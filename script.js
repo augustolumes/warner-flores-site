@@ -100,16 +100,24 @@ renderProducts();
 
 function setSearch(value, source) {
   searchTerm = value;
-  document.getElementById("homeSearch").value = value;
-  document.getElementById("catalogSearch").value = value;
+  const homeSearch = document.getElementById("homeSearch");
+  if (homeSearch) homeSearch.value = value;
+  const catalogSearch = document.getElementById("catalogSearch");
+  if (catalogSearch) catalogSearch.value = value;
   if (source === "home") {
     activatePage("catalogo");
-    document.getElementById("catalogSearch").focus({ preventScroll: true });
+    if (catalogSearch) catalogSearch.focus({ preventScroll: true });
   }
   renderProducts();
 }
-document.getElementById("homeSearch").addEventListener("input", (event) => setSearch(event.target.value, "home"));
-document.getElementById("catalogSearch").addEventListener("input", (event) => setSearch(event.target.value, "catalog"));
+const homeSearchInput = document.getElementById("homeSearch");
+if (homeSearchInput) {
+  homeSearchInput.addEventListener("input", (event) => setSearch(event.target.value, "home"));
+}
+const catalogSearchInput = document.getElementById("catalogSearch");
+if (catalogSearchInput) {
+  catalogSearchInput.addEventListener("input", (event) => setSearch(event.target.value, "catalog"));
+}
 
 document.querySelectorAll("[data-catalog-filter]").forEach((chip) => chip.addEventListener("click", () => {
   activeCatalogFilter = chip.dataset.catalogFilter;
@@ -125,8 +133,10 @@ document.querySelectorAll("[data-filter]").forEach((chip) => chip.addEventListen
   }
   activeCatalogFilter = filter === "todos" ? "todos" : filter;
   document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item.dataset.catalogFilter === activeCatalogFilter));
-  document.getElementById("catalogSearch").value = "";
-  document.getElementById("homeSearch").value = "";
+  const catalogSearch = document.getElementById("catalogSearch");
+  if (catalogSearch) catalogSearch.value = "";
+  const homeSearch = document.getElementById("homeSearch");
+  if (homeSearch) homeSearch.value = "";
   searchTerm = "";
   renderProducts();
   activatePage("catalogo");
@@ -245,10 +255,14 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
 function money(value) { return `R$ ${value.toFixed(0)}`; }
 function renderQuantities() {
   const quantities = Object.keys(prices[bouquetSize]).map(Number);
-  document.getElementById("quantityGrid").innerHTML = quantities.map((amount) => `<button class="quantity-chip ${amount === quantity ? "active" : ""}" data-quantity="${amount}" aria-pressed="${amount === quantity}"><strong>${amount} rosas</strong>${money(prices[bouquetSize][amount])}</button>`).join("");
-  document.querySelectorAll(".quantity-chip").forEach((button) => button.addEventListener("click", () => { quantity = Number(button.dataset.quantity); renderQuantities(); }));
+  const quantitySelect = document.getElementById("quantitySelect");
+  quantitySelect.innerHTML = quantities.map((amount) => `<option value="${amount}" ${amount === quantity ? "selected" : ""}>${amount} rosas · ${money(prices[bouquetSize][amount])}</option>`).join("");
   document.getElementById("bouquetOrder").textContent = `PEDIR ${quantity} ROSAS ${bouquetSize} · ${money(prices[bouquetSize][quantity])}`;
 }
+document.getElementById("quantitySelect").addEventListener("change", (event) => {
+  quantity = Number(event.target.value);
+  renderQuantities();
+});
 document.querySelectorAll(".segment-option").forEach((button) => button.addEventListener("click", () => {
   bouquetSize = button.dataset.size;
   document.querySelectorAll(".segment-option").forEach((item) => item.classList.toggle("active", item === button));

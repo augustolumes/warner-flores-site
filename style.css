@@ -22,7 +22,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 .topbar { position: fixed; inset: 0 0 auto; z-index: 20; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 max(20px, calc((100vw - 560px)/2)); color: var(--white); background: var(--dark); box-shadow: 0 3px 15px #16231e22; }
 .brand { display: flex; flex-direction: row; align-items: center; gap: 9px; line-height: 1; }
-.brand img { width: 48px; height: 48px; object-fit: contain; background: transparent; }
+.brand img { width: 46px; height: 46px; object-fit: contain; background: var(--cream); border-radius: 50%; padding: 4px; border: 1px solid rgba(187, 164, 122, 0.4); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18); }
 .brand-copy { display: flex; flex-direction: column; }
 .brand-copy > span { font: 600 20px/.95 'Cormorant Garamond', serif; letter-spacing: .15em; }
 .brand small { margin-top: 5px; font-size: 12px; letter-spacing: .13em; opacity: .82; }
@@ -31,11 +31,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .page { display: none; width: min(100%, 680px); min-height: calc(100dvh - 146px); margin: auto; padding-bottom: 30px; }
 .page.active { display: block; }
 .eyebrow { margin: 0 0 10px; color: #856f49; font-size: 12px; font-weight: 700; letter-spacing: .16em; line-height: 1.5; }
-.home-hero { min-height: 360px; padding: 35px 22px 28px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; color: white; background-image: linear-gradient(90deg, rgba(16,29,24,.88), rgba(16,29,24,.52)), linear-gradient(0deg, rgba(16,29,24,.38), transparent 70%), url('imagens/opcao-1a-arco-aster-branco.jpeg'); background-position: center; background-size: cover; }
+.home-hero { min-height: 380px; padding: 40px 22px 32px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; color: white; background-image: linear-gradient(135deg, rgba(16,29,24,.92) 0%, rgba(16,29,24,.62) 60%, rgba(16,29,24,.35) 100%), linear-gradient(0deg, rgba(16,29,24,.75) 0%, transparent 65%), url('imagens/opcao-1a-arco-aster-branco.jpeg'); background-position: center; background-size: cover; }
 .home-hero .eyebrow { color: #e0ca9f; }
 .home-hero h1, .page h1, .contact-hero h1, .detail-copy h1 { margin: 0; color: var(--green); font: 600 44px/.98 'Cormorant Garamond', serif; letter-spacing: -.02em; }
-.home-hero h1 { max-width: 480px; color: var(--white); font-size: 48px; }
-.home-hero > p:not(.eyebrow) { max-width: 420px; margin: 13px 0 19px; color: #fff; font-size: 16px; }
+.home-hero h1 { max-width: 490px; color: var(--white); font-size: 46px; line-height: 1.06; text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3); }
+.home-hero > p:not(.eyebrow) { max-width: 430px; margin: 15px 0 22px; color: rgba(255, 255, 255, 0.94); font-size: 15px; line-height: 1.6; text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25); }
+.home-hero .button-gold { box-shadow: 0 4px 16px rgba(187, 164, 122, 0.28); transition: transform .18s ease, box-shadow .18s ease; }
+.home-hero .button-gold:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(187, 164, 122, 0.4); }
 .button { min-height: 48px; border: 0; border-radius: 4px; padding: 0 17px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-align: center; font-size: 12px; line-height: 1.35; letter-spacing: .08em; font-weight: 700; }
 .button-gold { color: var(--deep); background: var(--gold); }
 .button-green { color: var(--white); background: var(--green); }
@@ -46,6 +48,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .search input { width: 100%; border: 0; outline: 0; color: var(--text); background: transparent; font-size: 16px; }
 .search input::placeholder { color: #68645e; opacity: 1; }
 .section-title { margin: 0 0 12px; display: flex; align-items: end; justify-content: space-between; }
+.page-content > .section-title:first-child { margin-top: 24px; }
 .section-title .eyebrow { margin-bottom: 4px; }
 .section-title h2, .minor-title, .testimonials h2 { margin: 0; color: var(--green); font: 600 27px/1.05 'Cormorant Garamond', serif; }
 .spaced { margin-top: 28px; }
@@ -139,10 +142,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .segment-option small { display: block; font-size: 12px; font-weight: 500; }
 .segment-option.active { color: white; background: var(--green); box-shadow: 0 3px 8px #263a3227; }
 .minor-title { margin: 0 0 10px; font-size: 25px; }
-.quantity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.quantity-chip { min-height: 56px; border: 1px solid #d7cebf; border-radius: 8px; color: var(--green); background: var(--white); font-size: 12px; font-weight: 600; }
-.quantity-chip strong { display: block; font-size: 14px; }
-.quantity-chip.active { border-color: var(--green); color: white; background: var(--green); }
+.quantity-label { display: block; }
+.quantity-select { width: 100%; min-height: 54px; margin: 0 0 4px; border: 1px solid #d7cebf; border-radius: 8px; padding: 0 14px; color: var(--green); background: var(--white); font-size: 16px; }
 .bouquet-order { width: 100%; margin: 14px 0 8px; }
 .delivery-note { margin: 4px 0 18px; text-align: center; color: var(--muted); font-size: 12px; }
 .rose-card { margin-bottom: 14px; padding: 14px; display: flex; align-items: center; gap: 15px; }
