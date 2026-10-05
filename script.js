@@ -1,0 +1,285 @@
+// Contato e catálogo.
+const WHATSAPP_NUMBER = "5582996808398";
+
+const products = [
+  { id: "1A", title: "Arco de Áster Branco & Arranjos de Banco", shortTitle: "Arco de Áster Branco", image: "imagens/opcao-1a-arco-aster-branco.jpeg", alt: "Arco de áster branco e arranjos nos bancos", description: "Uma entrada grandiosa em flores brancas, acompanhada de arranjos delicados ao longo da nave.", includes: ["Arco de entrada com áster branco", "Arranjos volumosos nos bancos", "Passadeira em tom neutro"], tags: ["arcos", "corredor", "passadeira"] },
+  { id: "1B", title: "Arco de Áster Branco & Passadeira Verde", shortTitle: "Áster Branco & Passadeira Verde", image: "imagens/opcao-1b-arco-aster-passadeira-verde.jpeg", alt: "Arco de áster branco com passadeira verde", description: "Flores brancas, corredor verde e uma composição contínua que conduz até o altar.", includes: ["Arco de entrada em áster branco", "Passadeira verde até o altar", "Arranjos contínuos nos bancos", "Iluminação focal na base do arco"], tags: ["arcos", "corredor", "passadeira"] },
+  { id: "1C", title: "Arco Iluminado com Focos de Luz no Chão", shortTitle: "Arco Iluminado com Focos", image: "imagens/opcao-1c-arco-iluminado-focos.jpeg", alt: "Arco iluminado com focos de luz no chão", description: "Uma composição luminosa e elegante para destacar a entrada da cerimônia.", includes: ["Arco denso de áster branco", "Pontos de iluminação cênica de LED", "Passadeira verde escuro", "Pequenos buquês nos bancos"], tags: ["arcos", "corredor", "passadeira", "luz"] },
+  { id: "1D", title: "Arco Iluminado com Faixas Laterais", shortTitle: "Arco Iluminado com Faixas", image: "imagens/opcao-1d-arco-iluminado-faixas.jpeg", alt: "Arco iluminado com faixas laterais de arranjos", description: "Luz cênica e faixas de arranjos que acompanham o corredor até o altar.", includes: ["Arco de entrada iluminado", "Faixas laterais de arranjos", "Iluminação cênica para realçar as flores"], tags: ["arcos", "corredor", "luz"] },
+  { id: "2A", title: "Arco de Flores Silvestres & Passadeira Vermelha", shortTitle: "Flores Silvestres & Vermelha", image: "imagens/opcao-2a-arco-silvestre-passadeira-vermelha.jpeg", alt: "Arco de flores silvestres com passadeira vermelha", description: "Flores silvestres e uma passadeira vermelha clássica para uma cerimônia acolhedora.", includes: ["Arco leve de flores e folhagens", "Passadeira vermelha até o presbitério", "Mini buquês nos bancos"], tags: ["arcos", "corredor", "passadeira"] },
+  { id: "3A", title: "Arranjos de Altar & Nichos de Imagens", shortTitle: "Arranjos de Altar", image: "imagens/portfolio-igreja-01.jpeg", alt: "Arranjos florais para altar de igreja", description: "Composição floral em tons de branco e verde para ornamentar o altar e os nichos.", includes: ["Arranjo central para o altar", "Arranjos nos nichos laterais", "Composição floral em branco e verde"], tags: ["altar", "igrejas"] }
+];
+
+const prices = {
+  P: { 2: 25, 3: 35, 4: 40, 5: 50, 6: 60, 7: 70, 8: 80, 9: 90, 10: 100, 12: 120, 15: 150, 24: 240 },
+  G: { 2: 35, 3: 50, 4: 60, 5: 75, 6: 90, 7: 105, 8: 120, 9: 135, 10: 150, 12: 180, 15: 225, 24: 360 }
+};
+const pages = [...document.querySelectorAll(".page")];
+const detail = document.getElementById("detailScreen");
+const sheet = document.getElementById("budgetSheet");
+const backdrop = document.getElementById("sheetBackdrop");
+let currentProduct = null;
+let currentRequest = { kind: "decoration", label: "Orçamento de decoração" };
+let bouquetSize = "P";
+let quantity = 5;
+
+// Adiciona contexto da campanha à mensagem sem expor parâmetros vazios.
+const queryParams = new URLSearchParams(window.location.search);
+const utm = ["utm_source", "utm_campaign", "utm_content"]
+  .map((key) => queryParams.get(key))
+  .filter(Boolean);
+const attribution = utm.length ? utm.join(" · ") : "site";
+
+function trackEvent(eventName, details = {}) {
+  if (typeof window.fbq === "function") {
+    if (eventName === "PageView") window.fbq("track", "PageView", details);
+    else if (eventName === "ViewContent") window.fbq("track", "ViewContent", details);
+    else window.fbq("track", "Lead", details);
+  }
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName === "PageView" ? "page_view" : eventName === "ViewContent" ? "view_item" : "generate_lead", details);
+  }
+}
+
+function messageForDirectLink(origin) {
+  return `Olá, Warner Flores! Gostaria de conversar sobre ${origin.toLocaleLowerCase("pt-BR")}.\nOrigem: ${attribution}.`;
+}
+
+function setWhatsAppLinks() {
+  document.querySelectorAll(".direct-whatsapp").forEach((link) => {
+    const origin = link.dataset.origin || "contato";
+    link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(messageForDirectLink(origin))}`;
+    link.addEventListener("click", () => trackEvent("Lead", { content_name: origin, content_category: "link direto WhatsApp", source: attribution }));
+  });
+}
+setWhatsAppLinks();
+
+function activatePage(id) {
+  const page = document.getElementById(id);
+  if (!page) return;
+  pages.forEach((item) => item.classList.toggle("active", item === page));
+  document.querySelectorAll(".nav-item").forEach((item) => item.classList.toggle("active", item.dataset.nav === id));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (window.location.hash !== `#${id}`) history.replaceState(null, "", `#${id}`);
+  trackEvent("PageView", { page_path: `/${id}`, page_title: page.getAttribute("aria-label") || id, source: attribution });
+}
+
+document.querySelectorAll("[data-nav]").forEach((link) => link.addEventListener("click", (event) => {
+  event.preventDefault();
+  activatePage(link.dataset.nav);
+}));
+document.querySelectorAll("[data-go]").forEach((link) => link.addEventListener("click", (event) => {
+  event.preventDefault();
+  activatePage(link.dataset.go);
+}));
+
+function productCard(product, featured = false) {
+  const cardClass = featured ? "highlight-card" : "option-card";
+  const buttonClass = featured ? "button button-outline detail-button" : "text-link detail-button";
+  const buttonLabel = featured ? "VER DETALHES" : "Solicitar orçamento →";
+  return `<article class="${cardClass}"><div class="${featured ? "highlight-image" : "option-image-wrap"}"><img src="${product.image}" alt="${product.alt}" width="1200" height="900" loading="lazy"></div><div class="${featured ? "highlight-copy" : "option-body"}"><span class="badge">OPÇÃO ${product.id}</span><h3>${product.shortTitle}</h3><p>${product.description}</p>${featured ? "" : `<ul>${product.includes.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}</ul><p class="investment">Investimento sob consulta</p>`}<button class="${buttonClass}" data-detail="${product.id}">${buttonLabel}</button></div></article>`;
+}
+
+const highlights = document.getElementById("homeHighlights");
+highlights.innerHTML = products.slice(0, 4).map((item) => productCard(item, true)).join("");
+const productList = document.getElementById("productList");
+let activeCatalogFilter = "todos";
+let searchTerm = "";
+
+function renderProducts() {
+  const normalizedQuery = searchTerm.trim().toLocaleLowerCase("pt-BR");
+  const filtered = products.slice(0, 4).filter((product) => {
+    const tagMatch = activeCatalogFilter === "todos" || product.tags.includes(activeCatalogFilter);
+    const queryMatch = !normalizedQuery || `${product.id} ${product.title} ${product.description} ${product.includes.join(" ")}`.toLocaleLowerCase("pt-BR").includes(normalizedQuery);
+    return tagMatch && queryMatch;
+  });
+  productList.innerHTML = filtered.length ? filtered.map((item) => productCard(item)).join("") : "<p class='empty-state'>Não encontramos opções. Tente outra busca.</p>";
+  bindDetailButtons(productList);
+}
+renderProducts();
+
+function setSearch(value, source) {
+  searchTerm = value;
+  document.getElementById("homeSearch").value = value;
+  document.getElementById("catalogSearch").value = value;
+  if (source === "home") {
+    activatePage("catalogo");
+    document.getElementById("catalogSearch").focus({ preventScroll: true });
+  }
+  renderProducts();
+}
+document.getElementById("homeSearch").addEventListener("input", (event) => setSearch(event.target.value, "home"));
+document.getElementById("catalogSearch").addEventListener("input", (event) => setSearch(event.target.value, "catalog"));
+
+document.querySelectorAll("[data-catalog-filter]").forEach((chip) => chip.addEventListener("click", () => {
+  activeCatalogFilter = chip.dataset.catalogFilter;
+  document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item === chip));
+  renderProducts();
+}));
+
+document.querySelectorAll("[data-filter]").forEach((chip) => chip.addEventListener("click", () => {
+  const filter = chip.dataset.filter;
+  if (["buques", "noivas", "igrejas"].includes(filter)) {
+    activatePage(filter);
+    return;
+  }
+  activeCatalogFilter = filter === "todos" ? "todos" : filter;
+  document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item.dataset.catalogFilter === activeCatalogFilter));
+  document.getElementById("catalogSearch").value = "";
+  document.getElementById("homeSearch").value = "";
+  searchTerm = "";
+  renderProducts();
+  activatePage("catalogo");
+}));
+
+// Detalhe da decoração e comparação alternam para uma opção distinta.
+function openDetail(id) {
+  const product = products.find((item) => item.id === id);
+  if (!product) return;
+  currentProduct = product;
+  currentRequest = { kind: "decoration", label: `Opção ${product.id} — ${product.title}` };
+  document.getElementById("detailCode").textContent = `Opção ${product.id}`;
+  document.getElementById("detailTitle").textContent = product.title;
+  document.getElementById("detailDescription").textContent = product.description;
+  document.getElementById("detailIncludes").innerHTML = product.includes.map((item) => `<li>${item}</li>`).join("");
+  const image = document.getElementById("detailImage");
+  image.src = product.image;
+  image.alt = product.alt;
+  image.loading = "eager";
+  const compare = products.find((item) => item.id === (product.id === "1B" ? "1A" : "1B")) || products.find((item) => item.id !== product.id);
+  const compareButton = document.getElementById("compareOption");
+  compareButton.textContent = `⇄ Comparar ${compare.id}`;
+  compareButton.dataset.compare = compare.id;
+  detail.classList.add("open");
+  detail.setAttribute("aria-hidden", "false");
+  document.body.classList.add("overlay-open");
+  trackEvent("ViewContent", { content_name: product.title, content_ids: [product.id], content_type: "product", source: attribution });
+}
+
+function bindDetailButtons(root = document) {
+  root.querySelectorAll("[data-detail]").forEach((button) => {
+    button.addEventListener("click", () => openDetail(button.dataset.detail));
+  });
+}
+bindDetailButtons();
+document.getElementById("closeDetail").addEventListener("click", closeDetail);
+function closeDetail() {
+  detail.classList.remove("open");
+  detail.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("overlay-open");
+}
+document.getElementById("compareOption").addEventListener("click", (event) => openDetail(event.currentTarget.dataset.compare));
+document.getElementById("detailBudget").addEventListener("click", () => openSheet("decoration", currentRequest.label));
+
+// Formulário contextual: decoração, presente ou buquê de noiva.
+const formFields = document.getElementById("formFields");
+function field(label, name, placeholder, type = "text", required = false) {
+  return `<label for="field-${name}">${label}${required ? " *" : ""}</label><input id="field-${name}" name="${name}" type="${type}" placeholder="${placeholder}" ${required ? "required" : ""}>`;
+}
+
+function renderForm(kind) {
+  if (kind === "gift") {
+    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data da entrega", "date", "", "date", true)}${field("Horário", "time", "", "time", true)}<label for="field-fulfillment">Entrega ou retirada? *</label><select id="field-fulfillment" name="fulfillment" required><option value="">Escolha uma opção</option><option value="Entrega">Entrega</option><option value="Retirada">Retirada</option></select><div id="addressField">${field("Endereço de entrega", "address", "Rua, número e bairro", "text", true)}</div>${field("Cor ou tipo de embalagem (opcional)", "wrapping", "Ex.: papel kraft, laço branco") }<label for="field-cardMessage">Mensagem para o cartão (opcional)</label><textarea id="field-cardMessage" name="cardMessage" rows="3" placeholder="Escreva uma mensagem"></textarea>`;
+    const fulfillment = document.getElementById("field-fulfillment");
+    const addressField = document.getElementById("addressField");
+    fulfillment.addEventListener("change", () => {
+      addressField.classList.toggle("hidden", fulfillment.value !== "Entrega");
+      document.getElementById("field-address").required = fulfillment.value === "Entrega";
+    });
+    addressField.classList.add("hidden");
+    document.getElementById("field-address").required = false;
+  } else if (kind === "bride") {
+    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data do casamento", "weddingDate", "", "date", true)}${field("Igreja ou local", "venue", "Onde será a cerimônia?", "text", true)}<label for="field-style">Estilo desejado *</label><textarea id="field-style" name="style" rows="3" placeholder="Conte sobre as flores, cores ou referências" required></textarea>`;
+  } else {
+    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Tipo de evento", "event", "Casamento na igreja", "text", true)}`;
+  }
+}
+
+function openSheet(kind = "decoration", label = "Orçamento de decoração") {
+  currentRequest = { kind, label };
+  document.getElementById("selectedOption").textContent = label;
+  renderForm(kind);
+  sheet.classList.add("open");
+  backdrop.classList.add("open");
+  sheet.setAttribute("aria-hidden", "false");
+  document.body.classList.add("overlay-open");
+  setTimeout(() => formFields.querySelector("input, select, textarea")?.focus(), 200);
+}
+
+function closeSheet() {
+  sheet.classList.remove("open");
+  backdrop.classList.remove("open");
+  sheet.setAttribute("aria-hidden", "true");
+  if (!detail.classList.contains("open")) document.body.classList.remove("overlay-open");
+}
+document.querySelectorAll("[data-request]").forEach((button) => button.addEventListener("click", () => openSheet("decoration", button.dataset.request)));
+document.querySelectorAll("[data-bridal]").forEach((button) => button.addEventListener("click", () => openSheet("bride", `Buquê de noiva — ${button.dataset.bridal}`)));
+document.getElementById("closeSheet").addEventListener("click", closeSheet);
+backdrop.addEventListener("click", closeSheet);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    if (sheet.classList.contains("open")) closeSheet();
+    else if (detail.classList.contains("open")) closeDetail();
+  }
+});
+
+document.getElementById("budgetForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  const lines = ["Olá, Warner Flores! Gostaria de solicitar um orçamento.", "", `Pedido: ${currentRequest.label}`];
+  const values = {
+    name: "Nome", event: "Tipo de evento", date: "Data da entrega", time: "Horário",
+    fulfillment: "Entrega ou retirada", address: "Endereço", wrapping: "Embalagem",
+    cardMessage: "Mensagem para o cartão", weddingDate: "Data do casamento", venue: "Igreja/local", style: "Estilo desejado"
+  };
+  Object.entries(values).forEach(([key, label]) => {
+    const value = String(data.get(key) || "").trim();
+    if (value) lines.push(`${label}: ${value}`);
+  });
+  lines.push(`Origem: ${attribution}.`);
+  trackEvent("Lead", { content_name: currentRequest.label, content_category: currentRequest.kind, source: attribution });
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+});
+
+// Preços informados para rosas e seleção de quantidade.
+function money(value) { return `R$ ${value.toFixed(0)}`; }
+function renderQuantities() {
+  const quantities = Object.keys(prices[bouquetSize]).map(Number);
+  document.getElementById("quantityGrid").innerHTML = quantities.map((amount) => `<button class="quantity-chip ${amount === quantity ? "active" : ""}" data-quantity="${amount}" aria-pressed="${amount === quantity}"><strong>${amount} rosas</strong>${money(prices[bouquetSize][amount])}</button>`).join("");
+  document.querySelectorAll(".quantity-chip").forEach((button) => button.addEventListener("click", () => { quantity = Number(button.dataset.quantity); renderQuantities(); }));
+  document.getElementById("bouquetOrder").textContent = `PEDIR ${quantity} ROSAS ${bouquetSize} · ${money(prices[bouquetSize][quantity])}`;
+}
+document.querySelectorAll(".segment-option").forEach((button) => button.addEventListener("click", () => {
+  bouquetSize = button.dataset.size;
+  document.querySelectorAll(".segment-option").forEach((item) => item.classList.toggle("active", item === button));
+  renderQuantities();
+}));
+document.getElementById("bouquetOrder").addEventListener("click", () => openSheet("gift", `Buquê de ${quantity} rosas tamanho ${bouquetSize} — ${money(prices[bouquetSize][quantity])}`));
+document.querySelector("[data-gift-request]").addEventListener("click", (event) => openSheet("gift", event.currentTarget.dataset.giftRequest));
+renderQuantities();
+
+// Carrossel acessível por rolagem horizontal na home.
+document.querySelectorAll(".category-chips .chip").forEach((chip) => chip.addEventListener("click", () => {
+  document.querySelectorAll(".category-chips .chip").forEach((item) => item.classList.toggle("active", item === chip));
+  const category = chip.dataset.filter;
+  if (category === "todos") {
+    activeCatalogFilter = "todos";
+    document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item.dataset.catalogFilter === "todos"));
+    setSearch("", "catalog");
+    activatePage("inicio");
+  }
+  else if (category === "arcos" || category === "corredor") {
+    activeCatalogFilter = category;
+    document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item.dataset.catalogFilter === "todos"));
+    renderProducts();
+    activatePage("catalogo");
+  } else activatePage(category);
+}));
+
+document.getElementById("year").textContent = new Date().getFullYear();
+window.addEventListener("hashchange", () => {
+  const pageId = window.location.hash.slice(1);
+  if (pages.some((page) => page.id === pageId)) activatePage(pageId);
+});
+const initialPage = window.location.hash.slice(1);
+if (pages.some((page) => page.id === initialPage)) activatePage(initialPage);
