@@ -48,8 +48,9 @@
     <a class="brand" href="#inicio" aria-label="Warner Flores, início"><img src="imagens/logo_warner-transparente.png"
         alt="" width="709" height="709" fetchpriority="high"><span class="brand-copy"><span>WARNER
           FLORES</span><small>FLORES E DECORAÇÃO</small></span></a>
-    <a class="top-whatsapp direct-whatsapp" href="#" data-origin="Topo" target="_blank" rel="noopener">WhatsApp <span
-        aria-hidden="true">↗</span></a>
+    <a class="top-whatsapp direct-whatsapp" href="#" data-origin="Topo"
+      aria-label="Falar com a Warner Flores pelo WhatsApp" target="_blank" rel="noopener"><img
+        src="imagens/whatsapp.png" alt="" width="75" height="75"></a>
   </header>
 
   <main>
@@ -78,40 +79,58 @@
           </div><a href="#catalogo" data-go="catalogo" class="subtle-link">Ver catálogo →</a>
         </div>
         <div class="highlight-row" id="homeHighlights"></div>
-      </div>
-
-      <section class="testimonials page-content" aria-labelledby="testimonialsTitle">
-        <p class="eyebrow">QUEM JÁ CELEBROU COM A GENTE</p>
-        <h2 id="testimonialsTitle">Palavras que florescem</h2>
-        <div class="review-seal"><span aria-hidden="true">★★★★★</span><strong>[NOTA GOOGLE]</strong><small>[NÚMERO DE
-            AVALIAÇÕES] avaliações no Google</small></div>
-        <div class="review-list">
-          <blockquote>“[TEXTO DO DEPOIMENTO 1]”<cite>[NOME DA CLIENTE 1]</cite></blockquote>
-          <blockquote>“[TEXTO DO DEPOIMENTO 2]”<cite>[NOME DA CLIENTE 2]</cite></blockquote>
-          <blockquote>“[TEXTO DO DEPOIMENTO 3]”<cite>[NOME DA CLIENTE 3]</cite></blockquote>
+        <div class="section-title spaced bouquet-carousel-heading">
+          <div>
+            <p class="eyebrow">PRESENTES &amp; CASAMENTOS</p>
+            <h2>Buquês para cada ocasião</h2>
+          </div>
+          <div class="carousel-controls" aria-label="Controles do carrossel de buquês">
+            <button type="button" data-bouquet-shift="-1" aria-label="Buquê anterior">‹</button>
+            <button type="button" data-bouquet-shift="1" aria-label="Próximo buquê">›</button>
+          </div>
         </div>
-      </section>
+        <div class="home-bouquet-row" id="homeBouquetCarousel" aria-label="Carrossel de buquês para presente e para noivas">
+          <article class="home-bouquet-card">
+            <button class="home-bouquet-photo bouquet-photo-two gallery-placeholder-trigger" type="button" data-gallery-key="gift-p" data-gallery-title="Buquê de rosas P" aria-label="Ver mais imagens do buquê de rosas P"><span>[FOTO DAS ROSAS] · VER MAIS IMAGENS</span></button>
+            <div class="home-bouquet-copy"><span class="badge">PARA PRESENTEAR</span><h3>Buquê de rosas P</h3><p>Escolha a quantidade de rosas para montar seu presente.</p><strong>Desde R$ 25</strong><a class="button button-outline" href="#buques" data-go="buques">ESCOLHER ROSAS</a></div>
+          </article>
+          <article class="home-bouquet-card">
+            <button class="home-bouquet-photo bouquet-photo-three gallery-placeholder-trigger" type="button" data-gallery-key="gift-g" data-gallery-title="Buquê de rosas G" aria-label="Ver mais imagens do buquê de rosas G"><span>[FOTO DAS ROSAS] · VER MAIS IMAGENS</span></button>
+            <div class="home-bouquet-copy"><span class="badge">PARA PRESENTEAR</span><h3>Buquê de rosas G</h3><p>Escolha a quantidade de rosas para montar seu presente.</p><strong>Desde R$ 35</strong><a class="button button-outline" href="#buques" data-go="buques">ESCOLHER ROSAS</a></div>
+          </article>
+          <article class="home-bouquet-card">
+            <button class="home-bouquet-photo bouquet-photo-one gallery-placeholder-trigger" type="button" data-gallery-key="rose" data-gallery-title="Rosa decorada" aria-label="Ver mais imagens da rosa decorada"><span>[FOTO DA ROSA] · VER MAIS IMAGENS</span></button>
+            <div class="home-bouquet-copy"><span class="badge">PARA PRESENTEAR</span><h3>Rosa decorada</h3><p>Uma rosa especial, com cores conforme disponibilidade.</p><strong>P R$ 10 · G R$ 15</strong><button class="button button-outline" data-gift-request="Rosa decorada">PEDIR ROSA</button></div>
+          </article>
+          <article class="home-bouquet-card">
+            <button class="home-bouquet-photo bouquet-photo-one gallery-placeholder-trigger" type="button" data-gallery-key="bride-1" data-gallery-title="[NOME DO BUQUÊ 1]" aria-label="Ver imagens do buquê de noiva 1"><span>[FOTO DO BUQUÊ] · VER MAIS IMAGENS</span></button>
+            <div class="home-bouquet-copy"><span class="badge">BUQUÊ DE NOIVA</span><h3>[NOME DO BUQUÊ 1]</h3><p>[DESCRIÇÃO CURTA DO BUQUÊ 1]</p><strong>A partir de [PREÇO 1]</strong><button class="button button-outline" data-bridal="[NOME DO BUQUÊ 1]">PEDIR ORÇAMENTO</button></div>
+          </article>
+          <article class="home-bouquet-card">
+            <button class="home-bouquet-photo bouquet-photo-two gallery-placeholder-trigger" type="button" data-gallery-key="bride-2" data-gallery-title="[NOME DO BUQUÊ 2]" aria-label="Ver imagens do buquê de noiva 2"><span>[FOTO DO BUQUÊ] · VER MAIS IMAGENS</span></button>
+            <div class="home-bouquet-copy"><span class="badge">BUQUÊ DE NOIVA</span><h3>[NOME DO BUQUÊ 2]</h3><p>[DESCRIÇÃO CURTA DO BUQUÊ 2]</p><strong>A partir de [PREÇO 2]</strong><button class="button button-outline" data-bridal="[NOME DO BUQUÊ 2]">PEDIR ORÇAMENTO</button></div>
+          </article>
+          <article class="home-bouquet-card">
+            <button class="home-bouquet-photo bouquet-photo-three gallery-placeholder-trigger" type="button" data-gallery-key="bride-3" data-gallery-title="[NOME DO BUQUÊ 3]" aria-label="Ver imagens do buquê de noiva 3"><span>[FOTO DO BUQUÊ] · VER MAIS IMAGENS</span></button>
+            <div class="home-bouquet-copy"><span class="badge">BUQUÊ DE NOIVA</span><h3>[NOME DO BUQUÊ 3]</h3><p>[DESCRIÇÃO CURTA DO BUQUÊ 3]</p><strong>A partir de [PREÇO 3]</strong><button class="button button-outline" data-bridal="[NOME DO BUQUÊ 3]">PEDIR ORÇAMENTO</button></div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section class="page" id="catalogo" data-page="catalogo" aria-label="Catálogo de decorações">
       <div class="page-content page-heading">
         <p class="eyebrow">DECORAÇÃO PARA CASAMENTOS</p>
-        <h1>Arcos &amp; corredor</h1>
-        <p>Explore as composições e encontre os detalhes perfeitos para sua cerimônia.</p>
+        <h1>Catálogo de decorações</h1>
+        <p>Explore arcos, corredores e composições para o altar da sua cerimônia.</p>
         <label class="search catalog-search"><span aria-hidden="true">⌕</span><input id="catalogSearch" type="search"
             placeholder="Buscar estilo, cor ou ambiente…" aria-label="Buscar no catálogo"></label>
       </div>
       <div class="chips filter-chips" aria-label="Filtros do catálogo"><button class="chip active"
-          data-catalog-filter="todos">1A–1D</button><button class="chip" data-catalog-filter="luz">Com
+          data-catalog-filter="todos">Todos os estilos</button><button class="chip"
+          data-catalog-filter="style01">1A–1D</button><button class="chip" data-catalog-filter="luz">Com
           luz</button><button class="chip" data-catalog-filter="passadeira">Passadeira</button></div>
       <div class="page-content product-list" id="productList" aria-live="polite"></div>
-      <div class="extra-styles page-content">
-        <p class="eyebrow">OUTROS ESTILOS</p>
-        <div class="style-link"><span>ESTILO 02</span><strong>Flores silvestres &amp; passadeira
-            vermelha</strong><button class="text-link" data-detail="2A">Ver opção 2A →</button></div>
-        <div class="style-link"><span>ESTILO 03</span><strong>Altar &amp; presbitério</strong><button class="text-link"
-            data-detail="3A">Ver opção 3A →</button></div>
-      </div>
     </section>
 
     <section class="page" id="igrejas" data-page="igrejas" aria-label="Igrejas e andores">
@@ -123,23 +142,23 @@
       </div>
       <div class="page-content church-content">
         <p class="authority">Já ornamentamos <strong>[NÚMERO]</strong> igrejas e celebrações em Arapiraca e região.</p>
-        <div class="service-card"><img src="imagens/portfolio-igreja-01.jpeg"
-            alt="Exemplo de ornamentação floral de igreja" width="900" height="600" loading="lazy">
+        <div class="service-card"><button class="service-photo-button image-gallery-trigger" type="button" data-gallery-key="church" data-gallery-title="Ornamentação de igrejas" aria-label="Ver mais imagens de ornamentação de igrejas"><img src="imagens/portfolio-igreja-01.jpeg"
+            alt="Exemplo de ornamentação floral de igreja" width="900" height="600" loading="lazy"><span class="gallery-trigger-label">VER MAIS IMAGENS</span></button>
           <div>
             <p class="eyebrow">FESTAS RELIGIOSAS</p>
             <h2>[NOME DA CELEBRAÇÃO]</h2>
             <p>[DESCRIÇÃO DA ORNAMENTAÇÃO E DA CELEBRAÇÃO]</p>
           </div>
         </div>
-        <div class="service-card"><img src="imagens/portfolio-igreja-02.jpeg"
-            alt="Exemplo de arranjos e flores para uma igreja" width="900" height="600" loading="lazy">
+        <div class="service-card"><button class="service-photo-button image-gallery-trigger" type="button" data-gallery-key="church" data-gallery-title="Andor e altar" aria-label="Ver mais imagens de andor e altar"><img src="imagens/portfolio-igreja-02.jpeg"
+            alt="Exemplo de arranjos e flores para uma igreja" width="900" height="600" loading="lazy"><span class="gallery-trigger-label">VER MAIS IMAGENS</span></button>
           <div>
             <p class="eyebrow">ANDOR E ALTAR</p>
             <h2>[NOME DA IGREJA OU FESTA]</h2>
             <p>[DESCRIÇÃO DOS ARRANJOS, ANDOR E DETALHES FLORAIS]</p>
           </div>
         </div>
-        <div class="service-placeholder"><span>FOTO DA ORNAMENTAÇÃO</span>
+        <div class="service-placeholder"><button class="placeholder-gallery-trigger" type="button" data-gallery-key="church" data-gallery-title="Festa do(a) padroeiro(a)"><span>FOTO DA ORNAMENTAÇÃO · VER MAIS IMAGENS</span></button>
           <h2>[FESTA DO(A) PADROEIRO(A)]</h2>
           <p>[DESCRIÇÃO DO SERVIÇO PRESTADO]</p>
         </div>
@@ -156,7 +175,7 @@
       </div>
       <div class="page-content bridal-list">
         <article class="bridal-card">
-          <div class="photo-placeholder"><span>FOTO DO BUQUÊ</span></div>
+          <button class="photo-placeholder gallery-placeholder-trigger" type="button" data-gallery-key="bride-1" data-gallery-title="[NOME DO BUQUÊ 1]" aria-label="Ver imagens do buquê de noiva 1"><span>FOTO DO BUQUÊ · VER MAIS IMAGENS</span></button>
           <div>
             <h2>[NOME DO BUQUÊ 1]</h2>
             <p>[DESCRIÇÃO CURTA DO BUQUÊ 1]</p>
@@ -165,7 +184,7 @@
           </div>
         </article>
         <article class="bridal-card">
-          <div class="photo-placeholder alt"><span>FOTO DO BUQUÊ</span></div>
+          <button class="photo-placeholder alt gallery-placeholder-trigger" type="button" data-gallery-key="bride-2" data-gallery-title="[NOME DO BUQUÊ 2]" aria-label="Ver imagens do buquê de noiva 2"><span>FOTO DO BUQUÊ · VER MAIS IMAGENS</span></button>
           <div>
             <h2>[NOME DO BUQUÊ 2]</h2>
             <p>[DESCRIÇÃO CURTA DO BUQUÊ 2]</p>
@@ -174,7 +193,7 @@
           </div>
         </article>
         <article class="bridal-card">
-          <div class="photo-placeholder pale"><span>FOTO DO BUQUÊ</span></div>
+          <button class="photo-placeholder pale gallery-placeholder-trigger" type="button" data-gallery-key="bride-3" data-gallery-title="[NOME DO BUQUÊ 3]" aria-label="Ver imagens do buquê de noiva 3"><span>FOTO DO BUQUÊ · VER MAIS IMAGENS</span></button>
           <div>
             <h2>[NOME DO BUQUÊ 3]</h2>
             <p>[DESCRIÇÃO CURTA DO BUQUÊ 3]</p>
@@ -198,7 +217,7 @@
         <button class="bouquet-order button button-green" id="bouquetOrder">PEDIR 5 ROSAS P · R$ 50</button>
         <p class="delivery-note">Entregamos em Arapiraca e região.<br /> [FORMAS DE PAGAMENTO].</p>
         <article class="rose-card">
-          <div class="rose-art" aria-hidden="true">✿</div>
+          <button class="rose-art gallery-placeholder-trigger" type="button" data-gallery-key="rose" data-gallery-title="Rosa decorada" aria-label="Ver imagens da rosa decorada">✿</button>
           <div>
             <p class="eyebrow">UM DETALHE ESPECIAL</p>
             <h3>Rosa decorada</h3>
@@ -247,17 +266,32 @@
     <header class="detail-top"><button class="back-button" id="closeDetail"
         aria-label="Voltar ao catálogo">←</button><strong id="detailCode">Opção</strong><span class="detail-spacer"
         aria-hidden="true"></span></header>
-    <div class="detail-gallery"><img id="detailImage" src="" alt="" width="1200" height="900"></div>
+    <div class="detail-gallery" id="detailGallery" aria-label="Fotos da decoração">
+      <div class="gallery-track" id="detailGalleryTrack"></div>
+      <button class="gallery-arrow gallery-previous hidden" id="galleryPrevious" type="button"
+        aria-label="Foto anterior">‹</button>
+      <button class="gallery-arrow gallery-next hidden" id="galleryNext" type="button"
+        aria-label="Próxima foto">›</button>
+      <div class="gallery-dots hidden" id="galleryDots" aria-label="Selecionar foto"></div>
+    </div>
     <div class="page-content detail-copy">
       <p class="eyebrow">DECORAÇÃO PARA IGREJA</p>
       <h1 id="detailTitle"></h1>
       <p id="detailDescription"></p>
       <h2 class="minor-title">Inclui</h2>
-      <ul class="include-list" id="detailIncludes"></ul><button class="chip" id="compareOption" type="button">⇄ Comparar
-        opção</button>
+      <ul class="include-list" id="detailIncludes"></ul>
     </div>
     <div class="detail-cta"><span>Investimento sob consulta</span><button class="button button-green"
         id="detailBudget">PEDIR ORÇAMENTO PELO WHATSAPP</button></div>
+  </section>
+
+  <section class="photo-viewer" id="photoViewer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galeria de fotos">
+    <header class="photo-viewer-header"><button type="button" id="closePhotoViewer" aria-label="Fechar galeria">×</button><strong id="photoViewerTitle"></strong><span id="photoViewerCount"></span></header>
+    <div class="photo-viewer-stage" id="photoViewerStage"><div class="photo-viewer-track" id="photoViewerTrack"></div></div>
+    <button class="photo-viewer-arrow previous" type="button" id="photoViewerPrevious" aria-label="Imagem anterior">‹</button>
+    <button class="photo-viewer-arrow next" type="button" id="photoViewerNext" aria-label="Próxima imagem">›</button>
+    <div class="photo-viewer-dots" id="photoViewerDots" aria-label="Selecionar imagem"></div>
+    <p class="photo-viewer-hint">Deslize para ver outras imagens</p>
   </section>
 
   <div class="sheet-backdrop" id="sheetBackdrop"></div>

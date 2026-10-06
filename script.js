@@ -2,10 +2,10 @@
 const WHATSAPP_NUMBER = "5582996808398";
 
 const products = [
-  { id: "1A", title: "Arco de Áster Branco & Arranjos de Banco", shortTitle: "Arco de Áster Branco", image: "imagens/opcao-1a-arco-aster-branco.jpeg", alt: "Arco de áster branco e arranjos nos bancos", description: "Uma entrada grandiosa em flores brancas, acompanhada de arranjos delicados ao longo da nave.", includes: ["Arco de entrada com áster branco", "Arranjos volumosos nos bancos", "Passadeira em tom neutro"], tags: ["arcos", "corredor", "passadeira"] },
-  { id: "1B", title: "Arco de Áster Branco & Passadeira Verde", shortTitle: "Áster Branco & Passadeira Verde", image: "imagens/opcao-1b-arco-aster-passadeira-verde.jpeg", alt: "Arco de áster branco com passadeira verde", description: "Flores brancas, corredor verde e uma composição contínua que conduz até o altar.", includes: ["Arco de entrada em áster branco", "Passadeira verde até o altar", "Arranjos contínuos nos bancos", "Iluminação focal na base do arco"], tags: ["arcos", "corredor", "passadeira"] },
+  { id: "1A", title: "Arco de Áster Branco & Arranjos de Banco", shortTitle: "Arco de Áster Branco", image: "imagens/opcao-1a-arco-aster-branco.jpeg", alt: "Arco de áster branco e arranjos nos bancos", description: "Uma entrada grandiosa em flores brancas, acompanhada de arranjos delicados ao longo da nave.", includes: ["Arco de entrada com áster branco", "Arranjos volumosos nos bancos", "Passadeira em tom neutro"], tags: ["arcos", "corredor"] },
+  { id: "1B", title: "Arco de Áster Branco & Passadeira Verde", shortTitle: "Áster Branco & Passadeira Verde", image: "imagens/opcao-1b-arco-aster-passadeira-verde.jpeg", gallery: ["imagens/opcao-1b-arco-aster-passadeira-verde.jpeg", "imagens/opcao-1b-arco-aster-passadeira-verde-2.jpeg"], alt: "Arco de áster branco com passadeira verde", description: "Flores brancas, corredor verde e uma composição contínua que conduz até o altar.", includes: ["Arco de entrada em áster branco", "Passadeira verde até o altar", "Arranjos contínuos nos bancos", "Iluminação focal na base do arco"], tags: ["arcos", "corredor", "passadeira"] },
   { id: "1C", title: "Arco Iluminado com Focos de Luz no Chão", shortTitle: "Arco Iluminado com Focos", image: "imagens/opcao-1c-arco-iluminado-focos.jpeg", alt: "Arco iluminado com focos de luz no chão", description: "Uma composição luminosa e elegante para destacar a entrada da cerimônia.", includes: ["Arco denso de áster branco", "Pontos de iluminação cênica de LED", "Passadeira verde escuro", "Pequenos buquês nos bancos"], tags: ["arcos", "corredor", "passadeira", "luz"] },
-  { id: "1D", title: "Arco Iluminado com Faixas Laterais", shortTitle: "Arco Iluminado com Faixas", image: "imagens/opcao-1d-arco-iluminado-faixas.jpeg", alt: "Arco iluminado com faixas laterais de arranjos", description: "Luz cênica e faixas de arranjos que acompanham o corredor até o altar.", includes: ["Arco de entrada iluminado", "Faixas laterais de arranjos", "Iluminação cênica para realçar as flores"], tags: ["arcos", "corredor", "luz"] },
+  { id: "1D", title: "Arco Iluminado com Faixas Laterais", shortTitle: "Arco Iluminado com Faixas", image: "imagens/opcao-1d-arco-iluminado-faixas.jpeg", gallery: ["imagens/opcao-1d-arco-iluminado-faixas.jpeg", "imagens/portfolio-igreja-01.jpeg"], alt: "Arco iluminado com faixas laterais de arranjos", description: "Luz cênica e faixas de arranjos que acompanham o corredor até o altar.", includes: ["Arco de entrada iluminado", "Faixas laterais de arranjos", "Iluminação cênica para realçar as flores"], tags: ["arcos", "corredor", "luz"] },
   { id: "2A", title: "Arco de Flores Silvestres & Passadeira Vermelha", shortTitle: "Flores Silvestres & Vermelha", image: "imagens/opcao-2a-arco-silvestre-passadeira-vermelha.jpeg", alt: "Arco de flores silvestres com passadeira vermelha", description: "Flores silvestres e uma passadeira vermelha clássica para uma cerimônia acolhedora.", includes: ["Arco leve de flores e folhagens", "Passadeira vermelha até o presbitério", "Mini buquês nos bancos"], tags: ["arcos", "corredor", "passadeira"] },
   { id: "3A", title: "Arranjos de Altar & Nichos de Imagens", shortTitle: "Arranjos de Altar", image: "imagens/portfolio-igreja-01.jpeg", alt: "Arranjos florais para altar de igreja", description: "Composição floral em tons de branco e verde para ornamentar o altar e os nichos.", includes: ["Arranjo central para o altar", "Arranjos nos nichos laterais", "Composição floral em branco e verde"], tags: ["altar", "igrejas"] }
 ];
@@ -77,7 +77,10 @@ function productCard(product, featured = false) {
   const cardClass = featured ? "highlight-card" : "option-card";
   const buttonClass = featured ? "button button-outline detail-button" : "text-link detail-button";
   const buttonLabel = featured ? "VER DETALHES" : "Solicitar orçamento →";
-  return `<article class="${cardClass}"><div class="${featured ? "highlight-image" : "option-image-wrap"}"><img src="${product.image}" alt="${product.alt}" width="1200" height="900" loading="lazy"></div><div class="${featured ? "highlight-copy" : "option-body"}"><span class="badge">OPÇÃO ${product.id}</span><h3>${product.shortTitle}</h3><p>${product.description}</p>${featured ? "" : `<ul>${product.includes.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}</ul><p class="investment">Investimento sob consulta</p>`}<button class="${buttonClass}" data-detail="${product.id}">${buttonLabel}</button></div></article>`;
+  const styleLabel = product.id.startsWith("2") ? "ESTILO 02 · " : product.id.startsWith("3") ? "ESTILO 03 · " : "";
+  const badge = featured ? `OPÇÃO ${product.id}` : `${styleLabel}OPÇÃO ${product.id}`;
+  const imageAction = (product.gallery?.length || 1) > 1 ? "VER MAIS IMAGENS" : "VER IMAGEM EM TELA CHEIA";
+  return `<article class="${cardClass}"><div class="${featured ? "highlight-image" : "option-image-wrap"}"><button class="image-gallery-trigger" type="button" data-gallery-product="${product.id}" aria-label="${imageAction.toLocaleLowerCase("pt-BR")} de ${product.shortTitle}"><img src="${product.image}" alt="${product.alt}" width="1200" height="900" loading="lazy"><span class="gallery-trigger-label">${imageAction}</span></button></div><div class="${featured ? "highlight-copy" : "option-body"}"><span class="badge">${badge}</span><h3>${product.shortTitle}</h3><p>${product.description}</p>${featured ? "" : `<ul>${product.includes.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}</ul><p class="investment">Investimento sob consulta</p>`}<button class="${buttonClass}" data-detail="${product.id}">${buttonLabel}</button></div></article>`;
 }
 
 const highlights = document.getElementById("homeHighlights");
@@ -88,8 +91,10 @@ let searchTerm = "";
 
 function renderProducts() {
   const normalizedQuery = searchTerm.trim().toLocaleLowerCase("pt-BR");
-  const filtered = products.slice(0, 4).filter((product) => {
-    const tagMatch = activeCatalogFilter === "todos" || product.tags.includes(activeCatalogFilter);
+  const filtered = products.filter((product) => {
+    const tagMatch = activeCatalogFilter === "todos"
+      || (activeCatalogFilter === "style01" && product.id.startsWith("1"))
+      || product.tags.includes(activeCatalogFilter);
     const queryMatch = !normalizedQuery || `${product.id} ${product.title} ${product.description} ${product.includes.join(" ")}`.toLocaleLowerCase("pt-BR").includes(normalizedQuery);
     return tagMatch && queryMatch;
   });
@@ -142,6 +147,38 @@ document.querySelectorAll("[data-filter]").forEach((chip) => chip.addEventListen
   activatePage("catalogo");
 }));
 
+// Galeria de detalhes: os controles só aparecem quando há várias fotos.
+let galleryIndex = 0;
+let galleryStartX = null;
+
+function showGalleryImage(index) {
+  const track = document.getElementById("detailGalleryTrack");
+  const images = track.querySelectorAll("img");
+  if (!images.length) return;
+  galleryIndex = (index + images.length) % images.length;
+  track.style.transform = `translateX(-${galleryIndex * 100}%)`;
+  document.querySelectorAll("#galleryDots button").forEach((dot, dotIndex) => {
+    dot.classList.toggle("active", dotIndex === galleryIndex);
+    dot.setAttribute("aria-current", dotIndex === galleryIndex ? "true" : "false");
+  });
+}
+
+function renderGallery(product) {
+  const sources = product.gallery || [product.image];
+  const track = document.getElementById("detailGalleryTrack");
+  const dots = document.getElementById("galleryDots");
+  const previous = document.getElementById("galleryPrevious");
+  const next = document.getElementById("galleryNext");
+  track.innerHTML = sources.map((source, index) => `<img src="${source}" alt="${product.alt}${sources.length > 1 ? ` — foto ${index + 1} de ${sources.length}` : ""}" width="1200" height="1600" ${index === 0 ? "fetchpriority=high" : "loading=lazy"}>`).join("");
+  dots.innerHTML = sources.map((_, index) => `<button type="button" aria-label="Ver foto ${index + 1}" aria-current="${index === 0}" class="${index === 0 ? "active" : ""}"></button>`).join("");
+  const hasMultiple = sources.length > 1;
+  previous.classList.toggle("hidden", !hasMultiple);
+  next.classList.toggle("hidden", !hasMultiple);
+  dots.classList.toggle("hidden", !hasMultiple);
+  dots.querySelectorAll("button").forEach((dot, index) => dot.addEventListener("click", () => showGalleryImage(index)));
+  showGalleryImage(0);
+}
+
 // Detalhe da decoração e comparação alternam para uma opção distinta.
 function openDetail(id) {
   const product = products.find((item) => item.id === id);
@@ -152,14 +189,7 @@ function openDetail(id) {
   document.getElementById("detailTitle").textContent = product.title;
   document.getElementById("detailDescription").textContent = product.description;
   document.getElementById("detailIncludes").innerHTML = product.includes.map((item) => `<li>${item}</li>`).join("");
-  const image = document.getElementById("detailImage");
-  image.src = product.image;
-  image.alt = product.alt;
-  image.loading = "eager";
-  const compare = products.find((item) => item.id === (product.id === "1B" ? "1A" : "1B")) || products.find((item) => item.id !== product.id);
-  const compareButton = document.getElementById("compareOption");
-  compareButton.textContent = `⇄ Comparar ${compare.id}`;
-  compareButton.dataset.compare = compare.id;
+  renderGallery(product);
   detail.classList.add("open");
   detail.setAttribute("aria-hidden", "false");
   document.body.classList.add("overlay-open");
@@ -172,14 +202,117 @@ function bindDetailButtons(root = document) {
   });
 }
 bindDetailButtons();
+
+const photoViewer = document.getElementById("photoViewer");
+const photoViewerTrack = document.getElementById("photoViewerTrack");
+let photoViewerItems = [];
+let photoViewerIndex = 0;
+let photoViewerTouchX = null;
+let photoViewerOpener = null;
+
+const placeholderGalleries = {
+  "gift-p": [{ placeholder: "bouquet-photo-two", label: "[FOTO DO BUQUÊ DE ROSAS P]" }],
+  "gift-g": [{ placeholder: "bouquet-photo-three", label: "[FOTO DO BUQUÊ DE ROSAS G]" }],
+  rose: [{ placeholder: "bouquet-photo-one", label: "[FOTO DA ROSA DECORADA]" }],
+  "bride-1": [{ placeholder: "bouquet-photo-one", label: "[FOTO DO BUQUÊ DE NOIVA 1]" }],
+  "bride-2": [{ placeholder: "bouquet-photo-two", label: "[FOTO DO BUQUÊ DE NOIVA 2]" }],
+  "bride-3": [{ placeholder: "bouquet-photo-three", label: "[FOTO DO BUQUÊ DE NOIVA 3]" }],
+  church: [
+    { src: "imagens/portfolio-igreja-01.jpeg", alt: "Exemplo de ornamentação floral de igreja" },
+    { src: "imagens/portfolio-igreja-02.jpeg", alt: "Exemplo de arranjos para igreja" }
+  ]
+};
+
+function updatePhotoViewer(index) {
+  if (!photoViewerItems.length) return;
+  photoViewerIndex = (index + photoViewerItems.length) % photoViewerItems.length;
+  photoViewerTrack.style.transform = `translateX(-${photoViewerIndex * 100}%)`;
+  document.getElementById("photoViewerCount").textContent = `${photoViewerIndex + 1} / ${photoViewerItems.length}`;
+  document.querySelectorAll("#photoViewerDots button").forEach((dot, dotIndex) => {
+    dot.classList.toggle("active", dotIndex === photoViewerIndex);
+    dot.setAttribute("aria-current", dotIndex === photoViewerIndex ? "true" : "false");
+  });
+}
+
+function openPhotoViewer(items, title) {
+  photoViewerOpener = document.activeElement;
+  photoViewerItems = items;
+  photoViewerIndex = 0;
+  photoViewerTrack.innerHTML = items.map((item) => item.src
+    ? `<div class="photo-viewer-slide"><img src="${item.src}" alt="${item.alt || title}" width="1200" height="1600"></div>`
+    : `<div class="photo-viewer-slide"><div class="photo-viewer-placeholder ${item.placeholder || ""}"><span>${item.label || "[FOTO DO PRODUTO]"}</span></div></div>`).join("");
+  const dots = document.getElementById("photoViewerDots");
+  dots.innerHTML = items.map((_, index) => `<button type="button" aria-label="Ver imagem ${index + 1}" aria-current="${index === 0}" class="${index === 0 ? "active" : ""}"></button>`).join("");
+  const multiple = items.length > 1;
+  document.getElementById("photoViewerPrevious").classList.toggle("hidden", !multiple);
+  document.getElementById("photoViewerNext").classList.toggle("hidden", !multiple);
+  dots.classList.toggle("hidden", !multiple);
+  document.getElementById("photoViewerTitle").textContent = title;
+  photoViewer.classList.add("open");
+  photoViewer.setAttribute("aria-hidden", "false");
+  document.body.classList.add("overlay-open");
+  updatePhotoViewer(0);
+  document.getElementById("closePhotoViewer").focus();
+}
+
+function closePhotoViewer() {
+  photoViewer.classList.remove("open");
+  photoViewer.setAttribute("aria-hidden", "true");
+  if (!detail.classList.contains("open") && !sheet.classList.contains("open")) document.body.classList.remove("overlay-open");
+  photoViewerOpener?.focus?.();
+}
+
+document.addEventListener("click", (event) => {
+  const productTrigger = event.target.closest("[data-gallery-product]");
+  if (productTrigger) {
+    const product = products.find((item) => item.id === productTrigger.dataset.galleryProduct);
+    if (product) openPhotoViewer((product.gallery || [product.image]).map((src) => ({ src, alt: product.alt })), product.title);
+    return;
+  }
+  const placeholderTrigger = event.target.closest("[data-gallery-key]");
+  if (placeholderTrigger) {
+    const items = placeholderGalleries[placeholderTrigger.dataset.galleryKey];
+    if (items) openPhotoViewer(items, placeholderTrigger.dataset.galleryTitle || "Fotos do produto");
+  }
+});
+
+document.getElementById("closePhotoViewer").addEventListener("click", closePhotoViewer);
+document.getElementById("photoViewerPrevious").addEventListener("click", () => updatePhotoViewer(photoViewerIndex - 1));
+document.getElementById("photoViewerNext").addEventListener("click", () => updatePhotoViewer(photoViewerIndex + 1));
+document.getElementById("photoViewerDots").addEventListener("click", (event) => {
+  const dot = event.target.closest("button");
+  if (dot) updatePhotoViewer([...event.currentTarget.querySelectorAll("button")].indexOf(dot));
+});
+const photoViewerStage = document.getElementById("photoViewerStage");
+photoViewerStage.addEventListener("touchstart", (event) => { photoViewerTouchX = event.changedTouches[0].screenX; }, { passive: true });
+photoViewerStage.addEventListener("touchend", (event) => {
+  if (photoViewerTouchX === null) return;
+  const delta = event.changedTouches[0].screenX - photoViewerTouchX;
+  photoViewerTouchX = null;
+  if (Math.abs(delta) > 45 && photoViewerItems.length > 1) updatePhotoViewer(photoViewerIndex + (delta < 0 ? 1 : -1));
+}, { passive: true });
+document.getElementById("detailGallery").addEventListener("click", (event) => {
+  if (!event.target.closest("img") || !currentProduct) return;
+  const images = currentProduct.gallery || [currentProduct.image];
+  openPhotoViewer(images.map((src) => ({ src, alt: currentProduct.alt })), currentProduct.title);
+});
+
 document.getElementById("closeDetail").addEventListener("click", closeDetail);
 function closeDetail() {
   detail.classList.remove("open");
   detail.setAttribute("aria-hidden", "true");
   document.body.classList.remove("overlay-open");
 }
-document.getElementById("compareOption").addEventListener("click", (event) => openDetail(event.currentTarget.dataset.compare));
 document.getElementById("detailBudget").addEventListener("click", () => openSheet("decoration", currentRequest.label));
+document.getElementById("galleryPrevious").addEventListener("click", () => showGalleryImage(galleryIndex - 1));
+document.getElementById("galleryNext").addEventListener("click", () => showGalleryImage(galleryIndex + 1));
+document.getElementById("detailGallery").addEventListener("touchstart", (event) => { galleryStartX = event.changedTouches[0].screenX; }, { passive: true });
+document.getElementById("detailGallery").addEventListener("touchend", (event) => {
+  if (galleryStartX === null) return;
+  const delta = event.changedTouches[0].screenX - galleryStartX;
+  galleryStartX = null;
+  if (Math.abs(delta) > 45) showGalleryImage(galleryIndex + (delta < 0 ? 1 : -1));
+}, { passive: true });
 
 // Formulário contextual: decoração, presente ou buquê de noiva.
 const formFields = document.getElementById("formFields");
@@ -189,7 +322,7 @@ function field(label, name, placeholder, type = "text", required = false) {
 
 function renderForm(kind) {
   if (kind === "gift") {
-    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data da entrega", "date", "", "date", true)}${field("Horário", "time", "", "time", true)}<label for="field-fulfillment">Entrega ou retirada? *</label><select id="field-fulfillment" name="fulfillment" required><option value="">Escolha uma opção</option><option value="Entrega">Entrega</option><option value="Retirada">Retirada</option></select><div id="addressField">${field("Endereço de entrega", "address", "Rua, número e bairro", "text", true)}</div>${field("Cor ou tipo de embalagem (opcional)", "wrapping", "Ex.: papel kraft, laço branco") }<label for="field-cardMessage">Mensagem para o cartão (opcional)</label><textarea id="field-cardMessage" name="cardMessage" rows="3" placeholder="Escreva uma mensagem"></textarea>`;
+    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data da entrega", "date", "", "date", true)}${field("Horário", "time", "", "time", true)}<label for="field-fulfillment">Entrega ou retirada? *</label><select id="field-fulfillment" name="fulfillment" required><option value="">Escolha uma opção</option><option value="Entrega">Entrega</option><option value="Retirada">Retirada</option></select><div id="addressField">${field("Endereço de entrega", "address", "Rua, número e bairro", "text", true)}</div>${field("Cor ou tipo de embalagem (opcional)", "wrapping", "Ex.: papel kraft, laço branco")}<label for="field-cardMessage">Mensagem para o cartão (opcional)</label><textarea id="field-cardMessage" name="cardMessage" rows="3" placeholder="Escreva uma mensagem"></textarea>`;
     const fulfillment = document.getElementById("field-fulfillment");
     const addressField = document.getElementById("addressField");
     fulfillment.addEventListener("change", () => {
@@ -227,6 +360,12 @@ document.querySelectorAll("[data-bridal]").forEach((button) => button.addEventLi
 document.getElementById("closeSheet").addEventListener("click", closeSheet);
 backdrop.addEventListener("click", closeSheet);
 document.addEventListener("keydown", (event) => {
+  if (photoViewer.classList.contains("open")) {
+    if (event.key === "Escape") closePhotoViewer();
+    if (event.key === "ArrowLeft") updatePhotoViewer(photoViewerIndex - 1);
+    if (event.key === "ArrowRight") updatePhotoViewer(photoViewerIndex + 1);
+    return;
+  }
   if (event.key === "Escape") {
     if (sheet.classList.contains("open")) closeSheet();
     else if (detail.classList.contains("open")) closeDetail();
@@ -269,8 +408,13 @@ document.querySelectorAll(".segment-option").forEach((button) => button.addEvent
   renderQuantities();
 }));
 document.getElementById("bouquetOrder").addEventListener("click", () => openSheet("gift", `Buquê de ${quantity} rosas tamanho ${bouquetSize} — ${money(prices[bouquetSize][quantity])}`));
-document.querySelector("[data-gift-request]").addEventListener("click", (event) => openSheet("gift", event.currentTarget.dataset.giftRequest));
+document.querySelectorAll("[data-gift-request]").forEach((button) => button.addEventListener("click", (event) => openSheet("gift", event.currentTarget.dataset.giftRequest)));
 renderQuantities();
+
+const homeBouquetCarousel = document.getElementById("homeBouquetCarousel");
+document.querySelectorAll("[data-bouquet-shift]").forEach((button) => button.addEventListener("click", () => {
+  homeBouquetCarousel.scrollBy({ left: Number(button.dataset.bouquetShift) * homeBouquetCarousel.clientWidth * 0.8, behavior: "smooth" });
+}));
 
 // Carrossel acessível por rolagem horizontal na home.
 document.querySelectorAll(".category-chips .chip").forEach((chip) => chip.addEventListener("click", () => {
