@@ -14,6 +14,20 @@ const prices = {
   P: { 2: 25, 3: 35, 4: 40, 5: 50, 6: 60, 7: 70, 8: 80, 9: 90, 10: 100, 12: 120, 15: 150, 24: 240 },
   G: { 2: 35, 3: 50, 4: 60, 5: 75, 6: 90, 7: 105, 8: 120, 9: 135, 10: 150, 12: 180, 15: 225, 24: 360 }
 };
+
+// Buquês prontos: mantenha a descrição vazia até receber o texto de cada produto.
+const readyBouquets = [
+  { id: 1, image: "imagens/buques/1.buque_150.jpeg", price: 150 },
+  { id: 2, image: "imagens/buques/2.buque_200.jpeg", price: 200 },
+  { id: 3, image: "imagens/buques/3.buque_150.jpeg", price: 150 },
+  { id: 4, image: "imagens/buques/4.buque_450_rosa_100.jpeg", price: 450 },
+  { id: 5, image: "imagens/buques/5.buque_70.jpeg", price: 70 },
+  { id: 6, image: "imagens/buques/6.buque_150.jpeg", price: 150 },
+  { id: 7, image: "imagens/buques/7.buque_150.jpeg", price: 150 },
+  { id: 8, image: "imagens/buques/8_boque_00.jpeg", price: 0 },
+  { id: 9, image: "imagens/buques/9.buque_90.jpeg", price: 90 },
+  { id: 10, image: "imagens/buques/10_buque_200.jpeg", price: 200 }
+];
 const pages = [...document.querySelectorAll(".page")];
 const detail = document.getElementById("detailScreen");
 const sheet = document.getElementById("budgetSheet");
@@ -84,7 +98,10 @@ function productCard(product, featured = false) {
 }
 
 const highlights = document.getElementById("homeHighlights");
-highlights.innerHTML = products.slice(0, 4).map((item) => productCard(item, true)).join("");
+highlights.innerHTML = products.slice(0, 4).map((item) => productCard(item, true)).join("") + `
+  <button class="carousel-end-link" type="button" data-home-catalog>
+    <span>Ver catálogo completo</span><span aria-hidden="true">→</span>
+  </button>`;
 const productList = document.getElementById("productList");
 let activeCatalogFilter = "todos";
 let searchTerm = "";
@@ -263,6 +280,12 @@ function closePhotoViewer() {
 }
 
 document.addEventListener("click", (event) => {
+  const readyBouquetTrigger = event.target.closest("[data-gallery-ready-bouquet]");
+  if (readyBouquetTrigger) {
+    const bouquet = readyBouquets.find((item) => item.id === Number(readyBouquetTrigger.dataset.galleryReadyBouquet));
+    if (bouquet) openPhotoViewer([{ src: bouquet.image, alt: `Buquê ${bouquet.id}` }], `Buquê ${bouquet.id}`);
+    return;
+  }
   const productTrigger = event.target.closest("[data-gallery-product]");
   if (productTrigger) {
     const product = products.find((item) => item.id === productTrigger.dataset.galleryProduct);
@@ -392,6 +415,38 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
 
 // Preços informados para rosas e seleção de quantidade.
 function money(value) { return `R$ ${value.toFixed(0)}`; }
+const readyBouquetsGrid = document.getElementById("readyBouquets");
+const homeBouquetCarousel = document.getElementById("homeBouquetCarousel");
+if (readyBouquetsGrid) {
+  readyBouquetsGrid.innerHTML = readyBouquets.map((bouquet) => `
+    <article class="ready-bouquet-card">
+      <img src="${bouquet.image}" alt="Buquê ${bouquet.id}" loading="lazy">
+      <p class="ready-bouquet-description">${bouquet.description || ""}</p>
+      <strong class="ready-bouquet-price">${money(bouquet.price)}</strong>
+      <button class="button button-outline" type="button" data-ready-bouquet="${bouquet.id}" data-price="${bouquet.price}">Pedir este buquê</button>
+    </article>`).join("");
+}
+if (homeBouquetCarousel) {
+  homeBouquetCarousel.innerHTML = readyBouquets.map((bouquet) => `
+    <article class="home-bouquet-card">
+      <button class="home-bouquet-photo" type="button" data-gallery-ready-bouquet="${bouquet.id}" aria-label="Ampliar foto do buquê ${bouquet.id}">
+        <img src="${bouquet.image}" alt="Buquê ${bouquet.id}" loading="lazy">
+      </button>
+      <div class="home-bouquet-copy">
+        <h3>Buquê ${bouquet.id}</h3>
+        <strong>${money(bouquet.price)}</strong>
+        <button class="button button-outline" type="button" data-ready-bouquet="${bouquet.id}" data-price="${bouquet.price}">PEDIR ESTE BUQUÊ</button>
+      </div>
+    </article>`).join("") + `
+    <button class="carousel-end-link" type="button" data-home-bouquets>
+      <span>Ver todos os buquês</span><span aria-hidden="true">→</span>
+    </button>`;
+}
+document.querySelector("[data-home-catalog]")?.addEventListener("click", () => activatePage("catalogo"));
+document.querySelector("[data-home-bouquets]")?.addEventListener("click", () => activatePage("buques"));
+document.querySelectorAll("[data-ready-bouquet]").forEach((button) => button.addEventListener("click", () => {
+  openSheet("gift", `Buquê ${button.dataset.readyBouquet} — ${money(Number(button.dataset.price))}`);
+}));
 function renderQuantities() {
   const quantities = Object.keys(prices[bouquetSize]).map(Number);
   const quantitySelect = document.getElementById("quantitySelect");
@@ -411,7 +466,6 @@ document.getElementById("bouquetOrder").addEventListener("click", () => openShee
 document.querySelectorAll("[data-gift-request]").forEach((button) => button.addEventListener("click", (event) => openSheet("gift", event.currentTarget.dataset.giftRequest)));
 renderQuantities();
 
-const homeBouquetCarousel = document.getElementById("homeBouquetCarousel");
 document.querySelectorAll("[data-bouquet-shift]").forEach((button) => button.addEventListener("click", () => {
   homeBouquetCarousel.scrollBy({ left: Number(button.dataset.bouquetShift) * homeBouquetCarousel.clientWidth * 0.8, behavior: "smooth" });
 }));

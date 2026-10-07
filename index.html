@@ -45,8 +45,8 @@
 
 <body>
   <header class="topbar">
-    <a class="brand" href="#inicio" aria-label="Warner Flores, início"><img src="imagens/logo_warner-transparente.png"
-        alt="" width="709" height="709" fetchpriority="high"><span class="brand-copy"><span>WARNER
+    <a class="brand" href="#inicio" aria-label="Warner Flores, início"><img src="imagens/logo_warner-header.png" alt=""
+        width="709" height="709" fetchpriority="high"><span class="brand-copy"><span>WARNER
           FLORES</span><small>FLORES E DECORAÇÃO</small></span></a>
     <a class="top-whatsapp direct-whatsapp" href="#" data-origin="Topo"
       aria-label="Falar com a Warner Flores pelo WhatsApp" target="_blank" rel="noopener"><img
@@ -56,10 +56,15 @@
   <main>
     <section class="page active" id="inicio" data-page="inicio" aria-label="Início">
       <div class="home-hero">
-        <h1>Flores para celebrações especiais</h1>
-        <p>Ornamentação de igrejas e andores, decoração para casamentos e buquês para celebrar cada momento.</p>
-        <a class="button button-gold" href="#igrejas" data-go="igrejas">CONHEÇA NOSSO TRABALHO <span
-            aria-hidden="true">→</span></a>
+        <p class="eyebrow">BUQUÊS DE NOIVA &amp; CASUAIS</p>
+        <h1>Seu momento especial em forma de flores</h1>
+        <p></p>
+        <div class="home-hero-actions">
+          <a class="button button-gold" href="#buques" data-go="buques">ESCOLHER MEU BUQUÊ <span
+              aria-hidden="true">→</span></a>
+          <button class="button home-hero-secondary" type="button"
+            data-request="Orçamento de igrejas e casamentos">ORÇAMENTO DE IGREJAS &amp; CASAMENTOS</button>
+        </div>
       </div>
       <div class="page-content">
         <div class="section-title">
@@ -74,47 +79,17 @@
             class="chip" data-filter="igrejas">Igrejas</button></div>
         <div class="section-title spaced">
           <div>
-            <p class="eyebrow">CONHEÇA ALGUMAS COMPOSIÇÕES</p>
             <h2>Destaques</h2>
-          </div><a href="#catalogo" data-go="catalogo" class="subtle-link">Ver catálogo →</a>
+          </div>
         </div>
         <div class="highlight-row" id="homeHighlights"></div>
         <div class="section-title spaced bouquet-carousel-heading">
           <div>
-            <p class="eyebrow">PRESENTES &amp; CASAMENTOS</p>
             <h2>Buquês para cada ocasião</h2>
           </div>
-          <div class="carousel-controls" aria-label="Controles do carrossel de buquês">
-            <button type="button" data-bouquet-shift="-1" aria-label="Buquê anterior">‹</button>
-            <button type="button" data-bouquet-shift="1" aria-label="Próximo buquê">›</button>
-          </div>
         </div>
-        <div class="home-bouquet-row" id="homeBouquetCarousel" aria-label="Carrossel de buquês para presente e para noivas">
-          <article class="home-bouquet-card">
-            <button class="home-bouquet-photo bouquet-photo-two gallery-placeholder-trigger" type="button" data-gallery-key="gift-p" data-gallery-title="Buquê de rosas P" aria-label="Ver mais imagens do buquê de rosas P"><span>[FOTO DAS ROSAS] · VER MAIS IMAGENS</span></button>
-            <div class="home-bouquet-copy"><span class="badge">PARA PRESENTEAR</span><h3>Buquê de rosas P</h3><p>Escolha a quantidade de rosas para montar seu presente.</p><strong>Desde R$ 25</strong><a class="button button-outline" href="#buques" data-go="buques">ESCOLHER ROSAS</a></div>
-          </article>
-          <article class="home-bouquet-card">
-            <button class="home-bouquet-photo bouquet-photo-three gallery-placeholder-trigger" type="button" data-gallery-key="gift-g" data-gallery-title="Buquê de rosas G" aria-label="Ver mais imagens do buquê de rosas G"><span>[FOTO DAS ROSAS] · VER MAIS IMAGENS</span></button>
-            <div class="home-bouquet-copy"><span class="badge">PARA PRESENTEAR</span><h3>Buquê de rosas G</h3><p>Escolha a quantidade de rosas para montar seu presente.</p><strong>Desde R$ 35</strong><a class="button button-outline" href="#buques" data-go="buques">ESCOLHER ROSAS</a></div>
-          </article>
-          <article class="home-bouquet-card">
-            <button class="home-bouquet-photo bouquet-photo-one gallery-placeholder-trigger" type="button" data-gallery-key="rose" data-gallery-title="Rosa decorada" aria-label="Ver mais imagens da rosa decorada"><span>[FOTO DA ROSA] · VER MAIS IMAGENS</span></button>
-            <div class="home-bouquet-copy"><span class="badge">PARA PRESENTEAR</span><h3>Rosa decorada</h3><p>Uma rosa especial, com cores conforme disponibilidade.</p><strong>P R$ 10 · G R$ 15</strong><button class="button button-outline" data-gift-request="Rosa decorada">PEDIR ROSA</button></div>
-          </article>
-          <article class="home-bouquet-card">
-            <button class="home-bouquet-photo bouquet-photo-one gallery-placeholder-trigger" type="button" data-gallery-key="bride-1" data-gallery-title="[NOME DO BUQUÊ 1]" aria-label="Ver imagens do buquê de noiva 1"><span>[FOTO DO BUQUÊ] · VER MAIS IMAGENS</span></button>
-            <div class="home-bouquet-copy"><span class="badge">BUQUÊ DE NOIVA</span><h3>[NOME DO BUQUÊ 1]</h3><p>[DESCRIÇÃO CURTA DO BUQUÊ 1]</p><strong>A partir de [PREÇO 1]</strong><button class="button button-outline" data-bridal="[NOME DO BUQUÊ 1]">PEDIR ORÇAMENTO</button></div>
-          </article>
-          <article class="home-bouquet-card">
-            <button class="home-bouquet-photo bouquet-photo-two gallery-placeholder-trigger" type="button" data-gallery-key="bride-2" data-gallery-title="[NOME DO BUQUÊ 2]" aria-label="Ver imagens do buquê de noiva 2"><span>[FOTO DO BUQUÊ] · VER MAIS IMAGENS</span></button>
-            <div class="home-bouquet-copy"><span class="badge">BUQUÊ DE NOIVA</span><h3>[NOME DO BUQUÊ 2]</h3><p>[DESCRIÇÃO CURTA DO BUQUÊ 2]</p><strong>A partir de [PREÇO 2]</strong><button class="button button-outline" data-bridal="[NOME DO BUQUÊ 2]">PEDIR ORÇAMENTO</button></div>
-          </article>
-          <article class="home-bouquet-card">
-            <button class="home-bouquet-photo bouquet-photo-three gallery-placeholder-trigger" type="button" data-gallery-key="bride-3" data-gallery-title="[NOME DO BUQUÊ 3]" aria-label="Ver imagens do buquê de noiva 3"><span>[FOTO DO BUQUÊ] · VER MAIS IMAGENS</span></button>
-            <div class="home-bouquet-copy"><span class="badge">BUQUÊ DE NOIVA</span><h3>[NOME DO BUQUÊ 3]</h3><p>[DESCRIÇÃO CURTA DO BUQUÊ 3]</p><strong>A partir de [PREÇO 3]</strong><button class="button button-outline" data-bridal="[NOME DO BUQUÊ 3]">PEDIR ORÇAMENTO</button></div>
-          </article>
-        </div>
+        <div class="home-bouquet-row" id="homeBouquetCarousel" aria-label="Carrossel de buquês disponíveis"></div>
+      </div>
       </div>
     </section>
 
@@ -142,23 +117,31 @@
       </div>
       <div class="page-content church-content">
         <p class="authority">Já ornamentamos <strong>[NÚMERO]</strong> igrejas e celebrações em Arapiraca e região.</p>
-        <div class="service-card"><button class="service-photo-button image-gallery-trigger" type="button" data-gallery-key="church" data-gallery-title="Ornamentação de igrejas" aria-label="Ver mais imagens de ornamentação de igrejas"><img src="imagens/portfolio-igreja-01.jpeg"
-            alt="Exemplo de ornamentação floral de igreja" width="900" height="600" loading="lazy"><span class="gallery-trigger-label">VER MAIS IMAGENS</span></button>
+        <div class="service-card"><button class="service-photo-button image-gallery-trigger" type="button"
+            data-gallery-key="church" data-gallery-title="Ornamentação de igrejas"
+            aria-label="Ver mais imagens de ornamentação de igrejas"><img src="imagens/portfolio-igreja-01.jpeg"
+              alt="Exemplo de ornamentação floral de igreja" width="900" height="600" loading="lazy"><span
+              class="gallery-trigger-label">VER MAIS IMAGENS</span></button>
           <div>
             <p class="eyebrow">FESTAS RELIGIOSAS</p>
             <h2>[NOME DA CELEBRAÇÃO]</h2>
             <p>[DESCRIÇÃO DA ORNAMENTAÇÃO E DA CELEBRAÇÃO]</p>
           </div>
         </div>
-        <div class="service-card"><button class="service-photo-button image-gallery-trigger" type="button" data-gallery-key="church" data-gallery-title="Andor e altar" aria-label="Ver mais imagens de andor e altar"><img src="imagens/portfolio-igreja-02.jpeg"
-            alt="Exemplo de arranjos e flores para uma igreja" width="900" height="600" loading="lazy"><span class="gallery-trigger-label">VER MAIS IMAGENS</span></button>
+        <div class="service-card"><button class="service-photo-button image-gallery-trigger" type="button"
+            data-gallery-key="church" data-gallery-title="Andor e altar"
+            aria-label="Ver mais imagens de andor e altar"><img src="imagens/portfolio-igreja-02.jpeg"
+              alt="Exemplo de arranjos e flores para uma igreja" width="900" height="600" loading="lazy"><span
+              class="gallery-trigger-label">VER MAIS IMAGENS</span></button>
           <div>
             <p class="eyebrow">ANDOR E ALTAR</p>
             <h2>[NOME DA IGREJA OU FESTA]</h2>
             <p>[DESCRIÇÃO DOS ARRANJOS, ANDOR E DETALHES FLORAIS]</p>
           </div>
         </div>
-        <div class="service-placeholder"><button class="placeholder-gallery-trigger" type="button" data-gallery-key="church" data-gallery-title="Festa do(a) padroeiro(a)"><span>FOTO DA ORNAMENTAÇÃO · VER MAIS IMAGENS</span></button>
+        <div class="service-placeholder"><button class="placeholder-gallery-trigger" type="button"
+            data-gallery-key="church" data-gallery-title="Festa do(a) padroeiro(a)"><span>FOTO DA ORNAMENTAÇÃO · VER
+              MAIS IMAGENS</span></button>
           <h2>[FESTA DO(A) PADROEIRO(A)]</h2>
           <p>[DESCRIÇÃO DO SERVIÇO PRESTADO]</p>
         </div>
@@ -175,7 +158,9 @@
       </div>
       <div class="page-content bridal-list">
         <article class="bridal-card">
-          <button class="photo-placeholder gallery-placeholder-trigger" type="button" data-gallery-key="bride-1" data-gallery-title="[NOME DO BUQUÊ 1]" aria-label="Ver imagens do buquê de noiva 1"><span>FOTO DO BUQUÊ · VER MAIS IMAGENS</span></button>
+          <button class="photo-placeholder gallery-placeholder-trigger" type="button" data-gallery-key="bride-1"
+            data-gallery-title="[NOME DO BUQUÊ 1]" aria-label="Ver imagens do buquê de noiva 1"><span>FOTO DO BUQUÊ ·
+              VER MAIS IMAGENS</span></button>
           <div>
             <h2>[NOME DO BUQUÊ 1]</h2>
             <p>[DESCRIÇÃO CURTA DO BUQUÊ 1]</p>
@@ -184,7 +169,9 @@
           </div>
         </article>
         <article class="bridal-card">
-          <button class="photo-placeholder alt gallery-placeholder-trigger" type="button" data-gallery-key="bride-2" data-gallery-title="[NOME DO BUQUÊ 2]" aria-label="Ver imagens do buquê de noiva 2"><span>FOTO DO BUQUÊ · VER MAIS IMAGENS</span></button>
+          <button class="photo-placeholder alt gallery-placeholder-trigger" type="button" data-gallery-key="bride-2"
+            data-gallery-title="[NOME DO BUQUÊ 2]" aria-label="Ver imagens do buquê de noiva 2"><span>FOTO DO BUQUÊ ·
+              VER MAIS IMAGENS</span></button>
           <div>
             <h2>[NOME DO BUQUÊ 2]</h2>
             <p>[DESCRIÇÃO CURTA DO BUQUÊ 2]</p>
@@ -193,7 +180,9 @@
           </div>
         </article>
         <article class="bridal-card">
-          <button class="photo-placeholder pale gallery-placeholder-trigger" type="button" data-gallery-key="bride-3" data-gallery-title="[NOME DO BUQUÊ 3]" aria-label="Ver imagens do buquê de noiva 3"><span>FOTO DO BUQUÊ · VER MAIS IMAGENS</span></button>
+          <button class="photo-placeholder pale gallery-placeholder-trigger" type="button" data-gallery-key="bride-3"
+            data-gallery-title="[NOME DO BUQUÊ 3]" aria-label="Ver imagens do buquê de noiva 3"><span>FOTO DO BUQUÊ ·
+              VER MAIS IMAGENS</span></button>
           <div>
             <h2>[NOME DO BUQUÊ 3]</h2>
             <p>[DESCRIÇÃO CURTA DO BUQUÊ 3]</p>
@@ -207,8 +196,10 @@
     <section class="page" id="buques" data-page="buques" aria-label="Buquês de presente">
       <div class="page-content bouquet-page">
         <p class="eyebrow">PRESENTES ESPECIAIS</p>
-        <h1>Escolha tamanho e quantidade</h1>
-        <p class="intro-copy">Um gesto delicado, feito com flores frescas e muito carinho.</p>
+        <h1 class="minor-title ready-bouquets-title">Buquês disponíveis</h1>
+        <div class="ready-bouquets-grid" id="readyBouquets" aria-label="Buquês disponíveis"></div>
+        <h1>Buquê de rosas</h1>
+        <p class="eyebrow">Escolhao tamanho e quantidade</p>
         <div class="segment" role="group" aria-label="Tamanho das rosas"><button class="segment-option active"
             data-size="P">Tamanho P <small>desde R$ 25</small></button><button class="segment-option"
             data-size="G">Tamanho G <small>desde R$ 35</small></button></div>
@@ -217,7 +208,8 @@
         <button class="bouquet-order button button-green" id="bouquetOrder">PEDIR 5 ROSAS P · R$ 50</button>
         <p class="delivery-note">Entregamos em Arapiraca e região.<br /> [FORMAS DE PAGAMENTO].</p>
         <article class="rose-card">
-          <button class="rose-art gallery-placeholder-trigger" type="button" data-gallery-key="rose" data-gallery-title="Rosa decorada" aria-label="Ver imagens da rosa decorada">✿</button>
+          <button class="rose-art gallery-placeholder-trigger" type="button" data-gallery-key="rose"
+            data-gallery-title="Rosa decorada" aria-label="Ver imagens da rosa decorada">✿</button>
           <div>
             <p class="eyebrow">UM DETALHE ESPECIAL</p>
             <h3>Rosa decorada</h3>
@@ -285,10 +277,16 @@
         id="detailBudget">PEDIR ORÇAMENTO PELO WHATSAPP</button></div>
   </section>
 
-  <section class="photo-viewer" id="photoViewer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Galeria de fotos">
-    <header class="photo-viewer-header"><button type="button" id="closePhotoViewer" aria-label="Fechar galeria">×</button><strong id="photoViewerTitle"></strong><span id="photoViewerCount"></span></header>
-    <div class="photo-viewer-stage" id="photoViewerStage"><div class="photo-viewer-track" id="photoViewerTrack"></div></div>
-    <button class="photo-viewer-arrow previous" type="button" id="photoViewerPrevious" aria-label="Imagem anterior">‹</button>
+  <section class="photo-viewer" id="photoViewer" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="Galeria de fotos">
+    <header class="photo-viewer-header"><button type="button" id="closePhotoViewer"
+        aria-label="Fechar galeria">×</button><strong id="photoViewerTitle"></strong><span id="photoViewerCount"></span>
+    </header>
+    <div class="photo-viewer-stage" id="photoViewerStage">
+      <div class="photo-viewer-track" id="photoViewerTrack"></div>
+    </div>
+    <button class="photo-viewer-arrow previous" type="button" id="photoViewerPrevious"
+      aria-label="Imagem anterior">‹</button>
     <button class="photo-viewer-arrow next" type="button" id="photoViewerNext" aria-label="Próxima imagem">›</button>
     <div class="photo-viewer-dots" id="photoViewerDots" aria-label="Selecionar imagem"></div>
     <p class="photo-viewer-hint">Deslize para ver outras imagens</p>
