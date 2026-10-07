@@ -15,18 +15,18 @@ const prices = {
   G: { 2: 35, 3: 50, 4: 60, 5: 75, 6: 90, 7: 105, 8: 120, 9: 135, 10: 150, 12: 180, 15: 225, 24: 360 }
 };
 
-// Buquês prontos: mantenha a descrição vazia até receber o texto de cada produto.
+// Edite nome e tipo para atualizar automaticamente os cartões e filtros. tipo aceita: presentes, noivas ou todos.
 const readyBouquets = [
-  { id: 1, image: "imagens/buques/1.buque_150.jpeg", price: 150 },
-  { id: 2, image: "imagens/buques/2.buque_200.jpeg", price: 200 },
-  { id: 3, image: "imagens/buques/3.buque_150.jpeg", price: 150 },
-  { id: 4, image: "imagens/buques/4.buque_450_rosa_100.jpeg", price: 450 },
-  { id: 5, image: "imagens/buques/5.buque_70.jpeg", price: 70 },
-  { id: 6, image: "imagens/buques/6.buque_150.jpeg", price: 150 },
-  { id: 7, image: "imagens/buques/7.buque_150.jpeg", price: 150 },
-  { id: 8, image: "imagens/buques/8_boque_00.jpeg", price: 0 },
-  { id: 9, image: "imagens/buques/9.buque_90.jpeg", price: 90 },
-  { id: 10, image: "imagens/buques/10_buque_200.jpeg", price: 200 }
+  { id: 1, nome: "Buquê 1", tipo: "presentes", image: "imagens/buques/1.buque_150.jpeg", price: 150 },
+  { id: 2, nome: "Buquê 2", tipo: "todos", image: "imagens/buques/2.buque_200.jpeg", price: 200 },
+  { id: 3, nome: "Buquê 3", tipo: "presentes", image: "imagens/buques/3.buque_150.jpeg", price: 150 },
+  { id: 4, nome: "Buquê 4", tipo: "presentes", image: "imagens/buques/4.buque_450_rosa_100.jpeg", price: 450 },
+  { id: 5, nome: "Buquê 5", tipo: "presentes", image: "imagens/buques/5.buque_70.jpeg", price: 70 },
+  { id: 6, nome: "Buquê 6", tipo: "presentes", image: "imagens/buques/6.buque_150.jpeg", price: 150 },
+  { id: 7, nome: "Buquê 7", tipo: "presentes", image: "imagens/buques/7.buque_150.jpeg", price: 150 },
+  { id: 8, nome: "Buquê 8", tipo: "presentes", image: "imagens/buques/8_boque_00.jpeg", price: 0 },
+  { id: 9, nome: "Buquê 9", tipo: "presentes", image: "imagens/buques/9.buque_90.jpeg", price: 90 },
+  { id: 10, nome: "Buquê 10", tipo: "presentes", image: "imagens/buques/10_buque_200.jpeg", price: 200 }
 ];
 const pages = [...document.querySelectorAll(".page")];
 const detail = document.getElementById("detailScreen");
@@ -68,13 +68,18 @@ function setWhatsAppLinks() {
 }
 setWhatsAppLinks();
 
-function activatePage(id) {
+function activatePage(id, { fromHistory = false, scrollY = 0 } = {}) {
   const page = document.getElementById(id);
   if (!page) return;
+  if (!fromHistory && window.location.hash !== `#${id}`) {
+    const currentPage = pages.find((item) => item.classList.contains("active"));
+    history.replaceState({ ...history.state, page: currentPage?.id || "inicio", scrollY: window.scrollY }, "", window.location.href);
+    history.pushState({ page: id, scrollY: 0 }, "", `#${id}`);
+  }
   pages.forEach((item) => item.classList.toggle("active", item === page));
   document.querySelectorAll(".nav-item").forEach((item) => item.classList.toggle("active", item.dataset.nav === id));
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  if (window.location.hash !== `#${id}`) history.replaceState(null, "", `#${id}`);
+  if (fromHistory) window.scrollTo(0, scrollY);
+  else window.scrollTo({ top: 0, behavior: "smooth" });
   trackEvent("PageView", { page_path: `/${id}`, page_title: page.getAttribute("aria-label") || id, source: attribution });
 }
 
@@ -103,6 +108,8 @@ highlights.innerHTML = products.slice(0, 4).map((item) => productCard(item, true
     <span>Ver catálogo completo</span><span aria-hidden="true">→</span>
   </button>`;
 const productList = document.getElementById("productList");
+const churchProductList = document.getElementById("churchProductList");
+const productLists = [productList, churchProductList].filter(Boolean);
 let activeCatalogFilter = "todos";
 let searchTerm = "";
 
@@ -115,8 +122,10 @@ function renderProducts() {
     const queryMatch = !normalizedQuery || `${product.id} ${product.title} ${product.description} ${product.includes.join(" ")}`.toLocaleLowerCase("pt-BR").includes(normalizedQuery);
     return tagMatch && queryMatch;
   });
-  productList.innerHTML = filtered.length ? filtered.map((item) => productCard(item)).join("") : "<p class='empty-state'>Não encontramos opções. Tente outra busca.</p>";
-  bindDetailButtons(productList);
+  productLists.forEach((list) => {
+    list.innerHTML = filtered.length ? filtered.map((item) => productCard(item)).join("") : "<p class='empty-state'>Não encontramos opções. Tente outra busca.</p>";
+    bindDetailButtons(list);
+  });
 }
 renderProducts();
 
@@ -126,6 +135,8 @@ function setSearch(value, source) {
   if (homeSearch) homeSearch.value = value;
   const catalogSearch = document.getElementById("catalogSearch");
   if (catalogSearch) catalogSearch.value = value;
+  const churchCatalogSearch = document.getElementById("churchCatalogSearch");
+  if (churchCatalogSearch) churchCatalogSearch.value = value;
   if (source === "home") {
     activatePage("catalogo");
     if (catalogSearch) catalogSearch.focus({ preventScroll: true });
@@ -140,16 +151,20 @@ const catalogSearchInput = document.getElementById("catalogSearch");
 if (catalogSearchInput) {
   catalogSearchInput.addEventListener("input", (event) => setSearch(event.target.value, "catalog"));
 }
+const churchCatalogSearchInput = document.getElementById("churchCatalogSearch");
+if (churchCatalogSearchInput) {
+  churchCatalogSearchInput.addEventListener("input", (event) => setSearch(event.target.value, "church"));
+}
 
 document.querySelectorAll("[data-catalog-filter]").forEach((chip) => chip.addEventListener("click", () => {
   activeCatalogFilter = chip.dataset.catalogFilter;
-  document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item === chip));
+  document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item.dataset.catalogFilter === activeCatalogFilter));
   renderProducts();
 }));
 
 document.querySelectorAll("[data-filter]").forEach((chip) => chip.addEventListener("click", () => {
   const filter = chip.dataset.filter;
-  if (["buques", "noivas", "igrejas"].includes(filter)) {
+  if (["buques", "igrejas"].includes(filter)) {
     activatePage(filter);
     return;
   }
@@ -231,9 +246,6 @@ const placeholderGalleries = {
   "gift-p": [{ placeholder: "bouquet-photo-two", label: "[FOTO DO BUQUÊ DE ROSAS P]" }],
   "gift-g": [{ placeholder: "bouquet-photo-three", label: "[FOTO DO BUQUÊ DE ROSAS G]" }],
   rose: [{ placeholder: "bouquet-photo-one", label: "[FOTO DA ROSA DECORADA]" }],
-  "bride-1": [{ placeholder: "bouquet-photo-one", label: "[FOTO DO BUQUÊ DE NOIVA 1]" }],
-  "bride-2": [{ placeholder: "bouquet-photo-two", label: "[FOTO DO BUQUÊ DE NOIVA 2]" }],
-  "bride-3": [{ placeholder: "bouquet-photo-three", label: "[FOTO DO BUQUÊ DE NOIVA 3]" }],
   church: [
     { src: "imagens/portfolio-igreja-01.jpeg", alt: "Exemplo de ornamentação floral de igreja" },
     { src: "imagens/portfolio-igreja-02.jpeg", alt: "Exemplo de arranjos para igreja" }
@@ -280,10 +292,16 @@ function closePhotoViewer() {
 }
 
 document.addEventListener("click", (event) => {
+  const readyBouquetOrder = event.target.closest("[data-ready-bouquet]");
+  if (readyBouquetOrder) {
+    const bouquet = readyBouquets.find((item) => item.id === Number(readyBouquetOrder.dataset.readyBouquet));
+    if (bouquet) openSheet(bouquet.tipo === "noivas" ? "bride" : "gift", `${bouquet.nome} — ${money(bouquet.price)}`);
+    return;
+  }
   const readyBouquetTrigger = event.target.closest("[data-gallery-ready-bouquet]");
   if (readyBouquetTrigger) {
     const bouquet = readyBouquets.find((item) => item.id === Number(readyBouquetTrigger.dataset.galleryReadyBouquet));
-    if (bouquet) openPhotoViewer([{ src: bouquet.image, alt: `Buquê ${bouquet.id}` }], `Buquê ${bouquet.id}`);
+    if (bouquet) openPhotoViewer([{ src: bouquet.image, alt: bouquet.nome }], bouquet.nome);
     return;
   }
   const productTrigger = event.target.closest("[data-gallery-product]");
@@ -345,7 +363,7 @@ function field(label, name, placeholder, type = "text", required = false) {
 
 function renderForm(kind) {
   if (kind === "gift") {
-    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data da entrega", "date", "", "date", true)}${field("Horário", "time", "", "time", true)}<label for="field-fulfillment">Entrega ou retirada? *</label><select id="field-fulfillment" name="fulfillment" required><option value="">Escolha uma opção</option><option value="Entrega">Entrega</option><option value="Retirada">Retirada</option></select><div id="addressField">${field("Endereço de entrega", "address", "Rua, número e bairro", "text", true)}</div>${field("Cor ou tipo de embalagem (opcional)", "wrapping", "Ex.: papel kraft, laço branco")}<label for="field-cardMessage">Mensagem para o cartão (opcional)</label><textarea id="field-cardMessage" name="cardMessage" rows="3" placeholder="Escreva uma mensagem"></textarea>`;
+    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data da entrega", "date", "", "date", true)}${field("Horário", "time", "", "time", true)}<label for="field-fulfillment">Entrega ou retirada? *</label><select id="field-fulfillment" name="fulfillment" required><option value="">Escolha uma opção</option><option value="Entrega">Entrega</option><option value="Retirada">Retirada</option></select><div id="addressField">${field("Endereço de entrega", "address", "Rua, número e bairro", "text", true)}</div><label for="field-cardMessage">Mensagem para o cartão (opcional)</label><textarea id="field-cardMessage" name="cardMessage" rows="3" placeholder="Escreva uma mensagem"></textarea>`;
     const fulfillment = document.getElementById("field-fulfillment");
     const addressField = document.getElementById("addressField");
     fulfillment.addEventListener("change", () => {
@@ -357,7 +375,7 @@ function renderForm(kind) {
   } else if (kind === "bride") {
     formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data do casamento", "weddingDate", "", "date", true)}${field("Igreja ou local", "venue", "Onde será a cerimônia?", "text", true)}<label for="field-style">Estilo desejado *</label><textarea id="field-style" name="style" rows="3" placeholder="Conte sobre as flores, cores ou referências" required></textarea>`;
   } else {
-    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Tipo de evento", "event", "Casamento na igreja", "text", true)}`;
+    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}`;
   }
 }
 
@@ -379,7 +397,6 @@ function closeSheet() {
   if (!detail.classList.contains("open")) document.body.classList.remove("overlay-open");
 }
 document.querySelectorAll("[data-request]").forEach((button) => button.addEventListener("click", () => openSheet("decoration", button.dataset.request)));
-document.querySelectorAll("[data-bridal]").forEach((button) => button.addEventListener("click", () => openSheet("bride", `Buquê de noiva — ${button.dataset.bridal}`)));
 document.getElementById("closeSheet").addEventListener("click", closeSheet);
 backdrop.addEventListener("click", closeSheet);
 document.addEventListener("keydown", (event) => {
@@ -400,8 +417,8 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
   const data = new FormData(event.currentTarget);
   const lines = ["Olá, Warner Flores! Gostaria de solicitar um orçamento.", "", `Pedido: ${currentRequest.label}`];
   const values = {
-    name: "Nome", event: "Tipo de evento", date: "Data da entrega", time: "Horário",
-    fulfillment: "Entrega ou retirada", address: "Endereço", wrapping: "Embalagem",
+    name: "Nome", date: "Data da entrega", time: "Horário",
+    fulfillment: "Entrega ou retirada", address: "Endereço",
     cardMessage: "Mensagem para o cartão", weddingDate: "Data do casamento", venue: "Igreja/local", style: "Estilo desejado"
   };
   Object.entries(values).forEach(([key, label]) => {
@@ -417,25 +434,46 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
 function money(value) { return `R$ ${value.toFixed(0)}`; }
 const readyBouquetsGrid = document.getElementById("readyBouquets");
 const homeBouquetCarousel = document.getElementById("homeBouquetCarousel");
-if (readyBouquetsGrid) {
-  readyBouquetsGrid.innerHTML = readyBouquets.map((bouquet) => `
+let activeBouquetCategory = "presentes";
+function renderReadyBouquets() {
+  if (!readyBouquetsGrid) return;
+  const visibleBouquets = activeBouquetCategory === "todos"
+    ? readyBouquets
+    : readyBouquets.filter((bouquet) => bouquet.tipo === activeBouquetCategory || bouquet.tipo === "todos");
+  readyBouquetsGrid.innerHTML = visibleBouquets.length ? visibleBouquets.map((bouquet) => `
     <article class="ready-bouquet-card">
-      <img src="${bouquet.image}" alt="Buquê ${bouquet.id}" loading="lazy">
+      <button class="ready-bouquet-photo" type="button" data-gallery-ready-bouquet="${bouquet.id}" aria-label="Ampliar foto de ${bouquet.nome}">
+        <img src="${bouquet.image}" alt="${bouquet.nome}" loading="lazy">
+      </button>
+      <h3 class="ready-bouquet-name">${bouquet.nome}</h3>
       <p class="ready-bouquet-description">${bouquet.description || ""}</p>
       <strong class="ready-bouquet-price">${money(bouquet.price)}</strong>
-      <button class="button button-outline" type="button" data-ready-bouquet="${bouquet.id}" data-price="${bouquet.price}">Pedir este buquê</button>
-    </article>`).join("");
+      <button class="button button-outline ready-bouquet-order" type="button" data-ready-bouquet="${bouquet.id}">Pedir este buquê</button>
+    </article>`).join("") : `<p class="empty-state">Ainda não há buquês cadastrados nesta categoria.</p>`;
 }
+document.querySelectorAll("[data-bouquet-category]").forEach((chip) => chip.addEventListener("click", () => {
+  activeBouquetCategory = chip.dataset.bouquetCategory;
+  document.querySelectorAll("[data-bouquet-category]").forEach((item) => {
+    const active = item === chip;
+    item.classList.toggle("active", active);
+    item.setAttribute("aria-selected", String(active));
+  });
+  document.getElementById("giftCategoryContent").classList.toggle("hidden", activeBouquetCategory === "noivas");
+  document.getElementById("bridalCategoryContent").classList.toggle("hidden", activeBouquetCategory === "presentes");
+  renderReadyBouquets();
+}));
+document.querySelector("[data-bouquet-bride-request]")?.addEventListener("click", () => openSheet("bride", "Buquê de noiva sob encomenda"));
+renderReadyBouquets();
 if (homeBouquetCarousel) {
   homeBouquetCarousel.innerHTML = readyBouquets.map((bouquet) => `
     <article class="home-bouquet-card">
-      <button class="home-bouquet-photo" type="button" data-gallery-ready-bouquet="${bouquet.id}" aria-label="Ampliar foto do buquê ${bouquet.id}">
-        <img src="${bouquet.image}" alt="Buquê ${bouquet.id}" loading="lazy">
+      <button class="home-bouquet-photo" type="button" data-gallery-ready-bouquet="${bouquet.id}" aria-label="Ampliar foto de ${bouquet.nome}">
+        <img src="${bouquet.image}" alt="${bouquet.nome}" loading="lazy">
       </button>
       <div class="home-bouquet-copy">
-        <h3>Buquê ${bouquet.id}</h3>
+        <h3>${bouquet.nome}</h3>
         <strong>${money(bouquet.price)}</strong>
-        <button class="button button-outline" type="button" data-ready-bouquet="${bouquet.id}" data-price="${bouquet.price}">PEDIR ESTE BUQUÊ</button>
+        <button class="button button-outline" type="button" data-ready-bouquet="${bouquet.id}">PEDIR ESTE BUQUÊ</button>
       </div>
     </article>`).join("") + `
     <button class="carousel-end-link" type="button" data-home-bouquets>
@@ -444,9 +482,6 @@ if (homeBouquetCarousel) {
 }
 document.querySelector("[data-home-catalog]")?.addEventListener("click", () => activatePage("catalogo"));
 document.querySelector("[data-home-bouquets]")?.addEventListener("click", () => activatePage("buques"));
-document.querySelectorAll("[data-ready-bouquet]").forEach((button) => button.addEventListener("click", () => {
-  openSheet("gift", `Buquê ${button.dataset.readyBouquet} — ${money(Number(button.dataset.price))}`);
-}));
 function renderQuantities() {
   const quantities = Object.keys(prices[bouquetSize]).map(Number);
   const quantitySelect = document.getElementById("quantitySelect");
@@ -489,9 +524,15 @@ document.querySelectorAll(".category-chips .chip").forEach((chip) => chip.addEve
 }));
 
 document.getElementById("year").textContent = new Date().getFullYear();
-window.addEventListener("hashchange", () => {
-  const pageId = window.location.hash.slice(1);
-  if (pages.some((page) => page.id === pageId)) activatePage(pageId);
+window.history.scrollRestoration = "manual";
+window.addEventListener("popstate", (event) => {
+  const hashPageId = window.location.hash.slice(1);
+  const pageId = pages.some((page) => page.id === event.state?.page)
+    ? event.state.page
+    : pages.some((page) => page.id === hashPageId) ? hashPageId : "inicio";
+  activatePage(pageId, { fromHistory: true, scrollY: Number(event.state?.scrollY) || 0 });
 });
 const initialPage = window.location.hash.slice(1);
-if (pages.some((page) => page.id === initialPage)) activatePage(initialPage);
+const initialPageId = pages.some((page) => page.id === initialPage) ? initialPage : "inicio";
+if (initialPage) activatePage(initialPageId, { fromHistory: true, scrollY: window.scrollY });
+history.replaceState({ ...history.state, page: initialPageId, scrollY: window.scrollY }, "", window.location.href);

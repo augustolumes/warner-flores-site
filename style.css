@@ -1203,6 +1203,31 @@ textarea:focus-visible {
   font-size: 21px;
 }
 
+.bouquet-category-chips {
+  margin: 0 0 20px;
+}
+
+.bridal-category-panel {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px 20px;
+  background: var(--white);
+  box-shadow: 0 3px 15px #263a3208;
+}
+
+.bridal-category-panel h1 {
+  max-width: 440px;
+  margin: 0 0 10px;
+  color: var(--green);
+  font: 600 36px/1.05 'Cormorant Garamond', serif;
+}
+
+.bridal-category-panel>p:not(.eyebrow) {
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .ready-bouquets-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1228,11 +1253,37 @@ textarea:focus-visible {
   object-fit: cover;
 }
 
+.ready-bouquet-photo {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 7px;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.ready-bouquet-photo:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
 .ready-bouquet-description {
   min-height: 0;
   margin: 9px 0 4px;
   color: var(--muted);
   font-size: 13px;
+}
+
+.ready-bouquet-name {
+  margin: 10px 0 0;
+  color: var(--green);
+  font: 600 22px/1.1 'Cormorant Garamond', serif;
+}
+
+.ready-bouquet-name+.ready-bouquet-description:empty {
+  display: none;
 }
 
 .ready-bouquet-description:not(:empty) {
@@ -1249,7 +1300,9 @@ textarea:focus-visible {
 .ready-bouquet-card .button {
   width: 100%;
   padding-inline: 7px;
-  font-size: 12px;
+  min-height: 38px;
+  padding-block: 7px;
+  font-size: 11px;
 }
 
 .segment {

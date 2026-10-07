@@ -75,8 +75,7 @@
         <div class="chips category-chips" aria-label="Categorias"><button class="chip active"
             data-filter="todos">Todos</button><button class="chip" data-filter="arcos">Arcos</button><button
             class="chip" data-filter="corredor">Corredor</button><button class="chip"
-            data-filter="buques">Buquês</button><button class="chip" data-filter="noivas">Noivas</button><button
-            class="chip" data-filter="igrejas">Igrejas</button></div>
+            data-filter="buques">Buquês</button><button class="chip" data-filter="igrejas">Igrejas</button></div>
         <div class="section-title spaced">
           <div>
             <h2>Destaques</h2>
@@ -108,118 +107,67 @@
       <div class="page-content product-list" id="productList" aria-live="polite"></div>
     </section>
 
-    <section class="page" id="igrejas" data-page="igrejas" aria-label="Igrejas e andores">
-      <div class="contact-hero church-hero">
-        <p class="eyebrow">NOSSA ESPECIALIDADE</p>
-        <h1>Igrejas, andores &amp; festas religiosas</h1>
-        <p><br></p>
-        <button class="button button-gold" data-request="Orçamento para igrejas e andores">PEDIR ORÇAMENTO ↗</button>
-      </div>
-      <div class="page-content church-content">
-        <p class="authority">Já ornamentamos <strong>[NÚMERO]</strong> igrejas e celebrações em Arapiraca e região.</p>
-        <div class="service-card"><button class="service-photo-button image-gallery-trigger" type="button"
-            data-gallery-key="church" data-gallery-title="Ornamentação de igrejas"
-            aria-label="Ver mais imagens de ornamentação de igrejas"><img src="imagens/portfolio-igreja-01.jpeg"
-              alt="Exemplo de ornamentação floral de igreja" width="900" height="600" loading="lazy"><span
-              class="gallery-trigger-label">VER MAIS IMAGENS</span></button>
-          <div>
-            <p class="eyebrow">FESTAS RELIGIOSAS</p>
-            <h2>[NOME DA CELEBRAÇÃO]</h2>
-            <p>[DESCRIÇÃO DA ORNAMENTAÇÃO E DA CELEBRAÇÃO]</p>
-          </div>
-        </div>
-        <div class="service-card"><button class="service-photo-button image-gallery-trigger" type="button"
-            data-gallery-key="church" data-gallery-title="Andor e altar"
-            aria-label="Ver mais imagens de andor e altar"><img src="imagens/portfolio-igreja-02.jpeg"
-              alt="Exemplo de arranjos e flores para uma igreja" width="900" height="600" loading="lazy"><span
-              class="gallery-trigger-label">VER MAIS IMAGENS</span></button>
-          <div>
-            <p class="eyebrow">ANDOR E ALTAR</p>
-            <h2>[NOME DA IGREJA OU FESTA]</h2>
-            <p>[DESCRIÇÃO DOS ARRANJOS, ANDOR E DETALHES FLORAIS]</p>
-          </div>
-        </div>
-        <div class="service-placeholder"><button class="placeholder-gallery-trigger" type="button"
-            data-gallery-key="church" data-gallery-title="Festa do(a) padroeiro(a)"><span>FOTO DA ORNAMENTAÇÃO · VER
-              MAIS IMAGENS</span></button>
-          <h2>[FESTA DO(A) PADROEIRO(A)]</h2>
-          <p>[DESCRIÇÃO DO SERVIÇO PRESTADO]</p>
-        </div>
-        <button class="button button-green full-button" data-request="Orçamento para igrejas e andores">CONVERSAR SOBRE
-          SUA CELEBRAÇÃO</button>
-      </div>
-    </section>
-
-    <section class="page" id="noivas" data-page="noivas" aria-label="Buquês de noiva">
+    <section class="page" id="igrejas" data-page="igrejas" aria-label="Catálogo de decorações">
       <div class="page-content page-heading">
-        <p class="eyebrow">PARA O GRANDE DIA</p>
-        <h1>Buquês de noiva</h1>
-        <p>Um buquê pensado para combinar com você e com a história do seu casamento.</p>
+        <p class="eyebrow">DECORAÇÃO PARA CASAMENTOS</p>
+        <h1>Catálogo de decorações</h1>
+        <p>Explore arcos, corredores e composições para o altar da sua cerimônia.</p>
+        <label class="search catalog-search"><span aria-hidden="true">⌕</span><input id="churchCatalogSearch"
+            type="search" placeholder="Buscar estilo, cor ou ambiente…"
+            aria-label="Buscar no catálogo de decorações"></label>
       </div>
-      <div class="page-content bridal-list">
-        <article class="bridal-card">
-          <button class="photo-placeholder gallery-placeholder-trigger" type="button" data-gallery-key="bride-1"
-            data-gallery-title="[NOME DO BUQUÊ 1]" aria-label="Ver imagens do buquê de noiva 1"><span>FOTO DO BUQUÊ ·
-              VER MAIS IMAGENS</span></button>
-          <div>
-            <h2>[NOME DO BUQUÊ 1]</h2>
-            <p>[DESCRIÇÃO CURTA DO BUQUÊ 1]</p>
-            <p class="price-placeholder">A partir de [PREÇO 1]</p><button class="button button-outline"
-              data-bridal="[NOME DO BUQUÊ 1]">PEDIR ORÇAMENTO</button>
-          </div>
-        </article>
-        <article class="bridal-card">
-          <button class="photo-placeholder alt gallery-placeholder-trigger" type="button" data-gallery-key="bride-2"
-            data-gallery-title="[NOME DO BUQUÊ 2]" aria-label="Ver imagens do buquê de noiva 2"><span>FOTO DO BUQUÊ ·
-              VER MAIS IMAGENS</span></button>
-          <div>
-            <h2>[NOME DO BUQUÊ 2]</h2>
-            <p>[DESCRIÇÃO CURTA DO BUQUÊ 2]</p>
-            <p class="price-placeholder">A partir de [PREÇO 2]</p><button class="button button-outline"
-              data-bridal="[NOME DO BUQUÊ 2]">PEDIR ORÇAMENTO</button>
-          </div>
-        </article>
-        <article class="bridal-card">
-          <button class="photo-placeholder pale gallery-placeholder-trigger" type="button" data-gallery-key="bride-3"
-            data-gallery-title="[NOME DO BUQUÊ 3]" aria-label="Ver imagens do buquê de noiva 3"><span>FOTO DO BUQUÊ ·
-              VER MAIS IMAGENS</span></button>
-          <div>
-            <h2>[NOME DO BUQUÊ 3]</h2>
-            <p>[DESCRIÇÃO CURTA DO BUQUÊ 3]</p>
-            <p class="price-placeholder">A partir de [PREÇO 3]</p><button class="button button-outline"
-              data-bridal="[NOME DO BUQUÊ 3]">PEDIR ORÇAMENTO</button>
-          </div>
-        </article>
+      <div class="chips filter-chips" aria-label="Filtros do catálogo de decorações">
+        <button class="chip active" data-catalog-filter="todos">Todos os estilos</button>
+        <button class="chip" data-catalog-filter="style01">1A–1D</button>
+        <button class="chip" data-catalog-filter="luz">Com luz</button>
+        <button class="chip" data-catalog-filter="passadeira">Passadeira</button>
       </div>
+      <div class="page-content product-list" id="churchProductList" aria-live="polite"></div>
     </section>
 
     <section class="page" id="buques" data-page="buques" aria-label="Buquês de presente">
       <div class="page-content bouquet-page">
-        <p class="eyebrow">PRESENTES ESPECIAIS</p>
+        <div class="chips bouquet-category-chips" role="tablist" aria-label="Categorias de buquês">
+          <button class="chip" type="button" role="tab" aria-controls="readyBouquets giftCategoryContent bridalCategoryContent"
+            aria-selected="false" data-bouquet-category="todos">Todos</button>
+          <button class="chip active" type="button" role="tab" aria-controls="readyBouquets giftCategoryContent"
+            aria-selected="true" data-bouquet-category="presentes">Presentes</button>
+          <button class="chip" type="button" role="tab" aria-controls="readyBouquets bridalCategoryContent"
+            aria-selected="false" data-bouquet-category="noivas">Noivas</button>
+        </div>
         <h1 class="minor-title ready-bouquets-title">Buquês disponíveis</h1>
         <div class="ready-bouquets-grid" id="readyBouquets" aria-label="Buquês disponíveis"></div>
-        <h1>Buquê de rosas</h1>
-        <p class="eyebrow">Escolhao tamanho e quantidade</p>
-        <div class="segment" role="group" aria-label="Tamanho das rosas"><button class="segment-option active"
-            data-size="P">Tamanho P <small>desde R$ 25</small></button><button class="segment-option"
-            data-size="G">Tamanho G <small>desde R$ 35</small></button></div>
-        <label class="minor-title quantity-label" for="quantitySelect">Quantidade de rosas</label><select
-          class="quantity-select" id="quantitySelect" aria-label="Escolha a quantidade de rosas"></select>
-        <button class="bouquet-order button button-green" id="bouquetOrder">PEDIR 5 ROSAS P · R$ 50</button>
-        <p class="delivery-note">Entregamos em Arapiraca e região.<br /> [FORMAS DE PAGAMENTO].</p>
-        <article class="rose-card">
-          <button class="rose-art gallery-placeholder-trigger" type="button" data-gallery-key="rose"
-            data-gallery-title="Rosa decorada" aria-label="Ver imagens da rosa decorada">✿</button>
-          <div>
-            <p class="eyebrow">UM DETALHE ESPECIAL</p>
-            <h3>Rosa decorada</h3>
-            <p>P R$ 10 · G R$ 15<br>Cores conforme disponibilidade.</p><button class="text-link"
-              data-gift-request="Rosa decorada">Solicitar rosa →</button>
-          </div>
-        </article>
-        <aside class="info-box"><span aria-hidden="true">✳</span>
-          <p>Flores naturais podem variar em tom e abertura. Embalagens e complementos conforme disponibilidade.</p>
-        </aside>
+        <div id="giftCategoryContent">
+          <p class="eyebrow">PRESENTES ESPECIAIS</p>
+          <h1>Buquê de rosas</h1>
+          <p class="eyebrow">Escolhao tamanho e quantidade</p>
+          <div class="segment" role="group" aria-label="Tamanho das rosas"><button class="segment-option active"
+              data-size="P">Tamanho P <small>desde R$ 25</small></button><button class="segment-option"
+              data-size="G">Tamanho G <small>desde R$ 35</small></button></div>
+          <label class="minor-title quantity-label" for="quantitySelect">Quantidade de rosas</label><select
+            class="quantity-select" id="quantitySelect" aria-label="Escolha a quantidade de rosas"></select>
+          <button class="bouquet-order button button-green" id="bouquetOrder">PEDIR 5 ROSAS P · R$ 50</button>
+          <p class="delivery-note">Entregamos em Arapiraca e região.<br /> [FORMAS DE PAGAMENTO].</p>
+          <article class="rose-card">
+            <button class="rose-art gallery-placeholder-trigger" type="button" data-gallery-key="rose"
+              data-gallery-title="Rosa decorada" aria-label="Ver imagens da rosa decorada">✿</button>
+            <div>
+              <p class="eyebrow">UM DETALHE ESPECIAL</p>
+              <h3>Rosa decorada</h3>
+              <p>P R$ 10 · G R$ 15<br>Cores conforme disponibilidade.</p><button class="text-link"
+                data-gift-request="Rosa decorada">Solicitar rosa →</button>
+            </div>
+          </article>
+          <aside class="info-box"><span aria-hidden="true">✳</span>
+            <p>Flores naturais podem variar em tom e abertura. Embalagens e complementos conforme disponibilidade.</p>
+          </aside>
+        </div>
+        <div class="bridal-category-panel hidden" id="bridalCategoryContent" role="tabpanel">
+          <p class="eyebrow">BUQUÊS DE NOIVA</p>
+          <h1>Um buquê para o seu grande dia</h1>
+          <p>Conte sobre a cerimônia, as flores e as cores que você imaginou. Vamos preparar uma proposta para você.</p>
+          <button class="button button-green" type="button" data-bouquet-bride-request>Solicitar buquê de noiva</button>
+        </div>
       </div>
     </section>
 
@@ -247,8 +195,7 @@
 
   <nav class="bottom-nav" aria-label="Navegação principal"><a href="#inicio" class="nav-item active"
       data-nav="inicio"><span aria-hidden="true">⌂</span><small>Início</small></a><a href="#buques" class="nav-item"
-      data-nav="buques"><span aria-hidden="true">❀</span><small>Buquês</small></a><a href="#noivas" class="nav-item"
-      data-nav="noivas"><span aria-hidden="true">♡</span><small>Noivas</small></a><a href="#igrejas" class="nav-item"
+      data-nav="buques"><span aria-hidden="true">❀</span><small>Buquês</small></a><a href="#igrejas" class="nav-item"
       data-nav="igrejas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M12 2v5M9.5 4.5h5M4 21V10l8-4 8 4v11M8 21v-6h8v6M4 12h16" />
