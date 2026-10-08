@@ -56,73 +56,45 @@
   <main>
     <section class="page active" id="inicio" data-page="inicio" aria-label="Início">
       <div class="home-hero">
-        <p class="eyebrow">BUQUÊS DE NOIVA &amp; CASUAIS</p>
+        <p class="eyebrow">BUQUÊS DE NOIVA &amp; PRESENTES</p>
         <h1>Seu momento especial em forma de flores</h1>
-        <p></p>
+        <p>Buquês feitos com flores frescas, com entrega em Arapiraca e região.</p>
         <div class="home-hero-actions">
           <a class="button button-gold" href="#buques" data-go="buques">ESCOLHER MEU BUQUÊ <span
               aria-hidden="true">→</span></a>
           <button class="button home-hero-secondary" type="button"
-            data-request="Orçamento de igrejas e casamentos">ORÇAMENTO DE IGREJAS &amp; CASAMENTOS</button>
+            data-request="Orçamento de igrejas e casamentos">ORNAMENTAÇÃO DE IGREJAS</button>
         </div>
       </div>
       <div class="page-content">
-        <div class="section-title">
-          <div>
-            <h2>O que você procura?</h2>
-          </div>
+        <div class="entry-grid" aria-label="Escolha uma categoria">
+          <button class="entry-card" type="button" data-go-bouquet="presentes"><img src="imagens/buque_presente_ta.png" alt="" width="400" height="400" loading="lazy"><span>Buquês de presente</span></button>
+          <button class="entry-card" type="button" data-go-bouquet="noivas"><img src="imagens/boque_noica_tab.png" alt="" width="400" height="400" loading="lazy"><span>Buquê de noiva</span></button>
+          <button class="entry-card" type="button" data-go="igrejas"><img src="imagens/arco_flores_tab.png" alt="" width="400" height="400" loading="lazy"><span>Igrejas e andores</span></button>
         </div>
-        <div class="chips category-chips" aria-label="Categorias"><button class="chip active"
-            data-filter="todos">Todos</button><button class="chip" data-filter="arcos">Arcos</button><button
-            class="chip" data-filter="corredor">Corredor</button><button class="chip"
-            data-filter="buques">Buquês</button><button class="chip" data-filter="igrejas">Igrejas</button></div>
-        <div class="section-title spaced">
-          <div>
-            <h2>Destaques</h2>
-          </div>
-        </div>
-        <div class="highlight-row" id="homeHighlights"></div>
-        <div class="section-title spaced bouquet-carousel-heading">
-          <div>
-            <h2>Buquês para cada ocasião</h2>
-          </div>
-        </div>
+        <div class="section-title spaced bouquet-carousel-heading"><div><h2>Buquês para cada ocasião</h2></div></div>
         <div class="home-bouquet-row" id="homeBouquetCarousel" aria-label="Carrossel de buquês disponíveis"></div>
-      </div>
+        <div class="section-title spaced"><div><h2>Ornamentação de igrejas</h2></div></div>
+        <div class="highlight-row" id="homeHighlights"></div>
       </div>
     </section>
 
-    <section class="page" id="catalogo" data-page="catalogo" aria-label="Catálogo de decorações">
+    <section class="page" id="igrejas" data-page="igrejas" aria-label="Ornamentação de igrejas">
       <div class="page-content page-heading">
-        <p class="eyebrow">DECORAÇÃO PARA CASAMENTOS</p>
-        <h1>Catálogo de decorações</h1>
-        <p>Explore arcos, corredores e composições para o altar da sua cerimônia.</p>
-        <label class="search catalog-search"><span aria-hidden="true">⌕</span><input id="catalogSearch" type="search"
-            placeholder="Buscar estilo, cor ou ambiente…" aria-label="Buscar no catálogo"></label>
+        <p class="eyebrow">IGREJAS E CELEBRAÇÕES</p>
+        <h1>Ornamentações e decorações para igrejas</h1>
+        <p>Altares, arcos, corredores, nichos, andores e festas religiosas.</p>
       </div>
-      <div class="chips filter-chips" aria-label="Filtros do catálogo"><button class="chip active"
-          data-catalog-filter="todos">Todos os estilos</button><button class="chip"
-          data-catalog-filter="style01">1A–1D</button><button class="chip" data-catalog-filter="luz">Com
-          luz</button><button class="chip" data-catalog-filter="passadeira">Passadeira</button></div>
-      <div class="page-content product-list" id="productList" aria-live="polite"></div>
-    </section>
-
-    <section class="page" id="igrejas" data-page="igrejas" aria-label="Catálogo de decorações">
-      <div class="page-content page-heading">
-        <p class="eyebrow">DECORAÇÃO PARA CASAMENTOS</p>
-        <h1>Catálogo de decorações</h1>
-        <p>Explore arcos, corredores e composições para o altar da sua cerimônia.</p>
-        <label class="search catalog-search"><span aria-hidden="true">⌕</span><input id="churchCatalogSearch"
-            type="search" placeholder="Buscar estilo, cor ou ambiente…"
-            aria-label="Buscar no catálogo de decorações"></label>
-      </div>
-      <div class="chips filter-chips" aria-label="Filtros do catálogo de decorações">
-        <button class="chip active" data-catalog-filter="todos">Todos os estilos</button>
-        <button class="chip" data-catalog-filter="style01">1A–1D</button>
+      <div class="chips filter-chips" aria-label="Filtros da ornamentação">
+        <button class="chip active" data-catalog-filter="todos">Todas</button>
+        <button class="chip" data-catalog-filter="arcos">Arcos</button>
+        <button class="chip" data-catalog-filter="corredor">Corredor</button>
+        <button class="chip" data-catalog-filter="altar">Altar</button>
         <button class="chip" data-catalog-filter="luz">Com luz</button>
         <button class="chip" data-catalog-filter="passadeira">Passadeira</button>
       </div>
       <div class="page-content product-list" id="churchProductList" aria-live="polite"></div>
+      <div class="page-content"><aside class="church-cta"><h3>Andores, festas religiosas e outras celebrações</h3><p>Ornamentamos andores, procissões, festas de padroeiro, missas e eventos da paróquia. Conte o que você precisa.</p><button class="button button-green" type="button" data-request="Orçamento de andores e festas religiosas">PEDIR ORÇAMENTO</button></aside></div>
     </section>
 
     <section class="page" id="buques" data-page="buques" aria-label="Buquês de presente">
@@ -137,21 +109,21 @@
             aria-selected="false" data-bouquet-category="noivas">Noivas</button>
         </div>
         <h1 class="minor-title ready-bouquets-title">Buquês disponíveis</h1>
+        <div class="chips price-chips" role="group" aria-label="Filtrar por preço"><button class="chip active" type="button" data-price="todos">Qualquer preço</button><button class="chip" type="button" data-price="0-100">Até R$ 100</button><button class="chip" type="button" data-price="100-200">R$ 100 a 200</button><button class="chip" type="button" data-price="200-9999">Acima de R$ 200</button></div>
         <div class="ready-bouquets-grid" id="readyBouquets" aria-label="Buquês disponíveis"></div>
         <div id="giftCategoryContent">
           <p class="eyebrow">PRESENTES ESPECIAIS</p>
           <h1>Buquê de rosas</h1>
-          <p class="eyebrow">Escolhao tamanho e quantidade</p>
+          <p class="eyebrow">Escolha o tamanho e quantidade</p>
           <div class="segment" role="group" aria-label="Tamanho das rosas"><button class="segment-option active"
               data-size="P">Tamanho P <small>desde R$ 25</small></button><button class="segment-option"
               data-size="G">Tamanho G <small>desde R$ 35</small></button></div>
           <label class="minor-title quantity-label" for="quantitySelect">Quantidade de rosas</label><select
             class="quantity-select" id="quantitySelect" aria-label="Escolha a quantidade de rosas"></select>
           <button class="bouquet-order button button-green" id="bouquetOrder">PEDIR 5 ROSAS P · R$ 50</button>
-          <p class="delivery-note">Entregamos em Arapiraca e região.<br /> [FORMAS DE PAGAMENTO].</p>
+          <p class="delivery-note">Entregamos em Arapiraca e região.</p>
           <article class="rose-card">
-            <button class="rose-art gallery-placeholder-trigger" type="button" data-gallery-key="rose"
-              data-gallery-title="Rosa decorada" aria-label="Ver imagens da rosa decorada">✿</button>
+            <div class="rose-art" aria-hidden="true">✿</div>
             <div>
               <p class="eyebrow">UM DETALHE ESPECIAL</p>
               <h3>Rosa decorada</h3>
@@ -175,8 +147,8 @@
     <section class="page" id="contato" data-page="contato" aria-label="Contato">
       <div class="contact-hero">
         <p class="eyebrow">VAMOS CONVERSAR</p>
-        <h1>Gostou de alguma decoração?</h1>
-        <p>Conte pra gente como imaginou esse dia. Vamos preparar uma proposta especial para você.</p><button
+        <h1>Vamos falar do seu buquê?</h1>
+        <p>Conte o que você imaginou e preparamos uma proposta para você.</p><button
           class="button button-gold" data-request="Orçamento de decoração">PEDIR ORÇAMENTO ↗</button>
       </div>
       <div class="page-content contact-links"><a class="direct-whatsapp" href="#" data-origin="Contato" target="_blank"
@@ -194,17 +166,11 @@
     </section>
   </main>
 
-  <nav class="bottom-nav" aria-label="Navegação principal"><a href="#inicio" class="nav-item active"
-      data-nav="inicio"><span aria-hidden="true">⌂</span><small>Início</small></a><a href="#buques" class="nav-item"
-      data-nav="buques"><span aria-hidden="true">❀</span><small>Buquês</small></a><a href="#igrejas" class="nav-item"
-      data-nav="igrejas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 2v5M9.5 4.5h5M4 21V10l8-4 8 4v11M8 21v-6h8v6M4 12h16" />
-      </svg><small>Igrejas</small></a></nav>
+  <nav class="bottom-nav" aria-label="Navegação principal"><a href="#inicio" class="nav-item active" data-nav="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg><small>Início</small></a><a href="#buques" class="nav-item" data-nav="buques"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="6" r="2.6"/><circle cx="12" cy="18" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="12" r="2.6"/></svg><small>Buquês</small></a><a href="#igrejas" class="nav-item" data-nav="igrejas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v5M9.5 4.5h5M4 21V10l8-4 8 4v11M8 21v-6h8v6M4 12h16"/></svg><small>Igrejas</small></a><a href="#contato" class="nav-item" data-nav="contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><small>Contato</small></a></nav>
 
-  <section class="detail-screen" id="detailScreen" aria-hidden="true" aria-label="Detalhe da decoração">
+  <section class="detail-screen" id="detailScreen" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="detailTitle" aria-label="Detalhes do produto">
     <header class="detail-top"><button class="back-button" id="closeDetail"
-        aria-label="Voltar ao catálogo">←</button><strong id="detailCode">Opção</strong><span class="detail-spacer"
+        aria-label="Fechar detalhes">←</button><strong id="detailCode">Opção</strong><span class="detail-spacer"
         aria-hidden="true"></span></header>
     <div class="detail-gallery" id="detailGallery" aria-label="Fotos da decoração">
       <div class="gallery-track" id="detailGalleryTrack"></div>
@@ -215,13 +181,15 @@
       <div class="gallery-dots hidden" id="galleryDots" aria-label="Selecionar foto"></div>
     </div>
     <div class="page-content detail-copy">
-      <p class="eyebrow">DECORAÇÃO PARA IGREJA</p>
+      <p class="eyebrow" id="detailCategoryLabel">DECORAÇÃO PARA IGREJA</p>
       <h1 id="detailTitle"></h1>
       <p id="detailDescription"></p>
-      <h2 class="minor-title">Inclui</h2>
-      <ul class="include-list" id="detailIncludes"></ul>
+      <div id="detailIncludesBlock">
+        <h2 class="minor-title">Inclui</h2>
+        <ul class="include-list" id="detailIncludes"></ul>
+      </div>
     </div>
-    <div class="detail-cta"><span>Investimento sob consulta</span><button class="button button-green"
+    <div class="detail-cta"><span id="detailInvestment">Investimento sob consulta</span><button class="button button-green"
         id="detailBudget">PEDIR ORÇAMENTO PELO WHATSAPP</button></div>
   </section>
 
@@ -245,13 +213,14 @@
     aria-labelledby="sheetTitle">
     <div class="sheet-handle" aria-hidden="true"></div><button class="sheet-close" id="closeSheet"
       aria-label="Fechar formulário">×</button>
-    <p class="eyebrow"> seu pedido:</p>
-    <div class="selected-product" id="selectedOption"></div>
+    <p class="eyebrow">SEU PEDIDO</p>
+    <div class="selected-product"><img class="selected-thumb" id="selectedThumb" alt="" width="48" height="48" hidden><span id="selectedOption"></span></div>
     <form id="budgetForm">
       <div id="formFields"></div><button class="button button-green" id="sendWhatsApp" type="submit">CONTINUAR NO
         WHATSAPP <span aria-hidden="true">↗</span></button>
     </form>
   </section>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>
 

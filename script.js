@@ -17,35 +17,37 @@ const prices = {
 
 // Edite nome e tipo para atualizar automaticamente os cartões e filtros. tipo aceita: presentes, noivas ou todos.
 const readyBouquets = [
-  { id: 1, nome: "Buquê 1", tipo: "presentes", image: "imagens/buques/1.buque_150.jpeg", price: 150 },
-  { id: 2, nome: "Buquê 2", tipo: "presentes", image: "imagens/buques/2.buque_200.jpeg", price: 200 },
-  { id: 3, nome: "Buquê 3", tipo: "presentes", image: "imagens/buques/3.buque_150.jpeg", price: 150 },
-  { id: 4, nome: "Buquê 4", tipo: "presentes", image: "imagens/buques/4.buque_450_rosa_100.jpeg", price: 450 },
-  { id: 5, nome: "Buquê 5", tipo: "presentes", image: "imagens/buques/5.buque_70.jpeg", price: 70 },
-  { id: 6, nome: "Buquê 6", tipo: "presentes", image: "imagens/buques/6.buque_150.jpeg", price: 150 },
-  { id: 7, nome: "Buquê 7", tipo: "presentes", image: "imagens/buques/7.buque_150.jpeg", price: 150 },
-  { id: 8, nome: "Buquê 8", tipo: "presentes", image: "imagens/buques/8_boque_00.jpeg", price: 0 },
-  { id: 9, nome: "Buquê 9", tipo: "presentes", image: "imagens/buques/9.buque_90.jpeg", price: 90 },
-  { id: 10, nome: "Buquê 10", tipo: "presentes", image: "imagens/buques/10_buque_200.jpeg", price: 200 },
-  { id: 11, nome: "Buquê de noiva 11", tipo: "noivas", image: "imagens/buques/11.buque_sc_noiva.JPG", price: null },
-  { id: 12, nome: "Buquê de noiva 12", tipo: "noivas", image: "imagens/buques/12..buque_sc_noiva.JPG", price: null },
-  { id: 13, nome: "Buquê de noiva 13", tipo: "noivas", image: "imagens/buques/13a.buque_sc_noiva.JPG", gallery: ["imagens/buques/13a.buque_sc_noiva.JPG", "imagens/buques/13b.buque_sc_noiva.JPG"], price: null },
-  { id: 14, nome: "Buquê de noiva 14", tipo: "noivas", image: "imagens/buques/14.buque_sc_noiva.JPG", price: null },
-  { id: 15, nome: "Buquê de noiva 15", tipo: "noivas", image: "imagens/buques/15.buque_sc_noiva.JPG", price: null },
-  { id: 16, nome: "Buquê de noiva 16", tipo: "noivas", image: "imagens/buques/16.buque_sc_noiva.JPG", price: null },
-  { id: 17, nome: "Buquê de noiva 17", tipo: "noivas", image: "imagens/buques/17.buque_sc_noiva.JPG", price: null },
-  { id: 18, nome: "Buquê de noiva 18", tipo: "noivas", image: "imagens/buques/18.buque_sc_noiva.JPG", price: null },
-  { id: 19, nome: "Buquê de noiva 19", tipo: "noivas", image: "imagens/buques/19.buque_sc_noiva.JPG", price: null },
-  { id: 20, nome: "Buquê de noiva 20", tipo: "noivas", image: "imagens/buques/20.buque_sc_noiva.JPG", price: null },
-  { id: 21, nome: "Buquê de noiva 21", tipo: "noivas", image: "imagens/buques/21.buque_sc_noiva.JPG", price: null },
-  { id: 22, nome: "Buquê de noiva 22", tipo: "noivas", image: "imagens/buques/22.buque_sc_noiva.JPG", price: null },
-  { id: 23, nome: "Buquê de noiva 23", tipo: "noivas", image: "imagens/buques/23.buque_sc_noiva.JPG", price: null }
+  { id: 1, nome: "Buquê 1", tipo: "presentes", image: "imagens/buques/1.buque_150.jpeg", description: "Uma composição floral feita à mão para presentear em momentos especiais.", price: 150 },
+  { id: 2, nome: "Buquê 2", tipo: "presentes", image: "imagens/buques/2.buque_200.jpeg", description: "Um buquê de presença marcante, preparado com flores selecionadas.", price: 200 },
+  { id: 3, nome: "Buquê 3", tipo: "presentes", image: "imagens/buques/3.buque_150.jpeg", description: "Uma opção delicada para demonstrar carinho e celebrar uma ocasião especial.", price: 150 },
+  { id: 4, nome: "Buquê 4", tipo: "presentes", image: "imagens/buques/4.buque_450_rosa_100.jpeg", description: "Um presente floral especial, montado com cuidado para surpreender.", price: 450 },
+  { id: 5, nome: "Buquê 5", tipo: "presentes", image: "imagens/buques/5.buque_70.jpeg", description: "Uma lembrança floral charmosa para tornar o dia de alguém mais bonito.", price: 70 },
+  { id: 6, nome: "Buquê 6", tipo: "presentes", image: "imagens/buques/6.buque_150.jpeg", description: "Flores organizadas em uma composição artesanal pronta para presentear.", price: 150 },
+  { id: 7, nome: "Buquê 7", tipo: "presentes", image: "imagens/buques/7.buque_150.jpeg", description: "Uma composição versátil para aniversários, agradecimentos e celebrações.", price: 150 },
+  { id: 8, nome: "Buquê 8", tipo: "presentes", image: "imagens/buques/8_boque_00.jpeg", description: "Consulte a disponibilidade e os detalhes deste buquê pelo WhatsApp.", price: 0 },
+  { id: 9, nome: "Buquê 9", tipo: "presentes", image: "imagens/buques/9.buque_90.jpeg", description: "Um buquê delicado para presentear com afeto em qualquer ocasião.", price: 90 },
+  { id: 10, nome: "Buquê 10", tipo: "presentes", image: "imagens/buques/10_buque_200.jpeg", description: "Uma composição floral especial, preparada para marcar bons momentos.", price: 200 },
+  { id: 11, nome: "Buquê de noiva 11", tipo: "noivas", image: "imagens/buques/11.buque_sc_noiva.JPG", description: "Buquê de noiva artesanal para acompanhar a cerimônia. Consulte disponibilidade e personalize os detalhes com a florista.", price: null },
+  { id: 12, nome: "Buquê de noiva 12", tipo: "noivas", image: "imagens/buques/12..buque_sc_noiva.JPG", description: "Uma composição para noivas, preparada com cuidado para o dia do casamento. Consulte disponibilidade e opções de personalização.", price: null },
+  { id: 13, nome: "Buquê de noiva 13", tipo: "noivas", image: "imagens/buques/13a.buque_sc_noiva.JPG", gallery: ["imagens/buques/13a.buque_sc_noiva.JPG", "imagens/buques/13b.buque_sc_noiva.JPG"], description: "Buquê de noiva com duas fotos para observar os detalhes da composição. Consulte disponibilidade para o seu casamento.", price: null },
+  { id: 14, nome: "Buquê de noiva 14", tipo: "noivas", image: "imagens/buques/14.buque_sc_noiva.JPG", description: "Uma opção artesanal para completar o visual da noiva. Consulte disponibilidade e converse sobre as flores e cores.", price: null },
+  { id: 15, nome: "Buquê de noiva 15", tipo: "noivas", image: "imagens/buques/15.buque_sc_noiva.JPG", description: "Composição floral para cerimônia de casamento, preparada sob consulta conforme a disponibilidade.", price: null },
+  { id: 16, nome: "Buquê de noiva 16", tipo: "noivas", image: "imagens/buques/16.buque_sc_noiva.JPG", description: "Buquê de noiva feito com atenção aos detalhes para acompanhar um momento inesquecível.", price: null },
+  { id: 17, nome: "Buquê de noiva 17", tipo: "noivas", image: "imagens/buques/17.buque_sc_noiva.JPG", description: "Uma composição floral para o casamento, com detalhes que podem ser conversados no atendimento.", price: null },
+  { id: 18, nome: "Buquê de noiva 18", tipo: "noivas", image: "imagens/buques/18.buque_sc_noiva.JPG", description: "Buquê artesanal para noivas. Consulte a florista para confirmar disponibilidade e combinações.", price: null },
+  { id: 19, nome: "Buquê de noiva 19", tipo: "noivas", image: "imagens/buques/19.buque_sc_noiva.JPG", description: "Uma opção floral para cerimônias de casamento, preparada sob consulta.", price: null },
+  { id: 20, nome: "Buquê de noiva 20", tipo: "noivas", image: "imagens/buques/20.buque_sc_noiva.JPG", description: "Composição artesanal para acompanhar a noiva em seu grande dia. Consulte detalhes pelo WhatsApp.", price: null },
+  { id: 21, nome: "Buquê de noiva 21", tipo: "noivas", image: "imagens/buques/21.buque_sc_noiva.JPG", description: "Buquê para casamento preparado com cuidado. Consulte disponibilidade e possibilidades de personalização.", price: null },
+  { id: 22, nome: "Buquê de noiva 22", tipo: "noivas", image: "imagens/buques/22.buque_sc_noiva.JPG", description: "Uma composição floral para completar a cerimônia e o visual da noiva. Consulte sob encomenda.", price: null },
+  { id: 23, nome: "Buquê de noiva 23", tipo: "noivas", image: "imagens/buques/23.buque_sc_noiva.JPG", description: "Buquê de noiva artesanal, disponível sob consulta para combinar com o estilo do casamento.", price: null }
 ];
 const pages = [...document.querySelectorAll(".page")];
 const detail = document.getElementById("detailScreen");
 const sheet = document.getElementById("budgetSheet");
 const backdrop = document.getElementById("sheetBackdrop");
 let currentProduct = null;
+let currentDetailType = "decoration";
+let detailOpener = null;
 let currentRequest = { kind: "decoration", label: "Orçamento de decoração" };
 let bouquetSize = "P";
 let quantity = 5;
@@ -111,14 +113,13 @@ function productCard(product, featured = false) {
   const buttonLabel = featured ? "VER DETALHES" : "Solicitar orçamento →";
   const styleLabel = product.id.startsWith("2") ? "ESTILO 02 · " : product.id.startsWith("3") ? "ESTILO 03 · " : "";
   const badge = featured ? `OPÇÃO ${product.id}` : `${styleLabel}OPÇÃO ${product.id}`;
-  const imageAction = (product.gallery?.length || 1) > 1 ? "VER MAIS IMAGENS" : "VER IMAGEM EM TELA CHEIA";
-  return `<article class="${cardClass}"><div class="${featured ? "highlight-image" : "option-image-wrap"}"><button class="image-gallery-trigger" type="button" data-gallery-product="${product.id}" aria-label="${imageAction.toLocaleLowerCase("pt-BR")} de ${product.shortTitle}"><img src="${product.image}" alt="${product.alt}" width="1200" height="900" loading="lazy"><span class="gallery-trigger-label">${imageAction}</span></button></div><div class="${featured ? "highlight-copy" : "option-body"}"><span class="badge">${badge}</span><h3>${product.shortTitle}</h3><p>${product.description}</p>${featured ? "" : `<ul>${product.includes.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}</ul><p class="investment">Investimento sob consulta</p>`}<button class="${buttonClass}" data-detail="${product.id}">${buttonLabel}</button></div></article>`;
+  return `<article class="${cardClass}"><div class="${featured ? "highlight-image" : "option-image-wrap"}"><button class="image-gallery-trigger" type="button" data-detail="${product.id}" aria-label="Ver detalhes de ${product.shortTitle}"><img src="${product.image}" alt="${product.alt}" width="1200" height="900" loading="lazy"></button></div><div class="${featured ? "highlight-copy" : "option-body"}"><span class="badge">${badge}</span><h3>${product.shortTitle}</h3><p>${product.description}</p>${featured ? "" : `<ul>${product.includes.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}</ul><p class="investment">Investimento sob consulta</p>`}<button class="${buttonClass}" data-detail="${product.id}">${buttonLabel}</button></div></article>`;
 }
 
 const highlights = document.getElementById("homeHighlights");
-highlights.innerHTML = products.slice(0, 4).map((item) => productCard(item, true)).join("") + `
+highlights.innerHTML = products.filter((p) => ["1A", "1C", "2A", "3A"].includes(p.id)).map((item) => productCard(item, true)).join("") + `
   <button class="carousel-end-link" type="button" data-home-catalog>
-    <span>Ver catálogo completo</span><span aria-hidden="true">→</span>
+    <span>Ver todas as ornamentações</span><span aria-hidden="true">→</span>
   </button>`;
 const productList = document.getElementById("productList");
 const churchProductList = document.getElementById("churchProductList");
@@ -148,10 +149,8 @@ function setSearch(value, source) {
   if (homeSearch) homeSearch.value = value;
   const catalogSearch = document.getElementById("catalogSearch");
   if (catalogSearch) catalogSearch.value = value;
-  const churchCatalogSearch = document.getElementById("churchCatalogSearch");
-  if (churchCatalogSearch) churchCatalogSearch.value = value;
   if (source === "home") {
-    activatePage("catalogo");
+    activatePage("igrejas");
     if (catalogSearch) catalogSearch.focus({ preventScroll: true });
   }
   renderProducts();
@@ -164,11 +163,6 @@ const catalogSearchInput = document.getElementById("catalogSearch");
 if (catalogSearchInput) {
   catalogSearchInput.addEventListener("input", (event) => setSearch(event.target.value, "catalog"));
 }
-const churchCatalogSearchInput = document.getElementById("churchCatalogSearch");
-if (churchCatalogSearchInput) {
-  churchCatalogSearchInput.addEventListener("input", (event) => setSearch(event.target.value, "church"));
-}
-
 document.querySelectorAll("[data-catalog-filter]").forEach((chip) => chip.addEventListener("click", () => {
   activeCatalogFilter = chip.dataset.catalogFilter;
   document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item.dataset.catalogFilter === activeCatalogFilter));
@@ -189,7 +183,7 @@ document.querySelectorAll("[data-filter]").forEach((chip) => chip.addEventListen
   if (homeSearch) homeSearch.value = "";
   searchTerm = "";
   renderProducts();
-  activatePage("catalogo");
+  activatePage("igrejas");
 }));
 
 // Galeria de detalhes: os controles só aparecem quando há várias fotos.
@@ -214,7 +208,8 @@ function renderGallery(product) {
   const dots = document.getElementById("galleryDots");
   const previous = document.getElementById("galleryPrevious");
   const next = document.getElementById("galleryNext");
-  track.innerHTML = sources.map((source, index) => `<img src="${source}" alt="${product.alt}${sources.length > 1 ? ` — foto ${index + 1} de ${sources.length}` : ""}" width="1200" height="1600" ${index === 0 ? "fetchpriority=high" : "loading=lazy"}>`).join("");
+  const imageAlt = product.alt || product.nome || product.title;
+  track.innerHTML = sources.map((source, index) => `<img src="${source}" alt="${imageAlt}${sources.length > 1 ? ` — foto ${index + 1} de ${sources.length}` : ""}" width="1200" height="1600" ${index === 0 ? "fetchpriority=high" : "loading=lazy"}>`).join("");
   dots.innerHTML = sources.map((_, index) => `<button type="button" aria-label="Ver foto ${index + 1}" aria-current="${index === 0}" class="${index === 0 ? "active" : ""}"></button>`).join("");
   const hasMultiple = sources.length > 1;
   previous.classList.toggle("hidden", !hasMultiple);
@@ -228,17 +223,50 @@ function renderGallery(product) {
 function openDetail(id) {
   const product = products.find((item) => item.id === id);
   if (!product) return;
+  detailOpener = document.activeElement;
+  currentDetailType = "decoration";
   currentProduct = product;
   currentRequest = { kind: "decoration", label: `Opção ${product.id} — ${product.title}` };
   document.getElementById("detailCode").textContent = `Opção ${product.id}`;
+  document.getElementById("detailGallery").setAttribute("aria-label", `Fotos de ${product.title}`);
+  document.getElementById("detailCategoryLabel").textContent = "DECORAÇÃO PARA IGREJA";
   document.getElementById("detailTitle").textContent = product.title;
   document.getElementById("detailDescription").textContent = product.description;
+  document.getElementById("detailIncludesBlock").hidden = false;
   document.getElementById("detailIncludes").innerHTML = product.includes.map((item) => `<li>${item}</li>`).join("");
+  document.getElementById("detailInvestment").textContent = "Investimento sob consulta";
+  document.getElementById("detailBudget").textContent = "PEDIR ORÇAMENTO PELO WHATSAPP";
   renderGallery(product);
   detail.classList.add("open");
   detail.setAttribute("aria-hidden", "false");
   document.body.classList.add("overlay-open");
+  document.getElementById("closeDetail").focus();
   trackEvent("ViewContent", { content_name: product.title, content_ids: [product.id], content_type: "product", source: attribution });
+}
+
+function openBouquetDetail(id) {
+  const bouquet = readyBouquets.find((item) => item.id === Number(id));
+  if (!bouquet) return;
+  detailOpener = document.activeElement;
+  currentDetailType = "bouquet";
+  currentProduct = bouquet;
+  const kind = bouquet.tipo === "noivas" ? "bride" : "gift";
+  const price = bouquetPrice(bouquet);
+  currentRequest = { kind, label: `${bouquet.nome} — ${price}` };
+  document.getElementById("detailCode").textContent = bouquet.tipo === "noivas" ? "Buquê de noiva" : "Buquê para presente";
+  document.getElementById("detailGallery").setAttribute("aria-label", `Fotos de ${bouquet.nome}`);
+  document.getElementById("detailCategoryLabel").textContent = bouquet.tipo === "noivas" ? "BUQUÊ DE NOIVA" : "BUQUÊ PARA PRESENTE";
+  document.getElementById("detailTitle").textContent = bouquet.nome;
+  document.getElementById("detailDescription").textContent = bouquet.description || "Consulte disponibilidade e detalhes pelo WhatsApp.";
+  document.getElementById("detailIncludesBlock").hidden = true;
+  document.getElementById("detailInvestment").textContent = price;
+  document.getElementById("detailBudget").textContent = "PEDIR ESTE BUQUÊ";
+  renderGallery(bouquet);
+  detail.classList.add("open");
+  detail.setAttribute("aria-hidden", "false");
+  document.body.classList.add("overlay-open");
+  document.getElementById("closeDetail").focus();
+  trackEvent("ViewContent", { content_name: bouquet.nome, content_ids: [bouquet.id], content_type: "product", source: attribution });
 }
 
 function bindDetailButtons(root = document) {
@@ -317,22 +345,9 @@ function closePhotoViewer({ fromHistory = false } = {}) {
 }
 
 document.addEventListener("click", (event) => {
-  const readyBouquetOrder = event.target.closest("[data-ready-bouquet]");
-  if (readyBouquetOrder) {
-    const bouquet = readyBouquets.find((item) => item.id === Number(readyBouquetOrder.dataset.readyBouquet));
-    if (bouquet) openSheet(bouquet.tipo === "noivas" ? "bride" : "gift", `${bouquet.nome} — ${bouquet.price == null ? "Sob consulta" : money(bouquet.price)}`);
-    return;
-  }
-  const readyBouquetTrigger = event.target.closest("[data-gallery-ready-bouquet]");
+  const readyBouquetTrigger = event.target.closest("[data-ready-detail]");
   if (readyBouquetTrigger) {
-    const bouquet = readyBouquets.find((item) => item.id === Number(readyBouquetTrigger.dataset.galleryReadyBouquet));
-    if (bouquet) openPhotoViewer((bouquet.gallery || [bouquet.image]).map((src) => ({ src, alt: bouquet.nome })), bouquet.nome);
-    return;
-  }
-  const productTrigger = event.target.closest("[data-gallery-product]");
-  if (productTrigger) {
-    const product = products.find((item) => item.id === productTrigger.dataset.galleryProduct);
-    if (product) openPhotoViewer((product.gallery || [product.image]).map((src) => ({ src, alt: product.alt })), product.title);
+    openBouquetDetail(readyBouquetTrigger.dataset.readyDetail);
     return;
   }
   const placeholderTrigger = event.target.closest("[data-gallery-key]");
@@ -360,7 +375,9 @@ photoViewerStage.addEventListener("touchend", (event) => {
 document.getElementById("detailGallery").addEventListener("click", (event) => {
   if (!event.target.closest("img") || !currentProduct) return;
   const images = currentProduct.gallery || [currentProduct.image];
-  openPhotoViewer(images.map((src) => ({ src, alt: currentProduct.alt })), currentProduct.title);
+  const title = currentProduct.title || currentProduct.nome;
+  const alt = currentProduct.alt || currentProduct.nome || currentProduct.title;
+  openPhotoViewer(images.map((src) => ({ src, alt })), title);
 });
 
 document.getElementById("closeDetail").addEventListener("click", closeDetail);
@@ -368,8 +385,15 @@ function closeDetail() {
   detail.classList.remove("open");
   detail.setAttribute("aria-hidden", "true");
   document.body.classList.remove("overlay-open");
+  detailOpener?.focus?.();
 }
-document.getElementById("detailBudget").addEventListener("click", () => openSheet("decoration", currentRequest.label));
+document.getElementById("detailBudget").addEventListener("click", () => {
+  if (currentDetailType === "bouquet") {
+    openSheet(currentRequest.kind, currentRequest.label, currentProduct?.image);
+    return;
+  }
+  openSheet("decoration", currentRequest.label, currentProduct?.image);
+});
 document.getElementById("galleryPrevious").addEventListener("click", () => showGalleryImage(galleryIndex - 1));
 document.getElementById("galleryNext").addEventListener("click", () => showGalleryImage(galleryIndex + 1));
 document.getElementById("detailGallery").addEventListener("touchstart", (event) => { galleryStartX = event.changedTouches[0].screenX; }, { passive: true });
@@ -400,14 +424,19 @@ function renderForm(kind) {
   } else if (kind === "bride") {
     formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data do casamento", "weddingDate", "", "date", true)}${field("Igreja ou local", "venue", "Onde será a cerimônia?", "text", true)}<label for="field-style">Estilo desejado *</label><textarea id="field-style" name="style" rows="3" placeholder="Conte sobre as flores, cores ou referências" required></textarea>`;
   } else {
-    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}`;
+    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Tipo de celebração", "eventType", "Casamento, festa de padroeiro, andor…")}${field("Data do evento (opcional)", "eventDate", "", "date")}${field("Igreja ou local (opcional)", "venue", "Nome da igreja ou cidade")}`;
   }
 }
 
-function openSheet(kind = "decoration", label = "Orçamento de decoração") {
+function openSheet(kind = "decoration", label = "Orçamento de decoração", image = "") {
   currentRequest = { kind, label };
   document.getElementById("selectedOption").textContent = label;
   renderForm(kind);
+  const thumb = document.getElementById("selectedThumb");
+  thumb.hidden = !image;
+  if (image) thumb.src = image;
+  const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  formFields.querySelectorAll('input[type="date"]').forEach((input) => { input.min = today; });
   sheet.classList.add("open");
   backdrop.classList.add("open");
   sheet.setAttribute("aria-hidden", "false");
@@ -444,7 +473,7 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
   const values = {
     name: "Nome", date: "Data da entrega", time: "Horário",
     fulfillment: "Entrega ou retirada", address: "Endereço",
-    cardMessage: "Mensagem para o cartão", weddingDate: "Data do casamento", venue: "Igreja/local", style: "Estilo desejado"
+    cardMessage: "Mensagem para o cartão", weddingDate: "Data do casamento", eventType: "Tipo de celebração", eventDate: "Data do evento", venue: "Igreja/local", style: "Estilo desejado"
   };
   Object.entries(values).forEach(([key, label]) => {
     const value = String(data.get(key) || "").trim();
@@ -453,28 +482,42 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
   lines.push(`Origem: ${attribution}.`);
   trackEvent("Lead", { content_name: currentRequest.label, content_category: currentRequest.kind, source: attribution });
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+  closeSheet();
+  showToast("Abrimos o WhatsApp. É só enviar a mensagem.");
 });
 
 // Preços informados para rosas e seleção de quantidade.
 function money(value) { return `R$ ${value.toFixed(0)}`; }
-function bouquetPrice(bouquet) { return bouquet.price == null ? "Sob consulta" : money(bouquet.price); }
+function bouquetPrice(bouquet) { return !bouquet.price ? "Sob consulta" : money(bouquet.price); }
 const readyBouquetsGrid = document.getElementById("readyBouquets");
 const homeBouquetCarousel = document.getElementById("homeBouquetCarousel");
 let activeBouquetCategory = "presentes";
+let activePrice = "todos";
+function inPriceRange(b) {
+  if (activePrice === "todos") return true;
+  if (!b.price) return false;
+  const [lo, hi] = activePrice.split("-").map(Number);
+  return b.price > lo && b.price <= hi;
+}
+function setPrice(value) {
+  activePrice = value;
+  document.querySelectorAll("[data-price]").forEach((c) => c.classList.toggle("active", c.dataset.price === value));
+}
 function renderReadyBouquets() {
   if (!readyBouquetsGrid) return;
-  const visibleBouquets = activeBouquetCategory === "todos"
+  const byCategory = activeBouquetCategory === "todos"
     ? readyBouquets
     : readyBouquets.filter((bouquet) => bouquet.tipo === activeBouquetCategory || bouquet.tipo === "todos");
+  const visibleBouquets = byCategory.filter(inPriceRange);
   readyBouquetsGrid.innerHTML = visibleBouquets.length ? visibleBouquets.map((bouquet) => `
     <article class="ready-bouquet-card">
-      <button class="ready-bouquet-photo" type="button" data-gallery-ready-bouquet="${bouquet.id}" aria-label="Ampliar foto de ${bouquet.nome}">
+      <button class="ready-bouquet-photo" type="button" data-ready-detail="${bouquet.id}" aria-label="Mais detalhes sobre ${bouquet.nome}">
         <img src="${bouquet.image}" alt="${bouquet.nome}" loading="lazy">
       </button>
       <h3 class="ready-bouquet-name">${bouquet.nome}</h3>
       <p class="ready-bouquet-description">${bouquet.description || ""}</p>
-      <strong class="ready-bouquet-price ${bouquet.price == null ? "price-on-request" : ""}">${bouquetPrice(bouquet)}</strong>
-      <button class="button button-outline ready-bouquet-order" type="button" data-ready-bouquet="${bouquet.id}">Pedir este buquê</button>
+      <strong class="ready-bouquet-price ${!bouquet.price ? "price-on-request" : ""}">${bouquetPrice(bouquet)}</strong>
+      <button class="button button-outline ready-bouquet-order" type="button" data-ready-detail="${bouquet.id}">Mais detalhes</button>
     </article>`).join("") : `<p class="empty-state">Ainda não há buquês cadastrados nesta categoria.</p>`;
 }
 document.querySelectorAll("[data-bouquet-category]").forEach((chip) => chip.addEventListener("click", () => {
@@ -486,27 +529,30 @@ document.querySelectorAll("[data-bouquet-category]").forEach((chip) => chip.addE
   });
   document.getElementById("giftCategoryContent").classList.toggle("hidden", activeBouquetCategory === "noivas");
   document.getElementById("bridalCategoryContent").classList.toggle("hidden", activeBouquetCategory === "presentes");
+  if (activeBouquetCategory === "noivas") setPrice("todos");
+  document.querySelector(".price-chips")?.classList.toggle("hidden", activeBouquetCategory === "noivas");
   renderReadyBouquets();
 }));
 document.querySelector("[data-bouquet-bride-request]")?.addEventListener("click", () => openSheet("bride", "Buquê de noiva sob encomenda"));
+document.querySelectorAll("[data-price]").forEach((c) => c.addEventListener("click", () => { setPrice(c.dataset.price); renderReadyBouquets(); }));
 renderReadyBouquets();
 if (homeBouquetCarousel) {
   homeBouquetCarousel.innerHTML = readyBouquets.slice(0, 6).map((bouquet) => `
     <article class="home-bouquet-card">
-      <button class="home-bouquet-photo" type="button" data-gallery-ready-bouquet="${bouquet.id}" aria-label="Ampliar foto de ${bouquet.nome}">
+      <button class="home-bouquet-photo" type="button" data-ready-detail="${bouquet.id}" aria-label="Mais detalhes sobre ${bouquet.nome}">
         <img src="${bouquet.image}" alt="${bouquet.nome}" loading="lazy">
       </button>
       <div class="home-bouquet-copy">
         <h3>${bouquet.nome}</h3>
         <strong>${bouquetPrice(bouquet)}</strong>
-        <button class="button button-outline" type="button" data-ready-bouquet="${bouquet.id}">PEDIR ESTE BUQUÊ</button>
+        <button class="button button-outline" type="button" data-ready-detail="${bouquet.id}">MAIS DETALHES</button>
       </div>
     </article>`).join("") + `
     <button class="carousel-end-link" type="button" data-home-bouquets>
       <span>Ver todos os buquês</span><span aria-hidden="true">→</span>
     </button>`;
 }
-document.querySelector("[data-home-catalog]")?.addEventListener("click", () => activatePage("catalogo"));
+document.querySelector("[data-home-catalog]")?.addEventListener("click", () => activatePage("igrejas"));
 document.querySelector("[data-home-bouquets]")?.addEventListener("click", () => activatePage("buques"));
 function renderQuantities() {
   const quantities = Object.keys(prices[bouquetSize]).map(Number);
@@ -545,7 +591,7 @@ document.querySelectorAll(".category-chips .chip").forEach((chip) => chip.addEve
     activeCatalogFilter = category;
     document.querySelectorAll("[data-catalog-filter]").forEach((item) => item.classList.toggle("active", item.dataset.catalogFilter === "todos"));
     renderProducts();
-    activatePage("catalogo");
+    activatePage("igrejas");
   } else activatePage(category);
 }));
 
@@ -563,3 +609,18 @@ const initialPage = window.location.hash.slice(1);
 const initialPageId = pages.some((page) => page.id === initialPage) ? initialPage : "inicio";
 if (initialPage) activatePage(initialPageId, { fromHistory: true, scrollY: window.scrollY });
 history.replaceState({ ...history.state, page: initialPageId, scrollY: window.scrollY }, "", window.location.href);
+
+// Atalhos da home: abrem Buquês já na aba escolhida.
+document.querySelectorAll("[data-go-bouquet]").forEach((button) => button.addEventListener("click", () => {
+  activatePage("buques");
+  document.querySelector(`[data-bouquet-category="${button.dataset.goBouquet}"]`)?.click();
+}));
+
+// Aviso rápido depois de enviar o pedido.
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove("show"), 4500);
+}
