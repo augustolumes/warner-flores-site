@@ -157,6 +157,7 @@ textarea:focus-visible {
   justify-content: flex-end;
   overflow: hidden;
   color: white;
+  box-shadow: 0px 4px 3px #43444707;
   background-image: linear-gradient(90deg, rgba(16, 29, 24, .9) 0%, rgba(16, 29, 24, .68) 57%, rgba(16, 29, 24, .2) 100%), linear-gradient(0deg, rgba(16, 29, 24, .42) 0%, transparent 65%), url('imagens/hero_background.jfif');
   background-position: 58% center;
   background-size: cover;
@@ -349,7 +350,7 @@ textarea:focus-visible {
   flex: 0 0 auto;
   border: 1px solid #c9b894;
   border-radius: 30px;
-  padding: 0 15px;
+  padding: 0 14.5px;
   color: var(--green);
   background: transparent;
   font-size: 12px;
@@ -368,6 +369,7 @@ textarea:focus-visible {
   overflow-x: auto;
   margin: 0 -18px;
   padding: 0 48px 10px 18px;
+  scroll-padding-inline: 18px;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
 }
@@ -378,16 +380,17 @@ textarea:focus-visible {
   min-width: 0;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 20px 20px 18px 18px;
   background: var(--white);
-  box-shadow: 0 3px 15px #263a3208;
+  box-shadow: 0px 4px 3px #43444710;
+
 }
 
 .highlight-card {
-  height: 500px;
+  height: auto;
   flex: 0 0 84%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto auto;
   scroll-snap-align: start;
 }
 
@@ -423,9 +426,12 @@ textarea:focus-visible {
 }
 
 .highlight-image {
-  height: 210px;
-  flex: 0 0 210px;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  flex: 0 0 auto;
   overflow: hidden;
+  border-radius: 15px;
+  padding: 8px;
 }
 
 .highlight-image img,
@@ -436,6 +442,10 @@ textarea:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.highlight-image img {
+  border-radius: 18px;
 }
 
 .image-gallery-trigger {
@@ -449,6 +459,10 @@ textarea:focus-visible {
   color: white;
   background: transparent;
   cursor: zoom-in;
+}
+
+.highlight-image .image-gallery-trigger {
+  border-radius: 18px;
 }
 
 .image-gallery-trigger img {
@@ -484,10 +498,12 @@ textarea:focus-visible {
 }
 
 .highlight-copy {
-  flex: 1;
-  padding: 14px 15px 16px;
+  min-width: 0;
+  padding: 16px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  background: var(--white);
 }
 
 .badge {
@@ -609,6 +625,7 @@ textarea:focus-visible {
   overflow-x: auto;
   margin: 0 -18px;
   padding: 0 48px 12px 18px;
+  scroll-padding-inline: 18px;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
 }
@@ -618,7 +635,8 @@ textarea:focus-visible {
   flex: 0 0 84%;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 20px 20px 18px 18px;
+  box-shadow: 0px 4px 3px #4344471f;
   display: grid;
   grid-template-rows: auto auto;
   background: var(--white);
@@ -630,6 +648,8 @@ textarea:focus-visible {
   aspect-ratio: 3 / 4;
   flex: 0 0 auto;
   overflow: hidden;
+  border-radius: 18px;
+  padding: 8px;
   display: grid;
   place-items: center;
   background-color: #eee7da;
@@ -705,7 +725,8 @@ textarea:focus-visible {
 .home-bouquet-photo {
   width: 100%;
   border: 0;
-  padding: 0;
+  padding: 8px;
+  background: var(--white);
   color: inherit;
   font: inherit;
   cursor: zoom-in;
@@ -715,6 +736,7 @@ textarea:focus-visible {
   display: block;
   width: 100%;
   height: 100%;
+  border-radius: 18px;
   object-fit: cover;
 }
 
@@ -1242,7 +1264,7 @@ textarea:focus-visible {
   border-radius: 10px;
   padding: 9px;
   background: var(--white);
-  box-shadow: 0 4px 14px #263a320d;
+  box-shadow: 0px 4px 3px #43444705;
 }
 
 .ready-bouquet-card img {
@@ -1295,6 +1317,10 @@ textarea:focus-visible {
   margin: 9px 0;
   color: var(--green);
   font-size: 18px;
+}
+
+.ready-bouquet-price.price-on-request {
+  font-size: 14px;
 }
 
 .ready-bouquet-card .button {
@@ -1374,7 +1400,7 @@ textarea:focus-visible {
   padding: 14px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  box-shadow: 0px 4px 3px #4344471f gap: 15px;
 }
 
 .rose-art {
@@ -1822,6 +1848,7 @@ textarea:focus-visible {
     margin: 18px 18px 0;
     background-position: 58% center;
     padding: 34px 30px;
+
   }
 
   .home-hero h1,
@@ -1852,12 +1879,14 @@ textarea:focus-visible {
 
   .highlight-row {
     margin-inline: -26px;
-    padding: 0 56px 10px 26px;
+    padding: 0 56px 10px 18px;
+    scroll-padding-inline: 18px;
   }
 
   .home-bouquet-row {
     margin-inline: -26px;
-    padding: 0 56px 12px 26px;
+    padding: 0 56px 12px 18px;
+    scroll-padding-inline: 18px;
   }
 
   .highlight-card {
@@ -1866,11 +1895,6 @@ textarea:focus-visible {
 
   .home-bouquet-card {
     flex-basis: 48%;
-  }
-
-  .highlight-image {
-    height: 230px;
-    flex-basis: 230px;
   }
 
   .option-image-wrap,

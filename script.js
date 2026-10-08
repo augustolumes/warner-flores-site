@@ -18,7 +18,7 @@ const prices = {
 // Edite nome e tipo para atualizar automaticamente os cartões e filtros. tipo aceita: presentes, noivas ou todos.
 const readyBouquets = [
   { id: 1, nome: "Buquê 1", tipo: "presentes", image: "imagens/buques/1.buque_150.jpeg", price: 150 },
-  { id: 2, nome: "Buquê 2", tipo: "todos", image: "imagens/buques/2.buque_200.jpeg", price: 200 },
+  { id: 2, nome: "Buquê 2", tipo: "presentes", image: "imagens/buques/2.buque_200.jpeg", price: 200 },
   { id: 3, nome: "Buquê 3", tipo: "presentes", image: "imagens/buques/3.buque_150.jpeg", price: 150 },
   { id: 4, nome: "Buquê 4", tipo: "presentes", image: "imagens/buques/4.buque_450_rosa_100.jpeg", price: 450 },
   { id: 5, nome: "Buquê 5", tipo: "presentes", image: "imagens/buques/5.buque_70.jpeg", price: 70 },
@@ -26,7 +26,20 @@ const readyBouquets = [
   { id: 7, nome: "Buquê 7", tipo: "presentes", image: "imagens/buques/7.buque_150.jpeg", price: 150 },
   { id: 8, nome: "Buquê 8", tipo: "presentes", image: "imagens/buques/8_boque_00.jpeg", price: 0 },
   { id: 9, nome: "Buquê 9", tipo: "presentes", image: "imagens/buques/9.buque_90.jpeg", price: 90 },
-  { id: 10, nome: "Buquê 10", tipo: "presentes", image: "imagens/buques/10_buque_200.jpeg", price: 200 }
+  { id: 10, nome: "Buquê 10", tipo: "presentes", image: "imagens/buques/10_buque_200.jpeg", price: 200 },
+  { id: 11, nome: "Buquê de noiva 11", tipo: "noivas", image: "imagens/buques/11.buque_sc_noiva.JPG", price: null },
+  { id: 12, nome: "Buquê de noiva 12", tipo: "noivas", image: "imagens/buques/12..buque_sc_noiva.JPG", price: null },
+  { id: 13, nome: "Buquê de noiva 13", tipo: "noivas", image: "imagens/buques/13a.buque_sc_noiva.JPG", gallery: ["imagens/buques/13a.buque_sc_noiva.JPG", "imagens/buques/13b.buque_sc_noiva.JPG"], price: null },
+  { id: 14, nome: "Buquê de noiva 14", tipo: "noivas", image: "imagens/buques/14.buque_sc_noiva.JPG", price: null },
+  { id: 15, nome: "Buquê de noiva 15", tipo: "noivas", image: "imagens/buques/15.buque_sc_noiva.JPG", price: null },
+  { id: 16, nome: "Buquê de noiva 16", tipo: "noivas", image: "imagens/buques/16.buque_sc_noiva.JPG", price: null },
+  { id: 17, nome: "Buquê de noiva 17", tipo: "noivas", image: "imagens/buques/17.buque_sc_noiva.JPG", price: null },
+  { id: 18, nome: "Buquê de noiva 18", tipo: "noivas", image: "imagens/buques/18.buque_sc_noiva.JPG", price: null },
+  { id: 19, nome: "Buquê de noiva 19", tipo: "noivas", image: "imagens/buques/19.buque_sc_noiva.JPG", price: null },
+  { id: 20, nome: "Buquê de noiva 20", tipo: "noivas", image: "imagens/buques/20.buque_sc_noiva.JPG", price: null },
+  { id: 21, nome: "Buquê de noiva 21", tipo: "noivas", image: "imagens/buques/21.buque_sc_noiva.JPG", price: null },
+  { id: 22, nome: "Buquê de noiva 22", tipo: "noivas", image: "imagens/buques/22.buque_sc_noiva.JPG", price: null },
+  { id: 23, nome: "Buquê de noiva 23", tipo: "noivas", image: "imagens/buques/23.buque_sc_noiva.JPG", price: null }
 ];
 const pages = [...document.querySelectorAll(".page")];
 const detail = document.getElementById("detailScreen");
@@ -264,6 +277,10 @@ function updatePhotoViewer(index) {
 }
 
 function openPhotoViewer(items, title) {
+  if (!photoViewer.classList.contains("open")) {
+    photoViewer.dataset.historyClosing = "false";
+    history.pushState({ ...history.state, photoViewer: true }, "", window.location.href);
+  }
   photoViewerOpener = document.activeElement;
   photoViewerItems = items;
   photoViewerIndex = 0;
@@ -276,6 +293,7 @@ function openPhotoViewer(items, title) {
   document.getElementById("photoViewerPrevious").classList.toggle("hidden", !multiple);
   document.getElementById("photoViewerNext").classList.toggle("hidden", !multiple);
   dots.classList.toggle("hidden", !multiple);
+  document.getElementById("photoViewerHint").classList.toggle("hidden", !multiple);
   document.getElementById("photoViewerTitle").textContent = title;
   photoViewer.classList.add("open");
   photoViewer.setAttribute("aria-hidden", "false");
@@ -284,8 +302,15 @@ function openPhotoViewer(items, title) {
   document.getElementById("closePhotoViewer").focus();
 }
 
-function closePhotoViewer() {
+function closePhotoViewer({ fromHistory = false } = {}) {
+  if (!fromHistory && history.state?.photoViewer) {
+    if (photoViewer.dataset.historyClosing === "true") return;
+    photoViewer.dataset.historyClosing = "true";
+    history.back();
+    return;
+  }
   photoViewer.classList.remove("open");
+  photoViewer.dataset.historyClosing = "false";
   photoViewer.setAttribute("aria-hidden", "true");
   if (!detail.classList.contains("open") && !sheet.classList.contains("open")) document.body.classList.remove("overlay-open");
   photoViewerOpener?.focus?.();
@@ -295,13 +320,13 @@ document.addEventListener("click", (event) => {
   const readyBouquetOrder = event.target.closest("[data-ready-bouquet]");
   if (readyBouquetOrder) {
     const bouquet = readyBouquets.find((item) => item.id === Number(readyBouquetOrder.dataset.readyBouquet));
-    if (bouquet) openSheet(bouquet.tipo === "noivas" ? "bride" : "gift", `${bouquet.nome} — ${money(bouquet.price)}`);
+    if (bouquet) openSheet(bouquet.tipo === "noivas" ? "bride" : "gift", `${bouquet.nome} — ${bouquet.price == null ? "Sob consulta" : money(bouquet.price)}`);
     return;
   }
   const readyBouquetTrigger = event.target.closest("[data-gallery-ready-bouquet]");
   if (readyBouquetTrigger) {
     const bouquet = readyBouquets.find((item) => item.id === Number(readyBouquetTrigger.dataset.galleryReadyBouquet));
-    if (bouquet) openPhotoViewer([{ src: bouquet.image, alt: bouquet.nome }], bouquet.nome);
+    if (bouquet) openPhotoViewer((bouquet.gallery || [bouquet.image]).map((src) => ({ src, alt: bouquet.nome })), bouquet.nome);
     return;
   }
   const productTrigger = event.target.closest("[data-gallery-product]");
@@ -432,6 +457,7 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
 
 // Preços informados para rosas e seleção de quantidade.
 function money(value) { return `R$ ${value.toFixed(0)}`; }
+function bouquetPrice(bouquet) { return bouquet.price == null ? "Sob consulta" : money(bouquet.price); }
 const readyBouquetsGrid = document.getElementById("readyBouquets");
 const homeBouquetCarousel = document.getElementById("homeBouquetCarousel");
 let activeBouquetCategory = "presentes";
@@ -447,7 +473,7 @@ function renderReadyBouquets() {
       </button>
       <h3 class="ready-bouquet-name">${bouquet.nome}</h3>
       <p class="ready-bouquet-description">${bouquet.description || ""}</p>
-      <strong class="ready-bouquet-price">${money(bouquet.price)}</strong>
+      <strong class="ready-bouquet-price ${bouquet.price == null ? "price-on-request" : ""}">${bouquetPrice(bouquet)}</strong>
       <button class="button button-outline ready-bouquet-order" type="button" data-ready-bouquet="${bouquet.id}">Pedir este buquê</button>
     </article>`).join("") : `<p class="empty-state">Ainda não há buquês cadastrados nesta categoria.</p>`;
 }
@@ -465,14 +491,14 @@ document.querySelectorAll("[data-bouquet-category]").forEach((chip) => chip.addE
 document.querySelector("[data-bouquet-bride-request]")?.addEventListener("click", () => openSheet("bride", "Buquê de noiva sob encomenda"));
 renderReadyBouquets();
 if (homeBouquetCarousel) {
-  homeBouquetCarousel.innerHTML = readyBouquets.map((bouquet) => `
+  homeBouquetCarousel.innerHTML = readyBouquets.slice(0, 6).map((bouquet) => `
     <article class="home-bouquet-card">
       <button class="home-bouquet-photo" type="button" data-gallery-ready-bouquet="${bouquet.id}" aria-label="Ampliar foto de ${bouquet.nome}">
         <img src="${bouquet.image}" alt="${bouquet.nome}" loading="lazy">
       </button>
       <div class="home-bouquet-copy">
         <h3>${bouquet.nome}</h3>
-        <strong>${money(bouquet.price)}</strong>
+        <strong>${bouquetPrice(bouquet)}</strong>
         <button class="button button-outline" type="button" data-ready-bouquet="${bouquet.id}">PEDIR ESTE BUQUÊ</button>
       </div>
     </article>`).join("") + `
@@ -526,6 +552,7 @@ document.querySelectorAll(".category-chips .chip").forEach((chip) => chip.addEve
 document.getElementById("year").textContent = new Date().getFullYear();
 window.history.scrollRestoration = "manual";
 window.addEventListener("popstate", (event) => {
+  if (photoViewer.classList.contains("open")) closePhotoViewer({ fromHistory: true });
   const hashPageId = window.location.hash.slice(1);
   const pageId = pages.some((page) => page.id === event.state?.page)
     ? event.state.page

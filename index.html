@@ -128,8 +128,9 @@
     <section class="page" id="buques" data-page="buques" aria-label="Buquês de presente">
       <div class="page-content bouquet-page">
         <div class="chips bouquet-category-chips" role="tablist" aria-label="Categorias de buquês">
-          <button class="chip" type="button" role="tab" aria-controls="readyBouquets giftCategoryContent bridalCategoryContent"
-            aria-selected="false" data-bouquet-category="todos">Todos</button>
+          <button class="chip" type="button" role="tab"
+            aria-controls="readyBouquets giftCategoryContent bridalCategoryContent" aria-selected="false"
+            data-bouquet-category="todos">Todos</button>
           <button class="chip active" type="button" role="tab" aria-controls="readyBouquets giftCategoryContent"
             aria-selected="true" data-bouquet-category="presentes">Presentes</button>
           <button class="chip" type="button" role="tab" aria-controls="readyBouquets bridalCategoryContent"
@@ -236,7 +237,7 @@
       aria-label="Imagem anterior">‹</button>
     <button class="photo-viewer-arrow next" type="button" id="photoViewerNext" aria-label="Próxima imagem">›</button>
     <div class="photo-viewer-dots" id="photoViewerDots" aria-label="Selecionar imagem"></div>
-    <p class="photo-viewer-hint">Deslize para ver outras imagens</p>
+    <p class="photo-viewer-hint hidden" id="photoViewerHint">Deslize para ver outras imagens</p>
   </section>
 
   <div class="sheet-backdrop" id="sheetBackdrop"></div>
@@ -244,8 +245,7 @@
     aria-labelledby="sheetTitle">
     <div class="sheet-handle" aria-hidden="true"></div><button class="sheet-close" id="closeSheet"
       aria-label="Fechar formulário">×</button>
-    <p class="eyebrow">SOLICITAR ORÇAMENTO</p>
-    <h2 id="sheetTitle">Vamos falar do seu dia.</h2>
+    <p class="eyebrow"> seu pedido:</p>
     <div class="selected-product" id="selectedOption"></div>
     <form id="budgetForm">
       <div id="formFields"></div><button class="button button-green" id="sendWhatsApp" type="submit">CONTINUAR NO
