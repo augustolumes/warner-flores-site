@@ -48,6 +48,7 @@ const backdrop = document.getElementById("sheetBackdrop");
 let currentProduct = null;
 let currentDetailType = "decoration";
 let detailOpener = null;
+let sheetOpener = null;
 let currentRequest = { kind: "decoration", label: "Orçamento de decoração" };
 let bouquetSize = "P";
 let quantity = 5;
@@ -92,6 +93,7 @@ function activatePage(id, { fromHistory = false, scrollY = 0 } = {}) {
     history.pushState({ page: id, scrollY: 0 }, "", `#${id}`);
   }
   pages.forEach((item) => item.classList.toggle("active", item === page));
+  document.body.classList.toggle("contact-page-active", id === "contato");
   document.querySelectorAll(".nav-item").forEach((item) => item.classList.toggle("active", item.dataset.nav === id));
   if (fromHistory) window.scrollTo(0, scrollY);
   else window.scrollTo({ top: 0, behavior: "smooth" });
@@ -220,9 +222,13 @@ function renderGallery(product) {
 }
 
 // Detalhe da decoração e comparação alternam para uma opção distinta.
-function openDetail(id) {
+function openDetail(id, { fromHistory = false } = {}) {
   const product = products.find((item) => item.id === id);
   if (!product) return;
+  if (!detail.classList.contains("open") && !fromHistory) {
+    detail.dataset.historyClosing = "false";
+    history.pushState({ ...history.state, detailModal: { type: "decoration", id: product.id } }, "", window.location.href);
+  }
   detailOpener = document.activeElement;
   currentDetailType = "decoration";
   currentProduct = product;
@@ -244,9 +250,13 @@ function openDetail(id) {
   trackEvent("ViewContent", { content_name: product.title, content_ids: [product.id], content_type: "product", source: attribution });
 }
 
-function openBouquetDetail(id) {
+function openBouquetDetail(id, { fromHistory = false } = {}) {
   const bouquet = readyBouquets.find((item) => item.id === Number(id));
   if (!bouquet) return;
+  if (!detail.classList.contains("open") && !fromHistory) {
+    detail.dataset.historyClosing = "false";
+    history.pushState({ ...history.state, detailModal: { type: "bouquet", id: bouquet.id } }, "", window.location.href);
+  }
   detailOpener = document.activeElement;
   currentDetailType = "bouquet";
   currentProduct = bouquet;
@@ -304,10 +314,10 @@ function updatePhotoViewer(index) {
   });
 }
 
-function openPhotoViewer(items, title) {
-  if (!photoViewer.classList.contains("open")) {
+function openPhotoViewer(items, title, { fromHistory = false } = {}) {
+  if (!photoViewer.classList.contains("open") && !fromHistory) {
     photoViewer.dataset.historyClosing = "false";
-    history.pushState({ ...history.state, photoViewer: true }, "", window.location.href);
+    history.pushState({ ...history.state, photoViewer: { items, title } }, "", window.location.href);
   }
   photoViewerOpener = document.activeElement;
   photoViewerItems = items;
@@ -341,7 +351,7 @@ function closePhotoViewer({ fromHistory = false } = {}) {
   photoViewer.dataset.historyClosing = "false";
   photoViewer.setAttribute("aria-hidden", "true");
   if (!detail.classList.contains("open") && !sheet.classList.contains("open")) document.body.classList.remove("overlay-open");
-  photoViewerOpener?.focus?.();
+  photoViewerOpener?.focus?.({ preventScroll: true });
 }
 
 document.addEventListener("click", (event) => {
@@ -381,11 +391,18 @@ document.getElementById("detailGallery").addEventListener("click", (event) => {
 });
 
 document.getElementById("closeDetail").addEventListener("click", closeDetail);
-function closeDetail() {
+function closeDetail({ fromHistory = false } = {}) {
+  if (!fromHistory && history.state?.detailModal) {
+    if (detail.dataset.historyClosing === "true") return;
+    detail.dataset.historyClosing = "true";
+    history.back();
+    return;
+  }
   detail.classList.remove("open");
+  detail.dataset.historyClosing = "false";
   detail.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("overlay-open");
-  detailOpener?.focus?.();
+  if (!photoViewer.classList.contains("open") && !sheet.classList.contains("open")) document.body.classList.remove("overlay-open");
+  detailOpener?.focus?.({ preventScroll: true });
 }
 document.getElementById("detailBudget").addEventListener("click", () => {
   if (currentDetailType === "bouquet") {
@@ -428,7 +445,14 @@ function renderForm(kind) {
   }
 }
 
-function openSheet(kind = "decoration", label = "Orçamento de decoração", image = "") {
+function openSheet(kind = "decoration", label = "Orçamento de decoração", image = "", { fromHistory = false } = {}) {
+  if (!sheet.classList.contains("open")) {
+    sheetOpener = document.activeElement;
+    sheet.dataset.historyClosing = "false";
+    if (!fromHistory) {
+      history.pushState({ ...history.state, budgetSheet: { kind, label, image } }, "", window.location.href);
+    }
+  }
   currentRequest = { kind, label };
   document.getElementById("selectedOption").textContent = label;
   renderForm(kind);
@@ -444,11 +468,19 @@ function openSheet(kind = "decoration", label = "Orçamento de decoração", ima
   setTimeout(() => formFields.querySelector("input, select, textarea")?.focus(), 200);
 }
 
-function closeSheet() {
+function closeSheet({ fromHistory = false } = {}) {
+  if (!fromHistory && history.state?.budgetSheet) {
+    if (sheet.dataset.historyClosing === "true") return;
+    sheet.dataset.historyClosing = "true";
+    history.back();
+    return;
+  }
   sheet.classList.remove("open");
   backdrop.classList.remove("open");
+  sheet.dataset.historyClosing = "false";
   sheet.setAttribute("aria-hidden", "true");
-  if (!detail.classList.contains("open")) document.body.classList.remove("overlay-open");
+  if (!detail.classList.contains("open") && !photoViewer.classList.contains("open")) document.body.classList.remove("overlay-open");
+  sheetOpener?.focus?.({ preventScroll: true });
 }
 document.querySelectorAll("[data-request]").forEach((button) => button.addEventListener("click", () => openSheet("decoration", button.dataset.request)));
 document.getElementById("closeSheet").addEventListener("click", closeSheet);
@@ -598,7 +630,37 @@ document.querySelectorAll(".category-chips .chip").forEach((chip) => chip.addEve
 document.getElementById("year").textContent = new Date().getFullYear();
 window.history.scrollRestoration = "manual";
 window.addEventListener("popstate", (event) => {
-  if (photoViewer.classList.contains("open")) closePhotoViewer({ fromHistory: true });
+  const targetState = event.state || {};
+  if (photoViewer.classList.contains("open") && !targetState.photoViewer) {
+    closePhotoViewer({ fromHistory: true });
+    return;
+  }
+  if (sheet.classList.contains("open") && !targetState.budgetSheet) {
+    closeSheet({ fromHistory: true });
+    return;
+  }
+  if (detail.classList.contains("open") && !targetState.detailModal) {
+    closeDetail({ fromHistory: true });
+    return;
+  }
+
+  if (targetState.detailModal && !detail.classList.contains("open")) {
+    const modal = targetState.detailModal;
+    if (modal.type === "bouquet") openBouquetDetail(modal.id, { fromHistory: true });
+    else openDetail(modal.id, { fromHistory: true });
+    return;
+  }
+  if (targetState.budgetSheet && !sheet.classList.contains("open")) {
+    const request = targetState.budgetSheet;
+    openSheet(request.kind, request.label, request.image, { fromHistory: true });
+    return;
+  }
+  if (targetState.photoViewer && !photoViewer.classList.contains("open")) {
+    const gallery = targetState.photoViewer;
+    if (gallery.items?.length) openPhotoViewer(gallery.items, gallery.title, { fromHistory: true });
+    return;
+  }
+
   const hashPageId = window.location.hash.slice(1);
   const pageId = pages.some((page) => page.id === event.state?.page)
     ? event.state.page
@@ -607,6 +669,7 @@ window.addEventListener("popstate", (event) => {
 });
 const initialPage = window.location.hash.slice(1);
 const initialPageId = pages.some((page) => page.id === initialPage) ? initialPage : "inicio";
+document.body.classList.toggle("contact-page-active", initialPageId === "contato");
 if (initialPage) activatePage(initialPageId, { fromHistory: true, scrollY: window.scrollY });
 history.replaceState({ ...history.state, page: initialPageId, scrollY: window.scrollY }, "", window.location.href);
 
