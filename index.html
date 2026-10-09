@@ -111,45 +111,16 @@
 
     <section class="page" id="buques" data-page="buques" aria-label="Buquês de presente">
       <div class="page-content bouquet-page">
+        <h1 class="minor-title ready-bouquets-title">Buquês disponíveis</h1>
         <div class="chips bouquet-category-chips" role="tablist" aria-label="Categorias de buquês">
-          <button class="chip" type="button" role="tab"
-            aria-controls="readyBouquets giftCategoryContent bridalCategoryContent" aria-selected="false"
-            data-bouquet-category="todos">Todos</button>
-          <button class="chip active" type="button" role="tab" aria-controls="readyBouquets giftCategoryContent"
-            aria-selected="true" data-bouquet-category="presentes">Presentes</button>
+          <button class="chip" type="button" role="tab" aria-controls="readyBouquets bridalCategoryContent"
+            aria-selected="false" data-bouquet-category="todos">Todos</button>
+          <button class="chip active" type="button" role="tab" aria-controls="readyBouquets" aria-selected="true"
+            data-bouquet-category="presentes">Presentes</button>
           <button class="chip" type="button" role="tab" aria-controls="readyBouquets bridalCategoryContent"
             aria-selected="false" data-bouquet-category="noivas">Noivas</button>
         </div>
-        <h1 class="minor-title ready-bouquets-title">Buquês disponíveis</h1>
-        <div class="chips price-chips" role="group" aria-label="Filtrar por preço"><button class="chip active"
-            type="button" data-price="todos">Qualquer preço</button><button class="chip" type="button"
-            data-price="0-100">Até R$ 100</button><button class="chip" type="button" data-price="100-200">R$ 100 a
-            200</button><button class="chip" type="button" data-price="200-9999">Acima de R$ 200</button></div>
         <div class="ready-bouquets-grid" id="readyBouquets" aria-label="Buquês disponíveis"></div>
-        <div id="giftCategoryContent">
-          <p class="eyebrow">PRESENTES ESPECIAIS</p>
-          <h1>Buquê de rosas</h1>
-          <p class="eyebrow">Escolha o tamanho e quantidade</p>
-          <div class="segment" role="group" aria-label="Tamanho das rosas"><button class="segment-option active"
-              data-size="P">Tamanho P <small>desde R$ 25</small></button><button class="segment-option"
-              data-size="G">Tamanho G <small>desde R$ 35</small></button></div>
-          <label class="minor-title quantity-label" for="quantitySelect">Quantidade de rosas</label><select
-            class="quantity-select" id="quantitySelect" aria-label="Escolha a quantidade de rosas"></select>
-          <button class="bouquet-order button button-green" id="bouquetOrder">PEDIR 5 ROSAS P · R$ 50</button>
-          <p class="delivery-note">Entregamos em Arapiraca e região.</p>
-          <article class="rose-card">
-            <div class="rose-art" aria-hidden="true">✿</div>
-            <div>
-              <p class="eyebrow">UM DETALHE ESPECIAL</p>
-              <h3>Rosa decorada</h3>
-              <p>P R$ 10 · G R$ 15<br>Cores conforme disponibilidade.</p><button class="text-link"
-                data-gift-request="Rosa decorada">Solicitar rosa →</button>
-            </div>
-          </article>
-          <aside class="info-box"><span aria-hidden="true">✳</span>
-            <p>Flores naturais podem variar em tom e abertura. Embalagens e complementos conforme disponibilidade.</p>
-          </aside>
-        </div>
         <div class="bridal-category-panel hidden" id="bridalCategoryContent" role="tabpanel">
           <p class="eyebrow">BUQUÊS DE NOIVA</p>
           <h1>Um buquê para o seu grande dia</h1>
@@ -181,8 +152,8 @@
             Ver perfil no Instagram ↗
           </a>
         </section>
-        <div class="location-note">Atendimento em Arapiraca e região · Alagoas</div>
         <footer class="site-footer">
+          <p class="location-note">Atendimento em Arapiraca e região</p>
           <p>© <span id="year"></span> Warner Flores</p>
         </footer>
       </div>

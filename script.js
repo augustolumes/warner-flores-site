@@ -10,11 +10,6 @@ const products = [
   { id: "3A", title: "Arranjos de Altar & Nichos de Imagens", shortTitle: "Arranjos de Altar", image: "imagens/portfolio-igreja-01.jpeg", alt: "Arranjos florais para altar de igreja", description: "Composição floral em tons de branco e verde para ornamentar o altar e os nichos.", includes: ["Arranjo central para o altar", "Arranjos nos nichos laterais", "Composição floral em branco e verde"], tags: ["altar", "igrejas"] }
 ];
 
-const prices = {
-  P: { 2: 25, 3: 35, 4: 40, 5: 50, 6: 60, 7: 70, 8: 80, 9: 90, 10: 100, 12: 120, 15: 150, 24: 240 },
-  G: { 2: 35, 3: 50, 4: 60, 5: 75, 6: 90, 7: 105, 8: 120, 9: 135, 10: 150, 12: 180, 15: 225, 24: 360 }
-};
-
 // Edite nome e tipo para atualizar automaticamente os cartões e filtros. tipo aceita: presentes, noivas ou todos.
 const readyBouquets = [
   { id: 1, nome: "Buquê 1", tipo: "presentes", image: "imagens/buques/1.buque_150.jpeg", description: "Uma composição floral feita à mão para presentear em momentos especiais.", price: 150 },
@@ -50,9 +45,6 @@ let currentDetailType = "decoration";
 let detailOpener = null;
 let sheetOpener = null;
 let currentRequest = { kind: "decoration", label: "Orçamento de decoração" };
-let bouquetSize = "P";
-let quantity = 5;
-
 // Adiciona contexto da campanha à mensagem sem expor parâmetros vazios.
 const queryParams = new URLSearchParams(window.location.search);
 const utm = ["utm_source", "utm_campaign", "utm_content"]
@@ -532,30 +524,18 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
   showToast("Abrimos o WhatsApp. É só enviar a mensagem.");
 });
 
-// Preços informados para rosas e seleção de quantidade.
+// Formatação de preços dos buquês cadastrados.
 function money(value) { return `R$ ${value.toFixed(0)}`; }
 function bouquetPrice(bouquet) { return !bouquet.price ? "Sob consulta" : money(bouquet.price); }
 const readyBouquetsGrid = document.getElementById("readyBouquets");
 const homeBouquetCarousel = document.getElementById("homeBouquetCarousel");
 let activeBouquetCategory = "presentes";
-let activePrice = "todos";
-function inPriceRange(b) {
-  if (activePrice === "todos") return true;
-  if (!b.price) return false;
-  const [lo, hi] = activePrice.split("-").map(Number);
-  return b.price > lo && b.price <= hi;
-}
-function setPrice(value) {
-  activePrice = value;
-  document.querySelectorAll("[data-price]").forEach((c) => c.classList.toggle("active", c.dataset.price === value));
-}
 function renderReadyBouquets() {
   if (!readyBouquetsGrid) return;
   const byCategory = activeBouquetCategory === "todos"
     ? readyBouquets
     : readyBouquets.filter((bouquet) => bouquet.tipo === activeBouquetCategory || bouquet.tipo === "todos");
-  const visibleBouquets = byCategory.filter(inPriceRange);
-  readyBouquetsGrid.innerHTML = visibleBouquets.length ? visibleBouquets.map((bouquet) => `
+  readyBouquetsGrid.innerHTML = byCategory.length ? byCategory.map((bouquet) => `
     <article class="ready-bouquet-card">
       <button class="ready-bouquet-photo" type="button" data-ready-detail="${bouquet.id}" aria-label="Mais detalhes sobre ${bouquet.nome}">
         <img src="${bouquet.image}" alt="${bouquet.nome}" loading="lazy">
@@ -573,14 +553,10 @@ document.querySelectorAll("[data-bouquet-category]").forEach((chip) => chip.addE
     item.classList.toggle("active", active);
     item.setAttribute("aria-selected", String(active));
   });
-  document.getElementById("giftCategoryContent").classList.toggle("hidden", activeBouquetCategory === "noivas");
-  document.getElementById("bridalCategoryContent").classList.toggle("hidden", activeBouquetCategory === "presentes");
-  if (activeBouquetCategory === "noivas") setPrice("todos");
-  document.querySelector(".price-chips")?.classList.toggle("hidden", activeBouquetCategory === "noivas");
+  document.getElementById("bridalCategoryContent").classList.toggle("hidden", activeBouquetCategory !== "noivas");
   renderReadyBouquets();
 }));
 document.querySelector("[data-bouquet-bride-request]")?.addEventListener("click", () => openSheet("bride", "Buquê de noiva sob encomenda"));
-document.querySelectorAll("[data-price]").forEach((c) => c.addEventListener("click", () => { setPrice(c.dataset.price); renderReadyBouquets(); }));
 renderReadyBouquets();
 if (homeBouquetCarousel) {
   homeBouquetCarousel.innerHTML = readyBouquets.slice(0, 6).map((bouquet) => `
@@ -600,25 +576,6 @@ if (homeBouquetCarousel) {
 }
 document.querySelector("[data-home-catalog]")?.addEventListener("click", () => activatePage("igrejas"));
 document.querySelector("[data-home-bouquets]")?.addEventListener("click", () => activatePage("buques"));
-function renderQuantities() {
-  const quantities = Object.keys(prices[bouquetSize]).map(Number);
-  const quantitySelect = document.getElementById("quantitySelect");
-  quantitySelect.innerHTML = quantities.map((amount) => `<option value="${amount}" ${amount === quantity ? "selected" : ""}>${amount} rosas · ${money(prices[bouquetSize][amount])}</option>`).join("");
-  document.getElementById("bouquetOrder").textContent = `PEDIR ${quantity} ROSAS ${bouquetSize} · ${money(prices[bouquetSize][quantity])}`;
-}
-document.getElementById("quantitySelect").addEventListener("change", (event) => {
-  quantity = Number(event.target.value);
-  renderQuantities();
-});
-document.querySelectorAll(".segment-option").forEach((button) => button.addEventListener("click", () => {
-  bouquetSize = button.dataset.size;
-  document.querySelectorAll(".segment-option").forEach((item) => item.classList.toggle("active", item === button));
-  renderQuantities();
-}));
-document.getElementById("bouquetOrder").addEventListener("click", () => openSheet("gift", `Buquê de ${quantity} rosas tamanho ${bouquetSize} — ${money(prices[bouquetSize][quantity])}`));
-document.querySelectorAll("[data-gift-request]").forEach((button) => button.addEventListener("click", (event) => openSheet("gift", event.currentTarget.dataset.giftRequest)));
-renderQuantities();
-
 document.querySelectorAll("[data-bouquet-shift]").forEach((button) => button.addEventListener("click", () => {
   homeBouquetCarousel.scrollBy({ left: Number(button.dataset.bouquetShift) * homeBouquetCarousel.clientWidth * 0.8, behavior: "smooth" });
 }));
