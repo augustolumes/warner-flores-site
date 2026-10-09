@@ -121,7 +121,7 @@ function productCard(product, featured = false) {
 const highlights = document.getElementById("homeHighlights");
 highlights.innerHTML = products.filter((p) => ["1A", "1C", "2A", "3A"].includes(p.id)).map((item) => productCard(item, true)).join("") + `
   <button class="carousel-end-link" type="button" data-home-catalog>
-    <span>Ver todas as ornamentações</span><span aria-hidden="true">→</span>
+    <span>Ver tudo</span><span aria-hidden="true">&gt;</span>
   </button>`;
 const productList = document.getElementById("productList");
 const churchProductList = document.getElementById("churchProductList");
@@ -243,6 +243,7 @@ function openDetail(id, { fromHistory = false } = {}) {
   document.getElementById("detailInvestment").textContent = "Investimento sob consulta";
   document.getElementById("detailBudget").textContent = "PEDIR ORÇAMENTO PELO WHATSAPP";
   renderGallery(product);
+  detail.classList.remove("closing");
   detail.classList.add("open");
   detail.setAttribute("aria-hidden", "false");
   document.body.classList.add("overlay-open");
@@ -272,6 +273,7 @@ function openBouquetDetail(id, { fromHistory = false } = {}) {
   document.getElementById("detailInvestment").textContent = price;
   document.getElementById("detailBudget").textContent = "PEDIR ESTE BUQUÊ";
   renderGallery(bouquet);
+  detail.classList.remove("closing");
   detail.classList.add("open");
   detail.setAttribute("aria-hidden", "false");
   document.body.classList.add("overlay-open");
@@ -288,6 +290,17 @@ bindDetailButtons();
 
 const photoViewer = document.getElementById("photoViewer");
 const photoViewerTrack = document.getElementById("photoViewerTrack");
+function closeOverlayWithAnimation(overlay) {
+  overlay.classList.remove("open");
+  overlay.classList.add("closing");
+}
+
+[detail, photoViewer].forEach((overlay) => overlay.addEventListener("animationend", (event) => {
+  if (event.target === overlay && overlay.classList.contains("closing")) {
+    overlay.classList.remove("closing");
+  }
+}));
+
 let photoViewerItems = [];
 let photoViewerIndex = 0;
 let photoViewerTouchX = null;
@@ -333,6 +346,7 @@ function openPhotoViewer(items, title, { fromHistory = false } = {}) {
   dots.classList.toggle("hidden", !multiple);
   document.getElementById("photoViewerHint").classList.toggle("hidden", !multiple);
   document.getElementById("photoViewerTitle").textContent = title;
+  photoViewer.classList.remove("closing");
   photoViewer.classList.add("open");
   photoViewer.setAttribute("aria-hidden", "false");
   document.body.classList.add("overlay-open");
@@ -347,7 +361,7 @@ function closePhotoViewer({ fromHistory = false } = {}) {
     history.back();
     return;
   }
-  photoViewer.classList.remove("open");
+  closeOverlayWithAnimation(photoViewer);
   photoViewer.dataset.historyClosing = "false";
   photoViewer.setAttribute("aria-hidden", "true");
   if (!detail.classList.contains("open") && !sheet.classList.contains("open")) document.body.classList.remove("overlay-open");
@@ -398,7 +412,7 @@ function closeDetail({ fromHistory = false } = {}) {
     history.back();
     return;
   }
-  detail.classList.remove("open");
+  closeOverlayWithAnimation(detail);
   detail.dataset.historyClosing = "false";
   detail.setAttribute("aria-hidden", "true");
   if (!photoViewer.classList.contains("open") && !sheet.classList.contains("open")) document.body.classList.remove("overlay-open");
@@ -581,7 +595,7 @@ if (homeBouquetCarousel) {
       </div>
     </article>`).join("") + `
     <button class="carousel-end-link" type="button" data-home-bouquets>
-      <span>Ver todos os buquês</span><span aria-hidden="true">→</span>
+      <span>Ver tudo</span><span aria-hidden="true">&gt;</span>
     </button>`;
 }
 document.querySelector("[data-home-catalog]")?.addEventListener("click", () => activatePage("igrejas"));
