@@ -223,6 +223,7 @@ function openDetail(id, { fromHistory = false } = {}) {
   }
   detailOpener = document.activeElement;
   currentDetailType = "decoration";
+  detail.classList.add("decoration-detail");
   currentProduct = product;
   currentRequest = { kind: "decoration", label: `Opção ${product.id} — ${product.title}` };
   document.getElementById("detailGallery").setAttribute("aria-label", `Fotos de ${product.title}`);
@@ -251,6 +252,7 @@ function openBouquetDetail(id, { fromHistory = false } = {}) {
   }
   detailOpener = document.activeElement;
   currentDetailType = "bouquet";
+  detail.classList.remove("decoration-detail");
   currentProduct = bouquet;
   const kind = bouquet.tipo === "noivas" ? "bride" : "gift";
   const price = bouquetPrice(bouquet);

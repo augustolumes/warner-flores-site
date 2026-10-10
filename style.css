@@ -1642,18 +1642,19 @@ textarea:focus-visible {
   z-index: 30;
   inset: 0;
   display: none;
+  flex-direction: column;
   overflow: auto;
-  padding-bottom: 110px;
+  padding-bottom: 0px;
   background: var(--cream);
 }
 
 .detail-screen.open {
-  display: block;
+  display: flex;
   animation: detail-screen-enter .28s cubic-bezier(.2, .75, .25, 1) both;
 }
 
 .detail-screen.closing {
-  display: block;
+  display: flex;
   pointer-events: none;
   animation: overlay-fade-out .2s ease-in both;
 }
@@ -1688,6 +1689,7 @@ textarea:focus-visible {
 
 .detail-gallery {
   position: relative;
+  flex: 0 0 auto;
   width: 100%;
   aspect-ratio: 3 / 4;
   overflow: hidden;
@@ -1786,7 +1788,8 @@ textarea:focus-visible {
 }
 
 .detail-copy {
-  padding: 20px 20px 25px;
+  flex: 1 0 auto;
+  padding: 20px 20px 20px;
 }
 
 .detail-copy h1 {
@@ -1818,11 +1821,10 @@ textarea:focus-visible {
 }
 
 .detail-cta {
-  position: fixed;
-  z-index: 31;
-  inset: auto 0 0;
+  position: relative;
+  margin-top: auto;
   border-top: 1px solid var(--line);
-  padding: 10px 18px max(10px, env(safe-area-inset-bottom));
+  padding: 10px 18px max(18px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -1835,6 +1837,11 @@ textarea:focus-visible {
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
+}
+
+.detail-screen.decoration-detail .detail-cta>span,
+.detail-screen.decoration-detail .detail-cta .button {
+  font-size: 12px;
 }
 
 .detail-cta .button {
@@ -2043,13 +2050,6 @@ textarea:focus-visible {
     right: auto;
     width: 100%;
     box-shadow: 0 0 0 100vmax #0008;
-    transform: translateX(-50%);
-  }
-
-  .detail-cta {
-    left: 50%;
-    right: auto;
-    width: min(100%, 680px);
     transform: translateX(-50%);
   }
 
