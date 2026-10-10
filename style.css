@@ -201,6 +201,11 @@ textarea:focus-visible {
   background: var(--green);
 }
 
+.button-green:active {
+  transform: scale(.985);
+  filter: brightness(.92);
+}
+
 .button-outline {
   border: 1px solid var(--green);
   color: var(--green);
@@ -355,6 +360,31 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
+@media (hover: hover) {
+
+  .highlight-card:hover,
+  .option-card:hover,
+  .ready-bouquet-card:hover,
+  .home-bouquet-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(38, 58, 50, .13);
+  }
+
+  .highlight-card:hover .highlight-image img,
+  .option-card:hover .option-image-wrap img,
+  .ready-bouquet-card:hover img,
+  .home-bouquet-card:hover img {
+    transform: scale(1.035);
+  }
+}
+
+.highlight-card:active,
+.option-card:active,
+.ready-bouquet-card:active,
+.home-bouquet-card:active {
+  transform: scale(.97);
+}
+
 .highlight-card {
   height: auto;
   flex: 0 0 84%;
@@ -414,7 +444,7 @@ textarea:focus-visible {
   flex: 0 0 auto;
   overflow: hidden;
   border-radius: 15px;
-  padding: 8px;
+  padding: 2px;
 }
 
 .highlight-image img,
@@ -427,8 +457,15 @@ textarea:focus-visible {
   object-fit: cover;
 }
 
+.highlight-image img,
+.option-image-wrap img,
+.ready-bouquet-card img,
+.home-bouquet-card img {
+  transition: transform .35s ease;
+}
+
 .highlight-image img {
-  border-radius: 18px;
+  border-radius: 5px;
 }
 
 .image-gallery-trigger {
@@ -445,7 +482,7 @@ textarea:focus-visible {
 }
 
 .highlight-image .image-gallery-trigger {
-  border-radius: 18px;
+  border-radius: 5px;
 }
 
 .image-gallery-trigger img {
@@ -632,8 +669,8 @@ textarea:focus-visible {
   aspect-ratio: 3 / 4;
   flex: 0 0 auto;
   overflow: hidden;
-  border-radius: 18px;
-  padding: 8px;
+  border-radius: 0px;
+  padding: 2px;
   display: grid;
   place-items: center;
   background-color: #eee7da;
@@ -710,7 +747,7 @@ textarea:focus-visible {
 .home-bouquet-photo {
   width: 100%;
   border: 0;
-  padding: 8px;
+  padding: 2px;
   background: var(--white);
   color: inherit;
   font: inherit;
@@ -721,7 +758,7 @@ textarea:focus-visible {
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 18px;
+  border-radius: 5px;
   object-fit: cover;
 }
 
@@ -1023,7 +1060,7 @@ textarea:focus-visible {
 }
 
 .contact-hero {
-  padding: 24px 22px 22px;
+  padding: 26px 22px 24px;
   color: white;
   background: var(--dark);
 }
@@ -1267,18 +1304,19 @@ textarea:focus-visible {
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 7px;
+  border-radius: 8px 8px 5px 5px;
   object-fit: cover;
 }
 
 .ready-bouquet-photo {
   display: block;
   flex: 0 0 auto;
-  width: 100%;
+  width: calc(100% + 14px);
+  margin: -7px -7px 0;
   border: 0;
   padding: 0;
   overflow: hidden;
-  border-radius: 7px;
+  border-radius: 8px 8px 5px 5px;
   background: transparent;
   cursor: zoom-in;
 }
@@ -1611,7 +1649,7 @@ textarea:focus-visible {
 
 .detail-screen.open {
   display: block;
-  animation: overlay-fade-in .24s ease-out both;
+  animation: detail-screen-enter .28s cubic-bezier(.2, .75, .25, 1) both;
 }
 
 .detail-screen.closing {
@@ -1655,6 +1693,28 @@ textarea:focus-visible {
   overflow: hidden;
   background: #e9e1d4;
   touch-action: pan-y;
+}
+
+.detail-close {
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  left: 14px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ffffff80;
+  border-radius: 50%;
+  color: #fff;
+  background: #16231ecc;
+  font: 400 27px/1 Arial, sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.detail-close:hover {
+  background: var(--dark);
 }
 
 .gallery-track {
@@ -1726,7 +1786,7 @@ textarea:focus-visible {
 }
 
 .detail-copy {
-  padding-top: 20px;
+  padding: 20px 20px 25px;
 }
 
 .detail-copy h1 {
@@ -2112,7 +2172,7 @@ textarea:focus-visible {
   left: 50%;
   bottom: 96px;
   max-width: calc(100% - 36px);
-  transform: translate(-50%, 16px);
+  transform: translate(-50%, 12px) scale(.97);
   padding: 12px 18px;
   border-radius: 8px;
   background: var(--dark);
@@ -2126,7 +2186,19 @@ textarea:focus-visible {
 .toast.show {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, 0)
+  transform: translate(-50%, 0) scale(1)
+}
+
+@keyframes detail-screen-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Cards menores nos carrosséis da página inicial */

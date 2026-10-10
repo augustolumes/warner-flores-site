@@ -225,7 +225,6 @@ function openDetail(id, { fromHistory = false } = {}) {
   currentDetailType = "decoration";
   currentProduct = product;
   currentRequest = { kind: "decoration", label: `Opção ${product.id} — ${product.title}` };
-  document.getElementById("detailCode").textContent = `Opção ${product.id}`;
   document.getElementById("detailGallery").setAttribute("aria-label", `Fotos de ${product.title}`);
   document.getElementById("detailCategoryLabel").textContent = "DECORAÇÃO PARA IGREJA";
   document.getElementById("detailTitle").textContent = product.title;
@@ -256,7 +255,6 @@ function openBouquetDetail(id, { fromHistory = false } = {}) {
   const kind = bouquet.tipo === "noivas" ? "bride" : "gift";
   const price = bouquetPrice(bouquet);
   currentRequest = { kind, label: `${bouquet.nome} — ${price}` };
-  document.getElementById("detailCode").textContent = bouquet.tipo === "noivas" ? "Buquê de noiva" : "Buquê para presente";
   document.getElementById("detailGallery").setAttribute("aria-label", `Fotos de ${bouquet.nome}`);
   document.getElementById("detailCategoryLabel").textContent = bouquet.tipo === "noivas" ? "BUQUÊ DE NOIVA" : "BUQUÊ PARA PRESENTE";
   document.getElementById("detailTitle").textContent = bouquet.nome;
