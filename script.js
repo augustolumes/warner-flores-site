@@ -107,7 +107,7 @@ function productCard(product, featured = false) {
   const buttonLabel = featured ? "VER DETALHES" : "Solicitar orçamento →";
   const styleLabel = product.id.startsWith("2") ? "ESTILO 02 · " : product.id.startsWith("3") ? "ESTILO 03 · " : "";
   const badge = featured ? `OPÇÃO ${product.id}` : `${styleLabel}OPÇÃO ${product.id}`;
-  return `<article class="${cardClass}"><div class="${featured ? "highlight-image" : "option-image-wrap"}"><button class="image-gallery-trigger" type="button" data-detail="${product.id}" aria-label="Ver detalhes de ${product.shortTitle}"><img src="${product.image}" alt="${product.alt}" width="1200" height="900" loading="lazy"></button></div><div class="${featured ? "highlight-copy" : "option-body"}"><span class="badge">${badge}</span><h3>${product.shortTitle}</h3><p>${product.description}</p>${featured ? "" : `<ul>${product.includes.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}</ul><p class="investment">Investimento sob consulta</p>`}<button class="${buttonClass}" data-detail="${product.id}">${buttonLabel}</button></div></article>`;
+  return `<article class="${cardClass}" data-card-detail="${product.id}" tabindex="0" aria-label="Ver detalhes de ${product.shortTitle}"><div class="${featured ? "highlight-image" : "option-image-wrap"}"><button class="image-gallery-trigger" type="button" data-detail="${product.id}" aria-label="Ver detalhes de ${product.shortTitle}"><img src="${product.image}" alt="${product.alt}" width="1200" height="900" loading="lazy"></button></div><div class="${featured ? "highlight-copy" : "option-body"}"><span class="badge">${badge}</span><h3>${product.shortTitle}</h3><p>${product.description}</p>${featured ? "" : `<ul>${product.includes.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}</ul><p class="investment">Investimento sob consulta</p>`}<button class="${buttonClass}" data-detail="${product.id}">${buttonLabel}</button></div></article>`;
 }
 
 const highlights = document.getElementById("homeHighlights");
@@ -366,6 +366,16 @@ document.addEventListener("click", (event) => {
     openBouquetDetail(readyBouquetTrigger.dataset.readyDetail);
     return;
   }
+  const bouquetCard = event.target.closest("[data-ready-card]");
+  if (bouquetCard) {
+    openBouquetDetail(bouquetCard.dataset.readyCard);
+    return;
+  }
+  const productCard = event.target.closest("[data-card-detail]");
+  if (productCard && !event.target.closest("button, a, input, select, textarea")) {
+    openDetail(productCard.dataset.cardDetail);
+    return;
+  }
   const placeholderTrigger = event.target.closest("[data-gallery-key]");
   if (placeholderTrigger) {
     const items = placeholderGalleries[placeholderTrigger.dataset.galleryKey];
@@ -435,15 +445,7 @@ function field(label, name, placeholder, type = "text", required = false) {
 
 function renderForm(kind) {
   if (kind === "gift") {
-    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data da entrega", "date", "", "date", true)}${field("Horário", "time", "", "time", true)}<label for="field-fulfillment">Entrega ou retirada? *</label><select id="field-fulfillment" name="fulfillment" required><option value="">Escolha uma opção</option><option value="Entrega">Entrega</option><option value="Retirada">Retirada</option></select><div id="addressField">${field("Endereço de entrega", "address", "Rua, número e bairro", "text", true)}</div><label for="field-cardMessage">Mensagem para o cartão (opcional)</label><textarea id="field-cardMessage" name="cardMessage" rows="3" placeholder="Escreva uma mensagem"></textarea>`;
-    const fulfillment = document.getElementById("field-fulfillment");
-    const addressField = document.getElementById("addressField");
-    fulfillment.addEventListener("change", () => {
-      addressField.classList.toggle("hidden", fulfillment.value !== "Entrega");
-      document.getElementById("field-address").required = fulfillment.value === "Entrega";
-    });
-    addressField.classList.add("hidden");
-    document.getElementById("field-address").required = false;
+    formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data da entrega", "date", "", "date", true)}<label for="field-time">Horário *</label><select id="field-time" name="time" required><option value="">Escolha um período</option><option value="Manhã - 8h às 13h">Manhã - 8h às 13h</option><option value="Tarde - 13h às 18h">Tarde - 13h às 18h</option></select>${field("Endereço de entrega", "address", "Rua, número e bairro", "text", true)}<label for="field-cardMessage">Mensagem para o cartão (opcional)</label><textarea id="field-cardMessage" name="cardMessage" rows="3" placeholder="Escreva uma mensagem"></textarea>`;
   } else if (kind === "bride") {
     formFields.innerHTML = `${field("Seu nome", "name", "Como podemos te chamar?", "text", true)}${field("Data do casamento", "weddingDate", "", "date", true)}${field("Igreja ou local", "venue", "Onde será a cerimônia?", "text", true)}<label for="field-style">Estilo desejado *</label><textarea id="field-style" name="style" rows="3" placeholder="Conte sobre as flores, cores ou referências" required></textarea>`;
   } else {
@@ -489,8 +491,40 @@ function closeSheet({ fromHistory = false } = {}) {
   sheetOpener?.focus?.({ preventScroll: true });
 }
 document.querySelectorAll("[data-request]").forEach((button) => button.addEventListener("click", () => openSheet("decoration", button.dataset.request)));
-document.getElementById("closeSheet").addEventListener("click", closeSheet);
-backdrop.addEventListener("click", closeSheet);
+const sheetHandle = document.querySelector(".sheet-handle");
+let sheetDragStartY = null;
+sheetHandle.addEventListener("pointerdown", (event) => {
+  if (!sheet.classList.contains("open") || event.button > 0) return;
+  sheetDragStartY = event.clientY;
+  sheet.classList.add("dragging");
+  sheetHandle.setPointerCapture(event.pointerId);
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Enter" && event.key !== " ") return;
+  const card = event.target.closest("[data-ready-card], [data-card-detail]");
+  if (!card || event.target !== card) return;
+  event.preventDefault();
+  if (card.hasAttribute("data-ready-card")) openBouquetDetail(card.dataset.readyCard);
+  else openDetail(card.dataset.cardDetail);
+});
+sheetHandle.addEventListener("pointermove", (event) => {
+  if (sheetDragStartY === null) return;
+  const offset = Math.max(0, event.clientY - sheetDragStartY);
+  sheet.style.transform = `translate(-50%, ${offset}px)`;
+});
+function finishSheetDrag(event) {
+  if (sheetDragStartY === null) return;
+  const offset = Math.max(0, event.clientY - sheetDragStartY);
+  sheetDragStartY = null;
+  sheet.classList.remove("dragging");
+  sheet.style.transform = "";
+  if (offset > 20) closeSheet();
+}
+sheetHandle.addEventListener("pointerup", finishSheetDrag);
+sheetHandle.addEventListener("pointercancel", finishSheetDrag);
+document.addEventListener("pointerdown", (event) => {
+  if (sheet.classList.contains("open") && !sheet.contains(event.target)) closeSheet();
+});
 document.addEventListener("keydown", (event) => {
   if (photoViewer.classList.contains("open")) {
     if (event.key === "Escape") closePhotoViewer();
@@ -509,8 +543,7 @@ document.getElementById("budgetForm").addEventListener("submit", (event) => {
   const data = new FormData(event.currentTarget);
   const lines = ["Olá, Warner Flores! Gostaria de solicitar um orçamento.", "", `Pedido: ${currentRequest.label}`];
   const values = {
-    name: "Nome", date: "Data da entrega", time: "Horário",
-    fulfillment: "Entrega ou retirada", address: "Endereço",
+    name: "Nome", date: "Data da entrega", time: "Horário", address: "Endereço",
     cardMessage: "Mensagem para o cartão", weddingDate: "Data do casamento", eventType: "Tipo de celebração", eventDate: "Data do evento", venue: "Igreja/local", style: "Estilo desejado"
   };
   Object.entries(values).forEach(([key, label]) => {
@@ -536,7 +569,7 @@ function renderReadyBouquets() {
     ? readyBouquets
     : readyBouquets.filter((bouquet) => bouquet.tipo === activeBouquetCategory || bouquet.tipo === "todos");
   readyBouquetsGrid.innerHTML = byCategory.length ? byCategory.map((bouquet) => `
-    <article class="ready-bouquet-card">
+    <article class="ready-bouquet-card" data-ready-card="${bouquet.id}" tabindex="0" aria-label="Ver detalhes sobre ${bouquet.nome}">
       <button class="ready-bouquet-photo" type="button" data-ready-detail="${bouquet.id}" aria-label="Mais detalhes sobre ${bouquet.nome}">
         <img src="${bouquet.image}" alt="${bouquet.nome}" loading="lazy">
       </button>
@@ -560,7 +593,7 @@ document.querySelector("[data-bouquet-bride-request]")?.addEventListener("click"
 renderReadyBouquets();
 if (homeBouquetCarousel) {
   homeBouquetCarousel.innerHTML = readyBouquets.slice(0, 6).map((bouquet) => `
-    <article class="home-bouquet-card">
+    <article class="home-bouquet-card" data-ready-card="${bouquet.id}" tabindex="0" aria-label="Ver detalhes sobre ${bouquet.nome}">
       <button class="home-bouquet-photo" type="button" data-ready-detail="${bouquet.id}" aria-label="Mais detalhes sobre ${bouquet.nome}">
         <img src="${bouquet.image}" alt="${bouquet.nome}" loading="lazy">
       </button>

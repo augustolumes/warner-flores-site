@@ -1,0 +1,118 @@
+/* Card Moderno e Profissional */
+.product-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    /* Borda extremamente sutil */
+}
+
+/* Feedback visual ao tocar no mobile (active) ou passar o mouse (hover) */
+.product-card:active {
+    transform: scale(0.98);
+}
+
+@media (hover: hover) {
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Container da Imagem */
+.product-image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    /* Mantém a proporção uniforme das fotos */
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Zoom suave na imagem ao interagir com o card */
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* Badge opcional para agregar valor */
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    color: #333;
+}
+
+/* Conteúdo */
+.product-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.product-description {
+    font-size: 0.85rem;
+    color: #666;
+    line-align: 1.4;
+    margin: 0;
+    /* Limita o texto a 2 linhas para manter os cards alinhados */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Rodapé do Card (Preço e Botão) */
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.product-btn {
+    background-color: #1a1a1a;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.product-btn:hover {
+    background-color: #333;
+}
