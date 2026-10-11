@@ -465,7 +465,7 @@ textarea:focus-visible {
 }
 
 .highlight-image img {
-  border-radius: 5px;
+  border-radius: 18px 18px 5px 5px;
 }
 
 .image-gallery-trigger {
@@ -758,7 +758,7 @@ textarea:focus-visible {
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 5px;
+  border-radius: 18px 18px 5px 5px;
   object-fit: cover;
 }
 
